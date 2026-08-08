@@ -1,89 +1,215 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 import EventCard from "./EventCard";
+import JourneyDrawer from "./horizontal-gallery-timeline/journey_drawer";
 import { events } from "./data";
+
+gsap.registerPlugin(ScrollTrigger);
+
+const LAST_INDEX = events.length - 1;
+const LAST_ID = events[LAST_INDEX]?.id;
+
+/** Master timeline phase weights — no overlap between phases */
+const CARD_DUR = 1;
+const DRAWER_DUR = 1;
+const HOLD_DUR = 0.25; // first card fully visible & frozen
+const GALLERY_DUR = 2;
+const TOTAL_DUR = CARD_DUR + DRAWER_DUR + HOLD_DUR + GALLERY_DUR;
 
 export default function EventCarousel() {
   const [activeId, setActiveId] = useState(events[0].id);
-  const sectionRef = useRef<HTMLDivElement>(null);
+  const [galleryProgress, setGalleryProgress] = useState(0);
+  const rootRef = useRef<HTMLDivElement>(null);
+  const pinRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
-  const scrollTriggerRef = useRef<any>(null);
-  
-  const isProgrammaticScroll = useRef(false);
-  const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
-  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const drawerRef = useRef<HTMLDivElement>(null);
+  const scrollTriggerRef = useRef<ScrollTrigger | null>(null);
+  const scrollTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const activeIdRef = useRef(events[0].id);
+  const galleryProgressRef = useRef(0);
 
-  // Register GSAP plugins
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia();
 
-    const mm = gsap.matchMedia();
+      mm.add("(min-width: 1024px)", () => {
+        const pin = pinRef.current;
+        const track = trackRef.current;
+        const container = containerRef.current;
+        const drawer = drawerRef.current;
+        if (!pin || !track || !container || !drawer) return;
 
-    // Desktop (>= 1024px): Pin the section and translate the track horizontally
-    mm.add("(min-width: 1024px)", () => {
-      if (!sectionRef.current || !trackRef.current || !containerRef.current) return;
+        const getScrollDistance = () => {
+          const paddingLeft =
+            parseFloat(window.getComputedStyle(container).paddingLeft) || 0;
+          return Math.max(
+            0,
+            track.scrollWidth - container.clientWidth + paddingLeft
+          );
+        };
 
-      const track = trackRef.current;
-      const container = containerRef.current;
+        gsap.set(track, { x: 0 });
+        gsap.set(drawer, {
+          yPercent: 100,
+          autoAlpha: 1,
+          pointerEvents: "none",
+          force3D: true,
+        });
+        galleryProgressRef.current = 0;
+        setGalleryProgress(0);
 
-      const getScrollDistance = () => {
-        const computedStyle = window.getComputedStyle(container);
-        const paddingLeft = parseFloat(computedStyle.paddingLeft) || 0;
-        // Calculate max translation using actual track scrollWidth and container clientWidth
-        // to ensure the right edge of the track aligns perfectly with the right edge of the container
-        return Math.max(0, track.scrollWidth - container.clientWidth + paddingLeft);
-      };
+        const setActive = (id: number) => {
+          if (id === activeIdRef.current) return;
+          activeIdRef.current = id;
+          setActiveId(id);
+        };
 
-      const scrollAnim = gsap.to(track, {
-        x: () => -getScrollDistance(),
-        ease: "none",
-        force3D: true, // GPU-accelerated translate3d transform
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          pin: true,
-          scrub: 1, // Smooth scrub tracking
-          start: "top top",
-          end: () => `+=${getScrollDistance() * 1.5}`, // Dynamic pin scroll duration
-          invalidateOnRefresh: true,
-          onUpdate: (self) => {
-            // Update active index based on scroll progress (balanced mapping)
-            const activeIndex = Math.min(
-              events.length - 1,
-              Math.floor(self.progress * events.length)
-            );
-            if (activeIndex >= 0 && activeIndex < events.length) {
-              setActiveId(events[activeIndex].id);
-            }
+        const setGallery = (p: number) => {
+          const clamped = Math.min(1, Math.max(0, p));
+          if (Math.abs(clamped - galleryProgressRef.current) < 0.001) return;
+          galleryProgressRef.current = clamped;
+          setGalleryProgress(clamped);
+        };
+
+        const galleryProxy = { p: 0 };
+
+        const tl = gsap.timeline({
+          defaults: { ease: "none" },
+          scrollTrigger: {
+            id: "programs-carousel",
+            trigger: pin,
+            pin: true,
+            pinSpacing: true,
+            scrub: 1,
+            start: "top top",
+            end: () => {
+              const cards = Math.max(getScrollDistance() * 1.5, 600);
+              const drawerScroll = Math.max(window.innerHeight * 1.2, 700);
+              const holdScroll = window.innerHeight * 0.2;
+              const galleryScroll = Math.max(window.innerWidth * 2.5, 1200);
+              return `+=${cards + drawerScroll + holdScroll + galleryScroll}`;
+            },
+            invalidateOnRefresh: true,
+            anticipatePin: 1,
+            onUpdate: () => {
+              const kids = tl.getChildren(false, true, false);
+              const cardTween = kids[0];
+              const drawerTween = kids[1];
+              const cardProg = cardTween
+                ? Math.min(1, Math.max(0, cardTween.progress()))
+                : 0;
+              const drawerProg = drawerTween
+                ? Math.min(1, Math.max(0, drawerTween.progress()))
+                : 0;
+
+              // Event cards active state (stage 0 only)
+              if (cardProg < 1) {
+                const activeIndex = Math.min(
+                  LAST_INDEX,
+                  Math.floor(cardProg * events.length)
+                );
+                if (events[activeIndex]) setActive(events[activeIndex].id);
+              } else if (LAST_ID != null) {
+                setActive(LAST_ID);
+              }
+
+              // Drawer interaction only while open / opening
+              drawer.style.pointerEvents =
+                drawerProg > 0.02 ? "auto" : "none";
+            },
           },
-        },
+        });
+
+        // ——— STAGE 0: event cards horizontal ———
+        tl.fromTo(
+          track,
+          { x: 0 },
+          {
+            x: () => -getScrollDistance(),
+            duration: CARD_DUR,
+            force3D: true,
+            immediateRender: false,
+          },
+          0
+        );
+
+        // ——— STAGE 1: drawer rises ONLY (gallery frozen at progress 0) ———
+        tl.fromTo(
+          drawer,
+          { yPercent: 100 },
+          {
+            yPercent: 0,
+            duration: DRAWER_DUR,
+            force3D: true,
+            immediateRender: false,
+            onUpdate: () => {
+              // Explicit freeze during drawer open
+              setGallery(0);
+            },
+          },
+          CARD_DUR
+        );
+
+        // ——— HOLD: first card fully visible & stationary ———
+        tl.to(
+          {},
+          {
+            duration: HOLD_DUR,
+            onUpdate: () => setGallery(0),
+          },
+          CARD_DUR + DRAWER_DUR
+        );
+
+        // ——— STAGE 2: HorizontalGallery / Timeline scroll ———
+        tl.fromTo(
+          galleryProxy,
+          { p: 0 },
+          {
+            p: 1,
+            duration: GALLERY_DUR,
+            onUpdate: () => setGallery(galleryProxy.p),
+          },
+          CARD_DUR + DRAWER_DUR + HOLD_DUR
+        );
+
+        scrollTriggerRef.current = tl.scrollTrigger ?? null;
+
+        const refresh = () => ScrollTrigger.refresh();
+        requestAnimationFrame(refresh);
+        const t1 = window.setTimeout(refresh, 200);
+        const t2 = window.setTimeout(refresh, 800);
+
+        return () => {
+          clearTimeout(t1);
+          clearTimeout(t2);
+          tl.scrollTrigger?.kill(true);
+          tl.kill();
+          scrollTriggerRef.current = null;
+          gsap.set(track, { clearProps: "transform" });
+          gsap.set(drawer, { clearProps: "transform,pointerEvents" });
+        };
       });
 
-      scrollTriggerRef.current = scrollAnim.scrollTrigger;
-
-      // Force GSAP ScrollTrigger to recalculate and settle layout sizing
-      ScrollTrigger.refresh();
+      mm.add("(max-width: 1023px)", () => {
+        gsap.set(drawerRef.current, { clearProps: "transform,pointerEvents" });
+        gsap.set(trackRef.current, { clearProps: "transform" });
+      });
 
       return () => {
-        if (scrollAnim.scrollTrigger) scrollAnim.scrollTrigger.kill();
-        scrollAnim.kill();
+        mm.revert();
+        if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
       };
-    });
+    },
+    { scope: rootRef }
+  );
 
-    return () => {
-      mm.revert();
-      if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
-      if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
-    };
-  }, []);
-
-  // Handle manual scroll (trackpad/mobile swipe/mouse-wheel on smaller viewports) to update active card
   const handleScroll = () => {
-    if (!containerRef.current || isProgrammaticScroll.current) return;
-
+    if (!containerRef.current) return;
     if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
 
     scrollTimeoutRef.current = setTimeout(() => {
@@ -92,126 +218,128 @@ export default function EventCarousel() {
 
       let inactiveWidth = 200;
       let gap = 28;
-      
       if (window.innerWidth < 768) {
         inactiveWidth = 100;
         gap = 20;
       }
 
-      const itemWidth = inactiveWidth + gap;
-      const activeIndex = Math.round(scrollPos / itemWidth);
-
+      const activeIndex = Math.round(scrollPos / (inactiveWidth + gap));
       if (activeIndex >= 0 && activeIndex < events.length) {
-        const targetEvent = events[activeIndex];
-        if (targetEvent.id !== activeId) {
-          setActiveId(targetEvent.id);
+        const nextId = events[activeIndex].id;
+        if (nextId !== activeIdRef.current) {
+          activeIdRef.current = nextId;
+          setActiveId(nextId);
         }
       }
-    }, 150); // debounce to prevent layout jumps mid-scroll
+    }, 150);
   };
 
   const handleCardClick = (id: number) => {
     const index = events.findIndex((e) => e.id === id);
     if (index === -1) return;
-
+    activeIdRef.current = id;
     setActiveId(id);
 
-    // Desktop: Scroll page to the matching ScrollTrigger scroll position
     if (window.innerWidth >= 1024 && scrollTriggerRef.current) {
       const st = scrollTriggerRef.current;
-      const start = st.start;
-      const end = st.end;
-      const duration = end - start;
-      const targetScroll = start + (index / (events.length - 1)) * duration;
-
-      window.scrollTo({
-        top: targetScroll,
-        behavior: "smooth",
-      });
+      const cardPortion = CARD_DUR / TOTAL_DUR;
+      const targetScroll =
+        st.start +
+        (index / Math.max(LAST_INDEX, 1)) * (st.end - st.start) * cardPortion;
+      window.scrollTo({ top: targetScroll, behavior: "smooth" });
+      return;
     }
-    // Mobile/Tablet: Scroll container horizontally to show the card
-    else if (containerRef.current) {
+
+    if (containerRef.current) {
       let inactiveWidth = 200;
       let gap = 28;
-      
       if (window.innerWidth < 768) {
         inactiveWidth = 100;
         gap = 20;
       }
-      
-      const itemWidth = inactiveWidth + gap;
-      const targetScrollLeft = index * itemWidth;
-      
       containerRef.current.scrollTo({
-        left: targetScrollLeft,
+        left: index * (inactiveWidth + gap),
         behavior: "smooth",
       });
     }
   };
 
   const handleWheel = (e: React.WheelEvent) => {
-    // Only translate vertical scroll wheel to horizontal scroll on mobile/tablet viewports
-    // On desktop, ScrollTrigger vertical-to-horizontal pinning handles this natively
-    if (window.innerWidth < 1024 && containerRef.current) {
-      if (e.deltaY !== 0) {
-        e.preventDefault();
-        containerRef.current.scrollLeft += e.deltaY;
-      }
-    }
+    if (window.innerWidth >= 1024 || !containerRef.current) return;
+    if (e.deltaY === 0) return;
+
+    const el = containerRef.current;
+    const atStart = el.scrollLeft <= 0;
+    const atEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 2;
+    if ((e.deltaY < 0 && atStart) || (e.deltaY > 0 && atEnd)) return;
+
+    e.preventDefault();
+    el.scrollLeft += e.deltaY;
   };
 
   return (
-    <section
-      ref={sectionRef}
-      className="relative z-20 w-full bg-[#FAF8F5] py-12 lg:py-0 lg:h-screen lg:flex lg:flex-col lg:justify-center overflow-hidden"
-    >
-      {/* Header */}
-      <div className="mx-auto w-full max-w-7xl px-6 mb-10 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
-        <div className="flex flex-col gap-4 max-w-4xl">
-          <span className="text-sm font-semibold tracking-wide text-orange-600">
-            Upcoming Programs
-          </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-normal text-gray-950 leading-[1.18] tracking-tight">
-            Join Swamiji for discourses, satsangs, and
-            <br className="hidden sm:block" /> sacred events across the country.
-          </h2>
-        </div>
-        <div className="shrink-0 md:pb-2">
-          <a
-            href="/events"
-            className="text-orange-600 hover:text-orange-700 font-semibold text-sm sm:text-base underline underline-offset-4 transition-colors"
+    <div ref={rootRef} className="relative z-20 w-full">
+      <div
+        ref={pinRef}
+        className="relative w-full bg-[#FAF8F5] py-12 lg:h-screen lg:overflow-hidden lg:py-0"
+      >
+        <div className="relative z-10 flex h-full w-full flex-col justify-center">
+          <div className="mx-auto mb-10 flex w-full max-w-7xl flex-col gap-6 px-6 md:flex-row md:items-end md:justify-between">
+            <div className="flex max-w-4xl flex-col gap-4">
+              <span className="text-sm font-semibold tracking-wide text-orange-600">
+                Upcoming Programs
+              </span>
+              <h2 className="text-3xl font-normal leading-[1.18] tracking-tight text-gray-950 sm:text-4xl lg:text-5xl">
+                Join Swamiji for discourses, satsangs, and
+                <br className="hidden sm:block" /> sacred events across the
+                country.
+              </h2>
+            </div>
+            <div className="shrink-0 md:pb-2">
+              <a
+                href="/events"
+                className="text-sm font-semibold text-orange-600 underline underline-offset-4 transition-colors hover:text-orange-700 sm:text-base"
+              >
+                View All Programs
+              </a>
+            </div>
+          </div>
+
+          <div
+            ref={containerRef}
+            onScroll={handleScroll}
+            onWheel={handleWheel}
+            className="no-scrollbar relative flex w-full flex-row flex-nowrap overflow-x-auto px-6 py-4 md:px-[calc((100vw-1280px)/2+24px)] lg:overflow-x-hidden"
           >
-            View All Programs
-          </a>
+            <div
+              ref={trackRef}
+              className="flex w-max flex-shrink-0 flex-row flex-nowrap gap-[20px] md:gap-[28px] will-change-transform"
+            >
+              {events.map((event) => (
+                <EventCard
+                  key={event.id}
+                  event={event}
+                  active={activeId === event.id}
+                  onClick={() => handleCardClick(event.id)}
+                />
+              ))}
+              <div className="w-[10px] flex-shrink-0 md:w-[calc((100vw-1280px)/2+24px)]" />
+            </div>
+          </div>
+        </div>
+
+        <div
+          ref={drawerRef}
+          className="absolute right-0 bottom-0 left-0 z-30 hidden h-full w-full will-change-transform lg:block"
+        >
+          <JourneyDrawer galleryProgress={galleryProgress} />
         </div>
       </div>
 
-      {/* Cards Container */}
-      <div
-        ref={containerRef}
-        onScroll={handleScroll}
-        onWheel={handleWheel}
-        className="w-full overflow-x-auto lg:overflow-x-hidden no-scrollbar flex flex-row flex-nowrap py-4 px-6 md:px-[calc((100vw-1280px)/2+24px)]"
-      >
-        {/* Track wrapper for GSAP animation */}
-        <div
-          ref={trackRef}
-          className="flex flex-row flex-nowrap gap-[20px] md:gap-[28px] flex-shrink-0 w-max"
-        >
-          {events.map((event) => (
-            <EventCard
-              key={event.id}
-              event={event}
-              active={activeId === event.id}
-              onClick={() => handleCardClick(event.id)}
-            />
-          ))}
-          {/* Spacer to allow padding at the end of the scroll */}
-          <div className="w-[10px] md:w-[calc((100vw-1280px)/2+24px)] flex-shrink-0" />
-        </div>
+      {/* Mobile journey (no pin / drawer stages) */}
+      <div className="lg:hidden">
+        <JourneyDrawer />
       </div>
-    </section>
+    </div>
   );
 }
-
-

@@ -112,38 +112,38 @@ export default function EventCard({
         />
       </div>
 
-      {/* Content */}
-      {active && (
-        <div
-          ref={contentRef}
-          className="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 rounded-[24px] bg-[#121212]/80 backdrop-blur-md border border-white/10 px-5 py-4 sm:px-8 sm:py-5 text-white shadow-2xl"
-        >
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div className="flex-1 min-w-0">
-              <h2 className="text-lg sm:text-2xl font-medium leading-snug tracking-tight truncate">
-                {event.title}
-              </h2>
+      {/* Content — keep mounted to avoid DOM removeChild conflicts during GSAP pin */}
+      <div
+        ref={contentRef}
+        className={`absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 rounded-[24px] bg-[#121212]/80 backdrop-blur-md border border-white/10 px-5 py-4 sm:px-8 sm:py-5 text-white shadow-2xl ${
+          active ? "visible" : "invisible pointer-events-none"
+        }`}
+      >
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="flex-1 min-w-0">
+            <h2 className="text-lg sm:text-2xl font-medium leading-snug tracking-tight truncate">
+              {event.title}
+            </h2>
 
-              <div className="mt-2.5 flex flex-wrap gap-x-4 gap-y-1.5 text-xs sm:text-sm text-gray-300">
-                <div className="flex items-center gap-1.5">
-                  <CalendarDays className="w-4 h-4 text-orange-500" />
-                  <span>{event.date}</span>
-                </div>
+            <div className="mt-2.5 flex flex-wrap gap-x-4 gap-y-1.5 text-xs sm:text-sm text-gray-300">
+              <div className="flex items-center gap-1.5">
+                <CalendarDays className="w-4 h-4 text-orange-500" />
+                <span>{event.date}</span>
+              </div>
 
-                <div className="flex items-center gap-1.5">
-                  <MapPin className="w-4 h-4 text-orange-500" />
-                  <span>{event.location}</span>
-                </div>
+              <div className="flex items-center gap-1.5">
+                <MapPin className="w-4 h-4 text-orange-500" />
+                <span>{event.location}</span>
               </div>
             </div>
-
-            <button className="flex items-center justify-center gap-2 rounded-xl border border-orange-500 px-6 py-3 text-sm font-medium text-orange-500 transition-all hover:bg-orange-500 hover:text-white">
-              Learn More
-              <ArrowRight className="w-4 h-4" />
-            </button>
           </div>
+
+          <button className="flex items-center justify-center gap-2 rounded-xl border border-orange-500 px-6 py-3 text-sm font-medium text-orange-500 transition-all hover:bg-orange-500 hover:text-white">
+            Learn More
+            <ArrowRight className="w-4 h-4" />
+          </button>
         </div>
-      )}
+      </div>
     </div>
   );
 }
