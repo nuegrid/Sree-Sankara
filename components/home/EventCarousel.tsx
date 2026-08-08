@@ -7,6 +7,7 @@ import { useGSAP } from "@gsap/react";
 import EventCard from "./EventCard";
 import JourneyDrawer from "./horizontal-gallery-timeline/journey_drawer";
 import { events } from "./data";
+import Typography from "@/components/ui/Typography";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -18,7 +19,8 @@ const CARD_DUR = 1;
 const DRAWER_DUR = 1;
 const HOLD_DUR = 0.25; // first card fully visible & frozen
 const GALLERY_DUR = 2;
-const TOTAL_DUR = CARD_DUR + DRAWER_DUR + HOLD_DUR + GALLERY_DUR;
+const QUOTE_DUR = 1; // reveal quote below gallery after horizontal journey ends
+const TOTAL_DUR = CARD_DUR + DRAWER_DUR + HOLD_DUR + GALLERY_DUR + QUOTE_DUR;
 
 export default function EventCarousel() {
   const [activeId, setActiveId] = useState(events[0].id);
@@ -60,6 +62,14 @@ export default function EventCarousel() {
           pointerEvents: "none",
           force3D: true,
         });
+
+        const drawerContent = drawer.querySelector(
+          ".journey-drawer-content"
+        ) as HTMLElement | null;
+        if (drawerContent) {
+          gsap.set(drawerContent, { y: 0, force3D: true });
+        }
+
         galleryProgressRef.current = 0;
         setGalleryProgress(0);
 
@@ -78,6 +88,14 @@ export default function EventCarousel() {
 
         const galleryProxy = { p: 0 };
 
+        const getQuoteReveal = () => {
+          if (!drawerContent) return Math.max(window.innerHeight * 0.85, 500);
+          return Math.max(
+            0,
+            drawerContent.scrollHeight - pin.clientHeight
+          );
+        };
+
         const tl = gsap.timeline({
           defaults: { ease: "none" },
           scrollTrigger: {
@@ -92,7 +110,8 @@ export default function EventCarousel() {
               const drawerScroll = Math.max(window.innerHeight * 1.2, 700);
               const holdScroll = window.innerHeight * 0.2;
               const galleryScroll = Math.max(window.innerWidth * 2.5, 1200);
-              return `+=${cards + drawerScroll + holdScroll + galleryScroll}`;
+              const quoteScroll = Math.max(getQuoteReveal() * 1.1, 500);
+              return `+=${cards + drawerScroll + holdScroll + galleryScroll + quoteScroll}`;
             },
             invalidateOnRefresh: true,
             anticipatePin: 1,
@@ -148,7 +167,6 @@ export default function EventCarousel() {
             force3D: true,
             immediateRender: false,
             onUpdate: () => {
-              // Explicit freeze during drawer open
               setGallery(0);
             },
           },
@@ -177,6 +195,22 @@ export default function EventCarousel() {
           CARD_DUR + DRAWER_DUR + HOLD_DUR
         );
 
+        // ——— STAGE 3: after last gallery card, reveal quote below ———
+        if (drawerContent) {
+          tl.fromTo(
+            drawerContent,
+            { y: 0 },
+            {
+              y: () => -getQuoteReveal(),
+              duration: QUOTE_DUR,
+              force3D: true,
+              immediateRender: false,
+              onUpdate: () => setGallery(1),
+            },
+            CARD_DUR + DRAWER_DUR + HOLD_DUR + GALLERY_DUR
+          );
+        }
+
         scrollTriggerRef.current = tl.scrollTrigger ?? null;
 
         const refresh = () => ScrollTrigger.refresh();
@@ -192,6 +226,9 @@ export default function EventCarousel() {
           scrollTriggerRef.current = null;
           gsap.set(track, { clearProps: "transform" });
           gsap.set(drawer, { clearProps: "transform,pointerEvents" });
+          if (drawerContent) {
+            gsap.set(drawerContent, { clearProps: "transform" });
+          }
         };
       });
 
@@ -286,21 +323,31 @@ export default function EventCarousel() {
         <div className="relative z-10 flex h-full w-full flex-col justify-center">
           <div className="mx-auto mb-10 flex w-full max-w-7xl flex-col gap-6 px-6 md:flex-row md:items-end md:justify-between">
             <div className="flex max-w-4xl flex-col gap-4">
-              <span className="text-sm font-semibold tracking-wide text-orange-600">
+              <Typography
+                as="span"
+                variant="sectionLabel"
+                className="text-orange-600"
+              >
                 Upcoming Programs
-              </span>
-              <h2 className="text-3xl font-normal leading-[1.18] tracking-tight text-gray-950 sm:text-4xl lg:text-5xl">
+              </Typography>
+              <Typography
+                as="h2"
+                variant="sectionTitle"
+                className="text-gray-950"
+              >
                 Join Swamiji for discourses, satsangs, and
                 <br className="hidden sm:block" /> sacred events across the
                 country.
-              </h2>
+              </Typography>
             </div>
             <div className="shrink-0 md:pb-2">
               <a
                 href="/events"
-                className="text-sm font-semibold text-orange-600 underline underline-offset-4 transition-colors hover:text-orange-700 sm:text-base"
+                className="text-orange-600 underline underline-offset-4 transition-colors hover:text-orange-700"
               >
-                View All Programs
+                <Typography as="span" variant="linkText">
+                  View All Programs
+                </Typography>
               </a>
             </div>
           </div>

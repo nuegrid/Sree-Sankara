@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import Image from "next/image";
 import { CalendarDays, MapPin, ArrowRight } from "lucide-react";
+import Typography from "@/components/ui/Typography";
 
 type Props = {
   event: {
@@ -115,32 +116,43 @@ export default function EventCard({
       {/* Content — keep mounted to avoid DOM removeChild conflicts during GSAP pin */}
       <div
         ref={contentRef}
-        className={`absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 rounded-[24px] bg-[#121212]/80 backdrop-blur-md border border-white/10 px-5 py-4 sm:px-8 sm:py-5 text-white shadow-2xl ${
+        className={`absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 rounded-[22px] bg-[#242424] px-5 py-5 sm:rounded-[24px] sm:px-6 sm:py-5 text-white shadow-xl ${
           active ? "visible" : "invisible pointer-events-none"
         }`}
       >
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div className="flex-1 min-w-0">
-            <h2 className="text-lg sm:text-2xl font-medium leading-snug tracking-tight truncate">
-              {event.title}
-            </h2>
+        <div className="grid grid-cols-[1fr_auto] items-start gap-x-4 gap-y-3">
+          <Typography
+            as="h2"
+            variant="cardTitle"
+            className="min-w-0 truncate text-white"
+          >
+            {event.title}
+          </Typography>
 
-            <div className="mt-2.5 flex flex-wrap gap-x-4 gap-y-1.5 text-xs sm:text-sm text-gray-300">
-              <div className="flex items-center gap-1.5">
-                <CalendarDays className="w-4 h-4 text-orange-500" />
-                <span>{event.date}</span>
-              </div>
+          <div className="col-start-1 flex min-w-0 flex-col gap-1.5 text-[#b0b0b0]">
+            <div className="flex items-center gap-2">
+              <CalendarDays className="h-[18px] w-[18px] shrink-0 text-[#b0b0b0] sm:h-5 sm:w-5" />
+              <Typography as="span" variant="cardMeta" className="truncate">
+                {event.date}
+              </Typography>
+            </div>
 
-              <div className="flex items-center gap-1.5">
-                <MapPin className="w-4 h-4 text-orange-500" />
-                <span>{event.location}</span>
-              </div>
+            <div className="flex items-center gap-2">
+              <MapPin className="h-[18px] w-[18px] shrink-0 text-[#b0b0b0] sm:h-5 sm:w-5" />
+              <Typography as="span" variant="cardMeta" className="truncate">
+                {event.location}
+              </Typography>
             </div>
           </div>
 
-          <button className="flex items-center justify-center gap-2 rounded-xl border border-orange-500 px-6 py-3 text-sm font-medium text-orange-500 transition-all hover:bg-orange-500 hover:text-white">
-            Learn More
-            <ArrowRight className="w-4 h-4" />
+          <button
+            type="button"
+            className="col-start-2 row-start-2 flex h-[42px] w-[116px] shrink-0 items-center justify-center gap-1.5 self-center rounded-lg border border-[#f4510b] bg-transparent text-[#f4510b] transition-colors hover:bg-[#f4510b]/10"
+          >
+            <Typography as="span" variant="buttonSmall">
+              Learn More
+            </Typography>
+            <ArrowRight className="h-4 w-4" />
           </button>
         </div>
       </div>

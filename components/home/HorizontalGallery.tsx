@@ -4,6 +4,7 @@ import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import Typography from "@/components/ui/Typography";
 
 const cards = [
   {
@@ -264,14 +265,22 @@ export default function HorizontalGallery({
       {/* Same page grid as Upcoming Programs (max-w-7xl / 1280px gutters) */}
       <div className="w-full translate-y-5 py-12 md:translate-y-7 md:py-14">
         <header className="relative z-20 mx-auto mb-8 w-full max-w-7xl shrink-0 px-6 md:mb-9">
-          <span className="text-xs font-semibold tracking-wide text-orange-600 md:text-sm">
+          <Typography
+            as="span"
+            variant="sectionLabelSm"
+            className="text-orange-600"
+          >
             Swami&apos;s Spiritual Journey
-          </span>
-          <h2 className="mt-1.5 max-w-sm text-2xl font-normal leading-[1.2] tracking-tight text-white md:max-w-md md:text-[1.85rem] lg:text-3xl">
+          </Typography>
+          <Typography
+            as="h2"
+            variant="galleryTitle"
+            className="mt-1.5 max-w-sm text-white md:max-w-md"
+          >
             A Life Dedicated to
             <br />
             Dharma
-          </h2>
+          </Typography>
         </header>
 
         {/* Same horizontal padding + end spacer as EventCarousel cards */}
@@ -309,12 +318,20 @@ export default function HorizontalGallery({
                   )}
                 </div>
 
-                <h3 className="mb-1.5 text-lg font-medium text-white md:mb-2 md:text-xl">
+                <Typography
+                  as="h3"
+                  variant="headline4"
+                  className="mb-1.5 text-white md:mb-2"
+                >
                   {card.title}
-                </h3>
-                <p className="text-sm leading-relaxed tracking-wide text-[#a3a3a3]">
+                </Typography>
+                <Typography
+                  as="p"
+                  variant="cardDescription"
+                  className="text-[#a3a3a3]"
+                >
                   {card.description}
-                </p>
+                </Typography>
               </div>
             ))}
 

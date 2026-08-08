@@ -6,6 +6,7 @@ import {
   motion,
 } from "motion/react";
 import React, { useEffect, useRef, useState } from "react";
+import Typography from "@/components/ui/Typography";
 
 interface TimelineEntry {
   title: string;
@@ -31,8 +32,7 @@ export const Timeline = ({
 
   useEffect(() => {
     if (!ref.current) return;
-    
-    // Dynamically track height changes (e.g. as images load or window resizes)
+
     const handleResize = () => {
       if (ref.current) {
         setHeight(ref.current.getBoundingClientRect().height);
@@ -44,10 +44,9 @@ export const Timeline = ({
     const resizeObserver = new ResizeObserver(() => {
       handleResize();
     });
-    
+
     resizeObserver.observe(ref.current);
 
-    // Initial delay refresh to make sure layout settles
     const timer = setTimeout(handleResize, 500);
 
     return () => {
@@ -71,17 +70,29 @@ export const Timeline = ({
     >
       <div className="max-w-7xl mx-auto py-10 px-4 md:px-8 lg:px-10">
         {subtitle && (
-          <span className="text-sm font-semibold tracking-wide text-orange-600 block mb-2">
+          <Typography
+            as="span"
+            variant="sectionLabel"
+            className="mb-2 block text-orange-600"
+          >
             {subtitle}
-          </span>
+          </Typography>
         )}
-        <h2 className="text-3xl md:text-5xl font-normal text-white max-w-4xl leading-tight">
+        <Typography
+          as="h2"
+          variant="sectionTitleTight"
+          className="max-w-4xl text-white"
+        >
           {title}
-        </h2>
+        </Typography>
         {description && (
-          <p className="text-neutral-400 text-sm md:text-base max-w-md mt-4 leading-relaxed">
+          <Typography
+            as="p"
+            variant="bodyText3"
+            className="mt-4 max-w-md leading-relaxed text-neutral-400"
+          >
             {description}
-          </p>
+          </Typography>
         )}
       </div>
 
@@ -95,23 +106,28 @@ export const Timeline = ({
               <div className="h-10 absolute left-3 md:left-3 w-10 rounded-full bg-black flex items-center justify-center border border-neutral-800">
                 <div className="h-4 w-4 rounded-full bg-neutral-900 border border-neutral-700 p-2" />
               </div>
-              <h3 className="hidden md:block text-xl md:pl-20 md:text-4xl font-semibold text-neutral-500">
+              <Typography
+                as="h3"
+                variant="timelineYear"
+                className="hidden text-neutral-500 md:block md:pl-20"
+              >
                 {item.title}
-              </h3>
+              </Typography>
             </div>
 
             <div className="relative pl-20 pr-4 md:pl-4 w-full">
-              <h3 className="md:hidden block text-xl mb-4 text-left font-semibold text-neutral-400">
+              <Typography
+                as="h3"
+                variant="timelineYearMobile"
+                className="mb-4 block text-left text-neutral-400 md:hidden"
+              >
                 {item.title}
-              </h3>
-              <div className="text-neutral-300">
-                {item.content}
-              </div>
+              </Typography>
+              <div className="text-neutral-300">{item.content}</div>
             </div>
           </div>
         ))}
-        
-        {/* Track Line */}
+
         <div
           style={{
             height: height + "px",

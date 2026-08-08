@@ -3,10 +3,10 @@
 import { useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { FaPlay } from "react-icons/fa";
 import { FiArrowRight } from "react-icons/fi";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Typography from "@/components/ui/Typography";
 
 export default function AboutSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -47,26 +47,40 @@ export default function AboutSection() {
       >
         {/* Left Column - Text Content */}
         <div className="flex flex-col items-start gap-4 sm:gap-5">
-          <span className="text-sm font-semibold tracking-wide text-orange-600">
+          <Typography
+            as="span"
+            variant="sectionLabel"
+            className="text-orange-600"
+          >
             About Swami Anandavanam
-          </span>
+          </Typography>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-normal text-gray-950 leading-[1.18] tracking-tight">
+          <Typography
+            as="h2"
+            variant="sectionTitle"
+            className="text-gray-950"
+          >
             A Life Dedicated to
             <br className="hidden sm:block" /> Dharma &amp; Humanity
-          </h2>
+          </Typography>
 
-          <p className="text-gray-600 text-base sm:text-lg leading-relaxed max-w-xl font-normal">
+          <Typography
+            as="p"
+            variant="bodyRelaxed"
+            className="max-w-xl text-gray-600"
+          >
             Swamiji is a revered spiritual leader, philosopher and guide
             dedicated to reviving the timeless wisdom of Sanatan Dharma and
             serving humanity selflessly.
-          </p>
+          </Typography>
 
           <Link
             href="/about"
-            className="mt-2 inline-flex items-center gap-2.5 px-5 py-3 rounded-xl border border-orange-300 text-orange-600 font-medium text-sm sm:text-base hover:bg-orange-50 hover:border-orange-400 transition-all group"
+            className="mt-2 inline-flex items-center gap-2.5 px-5 py-3 rounded-xl border border-orange-300 text-orange-600 hover:bg-orange-50 hover:border-orange-400 transition-all group"
           >
-            <span>Learn More About Swami Anandavanam</span>
+            <Typography as="span" variant="linkTextMedium">
+              Learn More About Swami Anandavanam
+            </Typography>
             <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
@@ -81,7 +95,6 @@ export default function AboutSection() {
             sizes="(max-width: 1024px) 100vw, 50vw"
             priority
           />
-
         </div>
       </div>
     </section>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Typography from "@/components/ui/Typography";
 
 export default function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -34,11 +35,15 @@ export default function Hero() {
 
       {/* Main Content */}
       <div className="relative z-20 mx-auto max-w-5xl px-4 pt-[175px] sm:pt-[195px] md:pt-[215px] lg:pt-[225px] text-center flex flex-col items-center">
-        <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[80px] xl:text-[84px] font-normal text-gray-950 tracking-tight leading-[1.05] max-w-4xl">
+        <Typography
+          as="h1"
+          variant="heroTitle"
+          className="max-w-4xl text-gray-950"
+        >
           Guiding Souls
           <br />
           Inspiring Humanity.
-        </h1>
+        </Typography>
       </div>
     </section>
   );

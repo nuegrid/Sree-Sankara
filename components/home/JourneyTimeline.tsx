@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import HorizontalGallery from "./HorizontalGallery";
 import { Timeline } from "../ui/timeline";
+import Typography from "@/components/ui/Typography";
 
 const timelineData = [
   {
@@ -16,12 +17,16 @@ const timelineData = [
             className="h-full w-full object-cover"
           />
         </div>
-        <p className="text-sm leading-relaxed text-neutral-400 sm:text-base">
+        <Typography
+          as="p"
+          variant="bodyRelaxedSm"
+          className="text-neutral-400"
+        >
           Born in Chalakudy, Kerala, Swami Anandavanam Bharathi (formerly P.
           Salil) pursued Political Science and became an active student leader,
           developing strong leadership skills and a commitment to public
           service.
-        </p>
+        </Typography>
       </div>
     ),
   },
@@ -36,11 +41,15 @@ const timelineData = [
             className="h-full w-full object-cover"
           />
         </div>
-        <p className="text-sm leading-relaxed text-neutral-400 sm:text-base">
+        <Typography
+          as="p"
+          variant="bodyRelaxedSm"
+          className="text-neutral-400"
+        >
           In 2001, a life-changing visit to the Kumbh Mela sparked a profound
           transformation. Time spent on the banks of the Ganga inspired Sanatan
           Dharma and inner realization.
-        </p>
+        </Typography>
       </div>
     ),
   },
@@ -55,11 +64,15 @@ const timelineData = [
             className="h-full w-full object-cover"
           />
         </div>
-        <p className="text-sm leading-relaxed text-neutral-400 sm:text-base">
+        <Typography
+          as="p"
+          variant="bodyRelaxedSm"
+          className="text-neutral-400"
+        >
           Embracing a life of deep meditation and spiritual practice,
           dedicating every moment to the pursuit of higher consciousness and
           divine connection.
-        </p>
+        </Typography>
       </div>
     ),
   },
@@ -74,10 +87,14 @@ const timelineData = [
             className="h-full w-full object-cover"
           />
         </div>
-        <p className="text-sm leading-relaxed text-neutral-400 sm:text-base">
+        <Typography
+          as="p"
+          variant="bodyRelaxedSm"
+          className="text-neutral-400"
+        >
           Now traveling and sharing wisdom, helping seekers discover their
           inner potential and peace in the modern world.
-        </p>
+        </Typography>
       </div>
     ),
   },
