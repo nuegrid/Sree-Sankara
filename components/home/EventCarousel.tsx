@@ -8,6 +8,7 @@ import EventCard from "./EventCard";
 import JourneyDrawer from "./horizontal-gallery-timeline/journey_drawer";
 import { events } from "./data";
 import Typography from "@/components/ui/Typography";
+import ViewAllLink from "@/components/ui/ViewAllLink";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -19,8 +20,7 @@ const CARD_DUR = 1;
 const DRAWER_DUR = 1;
 const HOLD_DUR = 0.25; // first card fully visible & frozen
 const GALLERY_DUR = 2;
-const QUOTE_DUR = 1; // reveal quote below gallery after horizontal journey ends
-const TOTAL_DUR = CARD_DUR + DRAWER_DUR + HOLD_DUR + GALLERY_DUR + QUOTE_DUR;
+const TOTAL_DUR = CARD_DUR + DRAWER_DUR + HOLD_DUR + GALLERY_DUR;
 
 export default function EventCarousel() {
   const [activeId, setActiveId] = useState(events[0].id);
@@ -88,14 +88,6 @@ export default function EventCarousel() {
 
         const galleryProxy = { p: 0 };
 
-        const getQuoteReveal = () => {
-          if (!drawerContent) return Math.max(window.innerHeight * 0.85, 500);
-          return Math.max(
-            0,
-            drawerContent.scrollHeight - pin.clientHeight
-          );
-        };
-
         const tl = gsap.timeline({
           defaults: { ease: "none" },
           scrollTrigger: {
@@ -110,8 +102,7 @@ export default function EventCarousel() {
               const drawerScroll = Math.max(window.innerHeight * 1.2, 700);
               const holdScroll = window.innerHeight * 0.2;
               const galleryScroll = Math.max(window.innerWidth * 2.5, 1200);
-              const quoteScroll = Math.max(getQuoteReveal() * 1.1, 500);
-              return `+=${cards + drawerScroll + holdScroll + galleryScroll + quoteScroll}`;
+              return `+=${cards + drawerScroll + holdScroll + galleryScroll}`;
             },
             invalidateOnRefresh: true,
             anticipatePin: 1,
@@ -194,22 +185,6 @@ export default function EventCarousel() {
           },
           CARD_DUR + DRAWER_DUR + HOLD_DUR
         );
-
-        // ——— STAGE 3: after last gallery card, reveal quote below ———
-        if (drawerContent) {
-          tl.fromTo(
-            drawerContent,
-            { y: 0 },
-            {
-              y: () => -getQuoteReveal(),
-              duration: QUOTE_DUR,
-              force3D: true,
-              immediateRender: false,
-              onUpdate: () => setGallery(1),
-            },
-            CARD_DUR + DRAWER_DUR + HOLD_DUR + GALLERY_DUR
-          );
-        }
 
         scrollTriggerRef.current = tl.scrollTrigger ?? null;
 
@@ -341,14 +316,7 @@ export default function EventCarousel() {
               </Typography>
             </div>
             <div className="shrink-0 md:pb-2">
-              <a
-                href="/events"
-                className="text-orange-600 underline underline-offset-4 transition-colors hover:text-orange-700"
-              >
-                <Typography as="span" variant="linkText">
-                  View All Programs
-                </Typography>
-              </a>
+              <ViewAllLink href="/events">View All Programs</ViewAllLink>
             </div>
           </div>
 
@@ -377,14 +345,14 @@ export default function EventCarousel() {
 
         <div
           ref={drawerRef}
-          className="absolute right-0 bottom-0 left-0 z-30 hidden h-full w-full will-change-transform lg:block"
+          className="absolute right-0 bottom-0 left-0 z-30 hidden h-full w-full bg-transparent will-change-transform lg:block"
         >
           <JourneyDrawer galleryProgress={galleryProgress} />
         </div>
       </div>
 
       {/* Mobile journey (no pin / drawer stages) */}
-      <div className="lg:hidden">
+      <div className="bg-transparent lg:hidden">
         <JourneyDrawer />
       </div>
     </div>

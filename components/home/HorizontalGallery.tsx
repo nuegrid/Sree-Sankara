@@ -263,19 +263,19 @@ export default function HorizontalGallery({
       className="relative flex h-full min-h-screen flex-col justify-center overflow-hidden bg-black"
     >
       {/* Same page grid as Upcoming Programs (max-w-7xl / 1280px gutters) */}
-      <div className="w-full translate-y-5 py-12 md:translate-y-7 md:py-14">
-        <header className="relative z-20 mx-auto mb-8 w-full max-w-7xl shrink-0 px-6 md:mb-9">
+      <div className="w-full translate-y-6 py-8 pt-12 md:translate-y-8 md:py-10 md:pt-16">
+        <header className="relative z-20 mx-auto mb-5 w-full max-w-7xl shrink-0 px-6 md:mb-6">
           <Typography
             as="span"
-            variant="sectionLabelSm"
-            className="text-orange-600"
+            variant="sectionEyebrow"
+            className="text-[#FE3E02]"
           >
-            Swami&apos;s Spiritual Journey
+            Swamiji&apos;s Spiritual Journey
           </Typography>
           <Typography
             as="h2"
             variant="galleryTitle"
-            className="mt-1.5 max-w-sm text-white md:max-w-md"
+            className="mt-1 max-w-sm text-white md:max-w-md"
           >
             A Life Dedicated to
             <br />
@@ -287,7 +287,7 @@ export default function HorizontalGallery({
         <div className="relative overflow-hidden px-6 md:px-[calc((100vw-1280px)/2+24px)]">
           <div
             ref={wrapperRef}
-            className="relative flex w-max gap-6 md:gap-8 will-change-transform"
+            className="relative flex w-max gap-5 md:gap-7 will-change-transform"
           >
             <div
               ref={bgLineRef}
@@ -301,14 +301,14 @@ export default function HorizontalGallery({
             {cards.map((card, i) => (
               <div
                 key={i}
-                className="timeline-card relative flex w-[78vw] max-w-[300px] shrink-0 flex-col sm:max-w-[340px] md:w-[400px] md:max-w-none lg:w-[420px]"
+                className="timeline-card relative flex w-[78vw] max-w-[280px] shrink-0 flex-col sm:max-w-[320px] md:w-[360px] md:max-w-none lg:w-[380px]"
               >
                 {/* Timeline row — below heading, above card media */}
-                <div className="relative mb-6 h-4 shrink-0 md:mb-7">
+                <div className="relative mb-4 h-4 shrink-0 md:mb-5">
                   <div className="timeline-dot absolute top-1/2 left-0 z-10 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-neutral-700 bg-neutral-900 transition-colors duration-300" />
                 </div>
 
-                <div className="relative mb-4 aspect-[4/3] overflow-hidden rounded-3xl border border-neutral-800 bg-[#171717] md:mb-5 md:aspect-[16/10]">
+                <div className="relative mb-3 aspect-[16/10] overflow-hidden rounded-2xl border border-neutral-800 bg-[#171717] md:mb-4 md:aspect-[16/9] md:rounded-3xl">
                   {card.image && (
                     <img
                       src={card.image}
@@ -321,7 +321,7 @@ export default function HorizontalGallery({
                 <Typography
                   as="h3"
                   variant="headline4"
-                  className="mb-1.5 text-white md:mb-2"
+                  className="mb-1 text-white md:mb-1.5"
                 >
                   {card.title}
                 </Typography>

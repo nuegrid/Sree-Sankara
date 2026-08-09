@@ -14,6 +14,8 @@ export const typographyVariants = cva("", {
       headline2: "text-2xl md:text-3xl font-medium",
       headline3: "text-base md:text-lg font-medium",
       headline4: "text-lg md:text-xl font-medium",
+      newsHeadline:
+        "text-[1.65rem] sm:text-[2rem] lg:text-[2.35rem] font-medium leading-[1.2] tracking-tight max-w-[654px]",
       bodyText: "text-base md:text-lg",
       bodyText2: "text-xs md:text-sm",
       bodyText3: "text-sm md:text-base",
@@ -29,6 +31,10 @@ export const typographyVariants = cva("", {
       sectionTitleTight: "text-3xl md:text-5xl font-normal leading-tight",
       sectionLabel: "text-sm font-semibold tracking-wide",
       sectionLabelSm: "text-xs md:text-sm font-semibold tracking-wide",
+      sectionEyebrow:
+        "font-[var(--font-inter)] text-[23px] font-normal leading-none tracking-[-0.04em]",
+      viewAllLink:
+        "font-[var(--font-inter)] text-[23px] font-normal leading-none tracking-[-0.04em]",
       galleryTitle:
         "text-2xl font-normal leading-[1.2] tracking-tight md:text-[1.85rem] lg:text-3xl",
       cardTitle:
@@ -36,7 +42,7 @@ export const typographyVariants = cva("", {
       cardMeta: "text-[15px] sm:text-lg",
       cardDescription: "text-sm leading-relaxed tracking-wide",
       quote:
-        "text-[1.65rem] font-medium leading-[1.35] tracking-wide sm:text-[1.85rem] md:text-[2.1rem] lg:text-[2.35rem]",
+        "font-[var(--font-inter)] text-[1.5rem] font-medium leading-none tracking-[-0.04em] sm:text-[1.85rem] md:text-[2.15rem] lg:text-[2.5rem] xl:text-[57px]",
       buttonSmall: "text-sm font-medium",
       linkText: "text-sm sm:text-base font-semibold",
       linkTextMedium: "text-sm sm:text-base font-medium",

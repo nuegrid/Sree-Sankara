@@ -23,7 +23,7 @@ interface TimelineProps {
 export const Timeline = ({
   data,
   title = "A Life Dedicated to Dharma",
-  subtitle = "Swami's Spiritual Journey",
+  subtitle = "Swamiji's Spiritual Journey",
   description,
 }: TimelineProps) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -72,8 +72,8 @@ export const Timeline = ({
         {subtitle && (
           <Typography
             as="span"
-            variant="sectionLabel"
-            className="mb-2 block text-orange-600"
+            variant="sectionEyebrow"
+            className="mb-2 block text-[#FE3E02]"
           >
             {subtitle}
           </Typography>

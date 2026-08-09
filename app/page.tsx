@@ -3,6 +3,8 @@ import Navbar from "@/components/layout/Navbar";
 import Hero from "@/components/home/Hero";
 import AboutSection from "@/components/home/AboutSection";
 import EventCarousel from "@/components/home/EventCarousel";
+import QuoteSection from "@/components/home/QuoteSection";
+import FeaturedNewsSection from "@/components/home/featured-news/FeaturedNewsSection";
 
 export default function Home() {
   return (
@@ -12,6 +14,8 @@ export default function Home() {
       <Hero />
       <AboutSection />
       <EventCarousel />
+      <QuoteSection />
+      <FeaturedNewsSection />
     </div>
   );
 }
