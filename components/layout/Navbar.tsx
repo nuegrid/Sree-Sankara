@@ -2,11 +2,16 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { FaHeart as HeartIcon } from "react-icons/fa";
 import { FiMenu } from "react-icons/fi";
 import MobileDrawer from "./MobileDrawer";
 import Typography from "@/components/ui/Typography";
+import { PAGE_CONTAINER } from "@/lib/layout";
+import { cn } from "@/lib/utils";
+
+const LOGO_SRC = "/images/home/logo/logo-section.png";
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -18,60 +23,57 @@ const navLinks = [
   { name: "Contact", href: "/contact" },
 ];
 
-export default function Navbar() {
+type NavbarProps = {
+  /** `overlay` sits on hero video; `solid` for inner pages */
+  variant?: "overlay" | "solid";
+};
+
+export default function Navbar({ variant = "overlay" }: NavbarProps) {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const isSolid = variant === "solid";
 
   useEffect(() => {
+    if (isSolid) return;
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isSolid]);
 
   return (
     <>
       <nav
-        className={`left-0 right-0 z-40 w-full px-4 sm:px-8 lg:px-12 py-3 transition-all duration-300 ${
-          isScrolled
-            ? "fixed top-0 bg-white/80 backdrop-blur-md border-b border-stone-200/50 shadow-xs"
-            : "absolute top-12 sm:top-14 bg-transparent border-none"
+        className={`left-0 right-0 z-40 w-full py-3 transition-all duration-300 ${
+          isSolid
+            ? "relative top-0 border-b border-stone-200/60 bg-white"
+            : isScrolled
+              ? "fixed top-0 bg-white/80 backdrop-blur-md border-b border-stone-200/50 shadow-xs"
+              : "absolute top-12 sm:top-14 bg-transparent border-none"
         }`}
       >
-        <div className="mx-auto max-w-[1280px] grid grid-cols-2 lg:grid-cols-[1fr_auto_1fr] items-center">
+        <div
+          className={cn(
+            PAGE_CONTAINER,
+            "grid grid-cols-2 items-center lg:grid-cols-[1fr_auto_1fr]"
+          )}
+        >
           <div className="flex items-center justify-start">
-            <Link href="/" className="flex items-center gap-3 group">
-              <div className="relative flex items-center justify-center w-11 h-11 rounded-full bg-amber-500/10 border border-amber-600/20 group-hover:scale-105 transition-transform shrink-0">
-                <svg
-                  viewBox="0 0 100 100"
-                  className="w-8 h-8 text-amber-900 fill-current"
-                >
-                  <circle cx="50" cy="50" r="46" fill="#FDE68A" opacity="0.4" />
-                  <path
-                    d="M50 15 C38 15 30 25 30 38 C30 46 34 52 40 56 C32 62 25 72 25 85 L75 85 C75 72 68 62 60 56 C66 52 70 46 70 38 C70 25 62 15 50 15 Z M50 22 C58 22 64 29 64 38 C64 47 58 53 50 53 C42 53 36 47 36 38 C36 29 42 22 50 22 Z"
-                    fill="#78350F"
-                  />
-                  <circle cx="50" cy="32" r="3" fill="#D97706" />
-                </svg>
-              </div>
-              <div className="flex flex-col leading-none">
-                <Typography
-                  as="span"
-                  variant="brandText"
-                  className="text-gray-900"
-                >
-                  Sree
-                </Typography>
-                <Typography
-                  as="span"
-                  variant="brandText"
-                  className="text-gray-900"
-                >
-                  Sankara
-                </Typography>
-              </div>
+            <Link
+              href="/"
+              className="relative block h-11 w-[148px] shrink-0 sm:h-12 sm:w-[168px]"
+              aria-label="Sree Sankara home"
+            >
+              <Image
+                src={LOGO_SRC}
+                alt="Sree Sankara"
+                fill
+                priority
+                className="object-contain object-left"
+                sizes="168px"
+              />
             </Link>
           </div>
 

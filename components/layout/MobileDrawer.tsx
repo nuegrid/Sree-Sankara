@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { FiX, FiChevronRight } from "react-icons/fi";
 import { FaHeart } from "react-icons/fa";
 import Typography from "@/components/ui/Typography";
@@ -59,22 +60,20 @@ export default function MobileDrawer({
         }`}
       >
         <div className="flex items-center justify-between px-6 py-5 border-b border-stone-200/50">
-          <div className="flex flex-col">
-            <Typography
-              as="span"
-              variant="brandText"
-              className="text-[#2A0707]"
-            >
-              Sree Sankara
-            </Typography>
-            <Typography
-              as="span"
-              variant="brandSubtitle"
-              className="mt-0.5 text-stone-500"
-            >
-              Spiritual Mission
-            </Typography>
-          </div>
+          <Link
+            href="/"
+            onClick={onClose}
+            className="relative block h-10 w-[140px] shrink-0"
+            aria-label="Sree Sankara home"
+          >
+            <Image
+              src="/images/home/logo/logo-section.png"
+              alt="Sree Sankara"
+              fill
+              className="object-contain object-left"
+              sizes="140px"
+            />
+          </Link>
           <button
             onClick={onClose}
             className="p-2 -mr-2 rounded-full text-stone-600 hover:bg-stone-200/60 active:scale-95 transition-all cursor-pointer focus:outline-none"

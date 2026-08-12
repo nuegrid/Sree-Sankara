@@ -1,4 +1,4 @@
-export const FEATURED_NEWS_DIR = "/images/featured%20news";
+export const FEATURED_NEWS_DIR = "/images/home/featured%20news";
 
 export const featuredArticle = {
   date: "15 May 2026",

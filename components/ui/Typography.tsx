@@ -49,9 +49,9 @@ export const typographyVariants = cva("", {
       brandText: "text-lg font-bold tracking-tight font-serif",
       brandSubtitle: "text-[10px] uppercase tracking-wider font-semibold",
       navText:
-        "font-[var(--font-inter)] text-[23px] font-normal leading-none tracking-[-0.04em]",
+        "font-[var(--font-inter)] text-[17px] font-normal leading-none tracking-[-0.04em] sm:text-[17px]",
       navTextActive:
-        "font-[var(--font-inter)] text-[23px] font-normal leading-none tracking-[-0.04em]",
+        "font-[var(--font-inter)] text-[17px] font-normal leading-none tracking-[-0.04em] sm:text-[17px]",
       topBarText:
         "font-[var(--font-inter)] text-xs font-normal leading-none tracking-[-0.04em] sm:text-sm",
       topBarAction:
@@ -63,6 +63,40 @@ export const typographyVariants = cva("", {
       caption: "text-xs",
       italicCaption: "text-xs font-serif italic leading-relaxed",
       buttonXs: "text-xs font-medium",
+
+      // Homepage CTAs / footer (Inter + Figma tracking)
+      displayTitle:
+        "font-[var(--font-inter)] text-[2rem] font-normal leading-none tracking-[-0.04em] sm:text-[2.5rem] md:text-[48px] lg:text-[57px]",
+      displayTitleMedium:
+        "font-[var(--font-inter)] text-[2rem] font-medium leading-none tracking-[-0.04em] sm:text-[2.5rem] md:text-[48px] lg:text-[57px]",
+      ctaBody:
+        "font-[var(--font-inter)] text-[18px] font-light leading-none tracking-[-0.04em] sm:text-[22px] md:text-[28px]",
+      ctaBodyMuted:
+        "font-[var(--font-inter)] text-[16px] font-normal leading-[1.2] tracking-[-0.04em] sm:text-[18px] md:text-[22px] md:leading-[1.15] lg:text-[24px]",
+      ctaButton:
+        "font-[var(--font-inter)] text-[18px] font-normal leading-none tracking-[-0.04em] sm:text-[20px] md:text-[23px]",
+      ctaButtonSm:
+        "font-[var(--font-inter)] text-[15px] font-normal leading-none tracking-[-0.04em] sm:text-[16px] md:text-[18px]",
+      footerTagline:
+        "font-[var(--font-inter)] text-[16px] font-normal leading-none tracking-[-0.04em] sm:text-[18px] md:text-[20px]",
+      footerBody:
+        "font-[var(--font-inter)] text-[15px] font-light leading-relaxed tracking-[-0.02em] sm:text-base",
+      footerHeading:
+        "font-[var(--font-inter)] text-base font-medium tracking-[-0.02em] sm:text-lg",
+      footerLink:
+        "font-[var(--font-inter)] text-sm font-light tracking-[-0.02em] sm:text-[15px]",
+      footerMeta:
+        "font-[var(--font-inter)] text-xs font-light tracking-[-0.02em] sm:text-sm",
+      aboutTitle:
+        "font-[var(--font-inter)] text-[1.85rem] font-medium leading-none tracking-[-0.04em] sm:text-[2.25rem] md:text-[42px] lg:text-[48px]",
+      aboutBody:
+        "font-[var(--font-inter)] text-[16px] font-normal leading-[1.45] tracking-[-0.04em] text-left sm:text-[20px] md:text-[24px] md:leading-[1.4]",
+      aboutPillarTitle:
+        "font-[var(--font-inter)] text-[16px] font-medium leading-[1.4] tracking-[-0.04em] sm:text-[18px] md:text-[22px] md:leading-[1.35]",
+      initiativeTitle:
+        "font-[var(--font-inter)] text-[18px] font-medium leading-none tracking-[-0.04em] sm:text-[22px] md:text-[24px]",
+      initiativeBody:
+        "font-[var(--font-inter)] text-[15px] font-normal leading-[1.4] tracking-[-0.04em] text-left sm:text-[17px] md:text-[20px] md:leading-[1.35]",
     },
   },
   defaultVariants: {

@@ -17,9 +17,9 @@ export default function QuoteSection() {
         <div className="relative mx-auto flex w-full max-w-7xl flex-col md:flex-row md:items-end">
           {/* Left — quote mark left; text indented under it */}
           <div className="relative z-10 flex w-full min-w-0 flex-col justify-center px-8 py-12 sm:px-10 md:w-[58%] md:self-center md:py-10 md:pl-14 md:pr-6 lg:w-[60%] lg:pl-20 lg:pr-8 lg:py-12">
-            <div className="relative mb-2 h-12 w-14 sm:mb-3 sm:h-14 sm:w-16 md:h-16 md:w-20 lg:h-[4.5rem] lg:w-24">
+            <div className="relative mb-2 ml-3 h-12 w-14 sm:mb-3 sm:ml-4 sm:h-14 sm:w-16 md:ml-5 md:h-16 md:w-20 lg:ml-6 lg:h-[4.5rem] lg:w-24">
               <Image
-                src="/images/journey/quote.png"
+                src="/images/home/journey/quote.png"
                 alt=""
                 fill
                 sizes="96px"
@@ -62,7 +62,7 @@ export default function QuoteSection() {
               <Typography
                 as="p"
                 variant="bodyText2"
-                className="mt-5 font-[var(--font-inter)] text-white sm:mt-6 md:text-base"
+                className="mt-5 text-white sm:mt-6"
               >
                 Swami Anandavanam
               </Typography>
@@ -72,7 +72,7 @@ export default function QuoteSection() {
           {/* Right — portrait flush to drawer bottom */}
           <div className="relative z-0 mx-auto flex w-full shrink-0 items-end justify-center md:w-[42%] md:justify-end lg:w-[40%]">
             <Image
-              src="/images/journey/sw1.png"
+              src="/images/home/journey/sw1.png"
               alt="Swami Anandavanam"
               width={720}
               height={960}

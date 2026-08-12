@@ -88,7 +88,7 @@ export default function AboutSection() {
         {/* Right Column - Swami Image Card */}
         <div className="relative w-full rounded-3xl sm:rounded-[32px] overflow-hidden shadow-xl aspect-[4/3] lg:aspect-[16/11] group">
           <Image
-            src="/images/hero/about_swami.png"
+            src="/images/home/hero/about_swami.png"
             alt="Swami Anandavanam"
             fill
             className="object-cover transition-transform duration-700 group-hover:scale-105"
