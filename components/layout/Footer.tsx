@@ -39,8 +39,8 @@ export default function Footer({ overlap = true }: { overlap?: boolean }) {
           : "mt-0"
       }`}
     >
-      <div className={cn(PAGE_CONTAINER, "pb-8 pt-14 sm:pb-10 sm:pt-16 md:pt-20")}>
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3 lg:gap-16">
+      <div className={cn(PAGE_CONTAINER, "pb-6 pt-12 sm:pb-10 sm:pt-16 md:pt-20")}>
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-12 lg:grid-cols-3 lg:gap-16">
           <div className="flex flex-col gap-6">
             <Typography
               as="p"
@@ -149,7 +149,7 @@ export default function Footer({ overlap = true }: { overlap?: boolean }) {
           </div>
         </div>
 
-        <div className="mt-40 flex flex-col gap-4 border-t border-white/10 pt-14 pb-8 sm:mt-44 sm:flex-row sm:items-center sm:justify-between sm:pt-16 md:mt-52">
+        <div className="mt-10 flex flex-col gap-4 border-t border-white/10 pt-6 pb-4 sm:mt-16 sm:flex-row sm:items-center sm:justify-between sm:pt-10 sm:pb-6 md:mt-24 md:pt-14 md:pb-8">
           <Typography
             as="p"
             variant="footerMeta"

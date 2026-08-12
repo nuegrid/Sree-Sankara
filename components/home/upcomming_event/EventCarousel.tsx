@@ -276,19 +276,6 @@ export default function EventCarousel() {
     }
   };
 
-  const handleWheel = (e: React.WheelEvent) => {
-    if (window.innerWidth >= 1024 || !containerRef.current) return;
-    if (e.deltaY === 0) return;
-
-    const el = containerRef.current;
-    const atStart = el.scrollLeft <= 0;
-    const atEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 2;
-    if ((e.deltaY < 0 && atStart) || (e.deltaY > 0 && atEnd)) return;
-
-    e.preventDefault();
-    el.scrollLeft += e.deltaY;
-  };
-
   return (
     <div ref={rootRef} className="relative z-20 w-full">
       <div
@@ -323,7 +310,6 @@ export default function EventCarousel() {
           <div
             ref={containerRef}
             onScroll={handleScroll}
-            onWheel={handleWheel}
             data-lenis-prevent
             className="no-scrollbar relative flex w-full flex-row flex-nowrap overflow-x-auto px-6 py-4 md:px-[calc((100vw-1280px)/2+24px)] lg:overflow-x-hidden"
           >
@@ -352,8 +338,8 @@ export default function EventCarousel() {
         </div>
       </div>
 
-      {/* Mobile journey (no pin / drawer stages) */}
-      <div className="bg-transparent lg:hidden">
+      {/* Mobile / tablet journey (no pin / drawer stages) */}
+      <div className="overflow-visible bg-black lg:hidden">
         <JourneyDrawer />
       </div>
     </div>

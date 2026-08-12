@@ -106,7 +106,9 @@ export default function FeaturedNewsSection() {
                 <Link
                   key={item.id}
                   href={item.href}
-                  className="group flex flex-col gap-4"
+                  className={`group flex flex-col gap-4 ${
+                    item.id === 2 || item.id === 3 ? "hidden sm:flex" : ""
+                  }`}
                 >
                   <div className="relative aspect-[16/11] w-full overflow-hidden rounded-2xl bg-neutral-200 sm:rounded-3xl">
                     <Image

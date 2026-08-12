@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import Image from "next/image";
-import { FiX, FiChevronRight } from "react-icons/fi";
-import { FaHeart } from "react-icons/fa";
+import { FiChevronRight } from "react-icons/fi";
 import Typography from "@/components/ui/Typography";
 
 interface MobileDrawerProps {
@@ -20,6 +20,7 @@ const navLinks = [
   { name: "Events", href: "/events" },
   { name: "Media", href: "/media" },
   { name: "Volunteer", href: "/volunteer" },
+  { name: "Donation", href: "/donate" },
   { name: "Contact", href: "/contact" },
 ];
 
@@ -28,38 +29,56 @@ export default function MobileDrawer({
   onClose,
   pathname,
 }: MobileDrawerProps) {
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
-    return () => {
-      document.body.style.overflow = "unset";
-    };
-  }, [isOpen]);
+  const [mounted, setMounted] = useState(false);
 
-  return (
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [isOpen, onClose]);
+
+  if (!mounted) return null;
+
+  return createPortal(
     <div
-      className={`fixed inset-0 z-50 lg:hidden flex justify-end transition-all duration-300 ${
+      id="mobile-navigation"
+      className={
         isOpen
-          ? "opacity-100 pointer-events-auto"
-          : "opacity-0 pointer-events-none"
-      }`}
+          ? "fixed inset-0 z-[300] flex justify-end lg:hidden"
+          : "pointer-events-none fixed inset-0 z-[300] hidden justify-end lg:hidden"
+      }
+      aria-hidden={!isOpen}
     >
-      <div
-        className={`fixed inset-0 bg-stone-900/60 backdrop-blur-xs transition-opacity duration-300 ${
-          isOpen ? "opacity-100" : "opacity-0"
-        }`}
+      <button
+        type="button"
+        className="absolute inset-0 bg-stone-900/60 backdrop-blur-xs"
+        aria-label="Close menu"
+        tabIndex={isOpen ? 0 : -1}
         onClick={onClose}
       />
 
       <div
-        className={`relative w-full max-w-[320px] sm:max-w-[360px] h-full bg-[#FAF8F5] shadow-2xl flex flex-col z-50 transition-transform duration-300 ease-out transform ${
-          isOpen ? "translate-x-0" : "translate-x-full"
-        }`}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Mobile navigation"
+        className="relative z-10 flex h-full w-full max-w-[320px] flex-col bg-[#FAF8F5] shadow-2xl sm:max-w-[360px]"
       >
-        <div className="flex items-center justify-between px-6 py-5 border-b border-stone-200/50">
+        <div className="flex items-center justify-between border-b border-stone-200/50 px-6 py-5">
           <Link
             href="/"
             onClick={onClose}
@@ -74,16 +93,9 @@ export default function MobileDrawer({
               sizes="140px"
             />
           </Link>
-          <button
-            onClick={onClose}
-            className="p-2 -mr-2 rounded-full text-stone-600 hover:bg-stone-200/60 active:scale-95 transition-all cursor-pointer focus:outline-none"
-            aria-label="Close menu"
-          >
-            <FiX size={22} />
-          </button>
         </div>
 
-        <div className="flex-1 overflow-y-auto px-4 py-6 flex flex-col gap-1.5">
+        <div className="flex flex-1 flex-col gap-1.5 overflow-y-auto px-4 py-6">
           {navLinks.map((link) => {
             const isActive = pathname === link.href;
             return (
@@ -91,7 +103,7 @@ export default function MobileDrawer({
                 key={link.name}
                 href={link.href}
                 onClick={onClose}
-                className={`flex items-center justify-between px-4 py-3.5 rounded-xl transition-all ${
+                className={`flex items-center justify-between rounded-xl px-4 py-3.5 transition-all ${
                   isActive
                     ? "bg-[#2A0707] text-[#f0e9df] shadow-sm"
                     : "text-stone-800 hover:bg-stone-200/40 hover:text-black"
@@ -105,7 +117,7 @@ export default function MobileDrawer({
                   {link.name}
                 </Typography>
                 <FiChevronRight
-                  className={`w-4 h-4 opacity-70 ${
+                  className={`h-4 w-4 opacity-70 ${
                     isActive ? "text-[#f0e9df]" : "text-stone-400"
                   }`}
                 />
@@ -113,28 +125,8 @@ export default function MobileDrawer({
             );
           })}
         </div>
-
-        <div className="p-6 border-t border-stone-200/50 bg-stone-100/30 flex flex-col gap-4">
-          <Link
-            href="/donate"
-            onClick={onClose}
-            className="group flex items-center justify-center gap-2.5 w-full py-4 rounded-xl bg-[#2A0707] text-[#f0e9df] hover:bg-stone-900 transition-colors active:scale-[0.98] shadow-md shadow-stone-900/10 cursor-pointer"
-          >
-            <Typography as="span" variant="bodyBase" className="font-semibold">
-              Support / Donate
-            </Typography>
-            <FaHeart className="w-3.5 h-3.5 text-orange-400 group-hover:scale-110 transition-transform" />
-          </Link>
-          <Typography
-            as="p"
-            variant="italicCaption"
-            className="mx-auto max-w-[240px] text-center text-stone-500"
-          >
-            &ldquo;Dharma is not just a path, it is the way of living for the
-            welfare of all&rdquo;
-          </Typography>
-        </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

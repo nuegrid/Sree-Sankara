@@ -12,7 +12,7 @@ import Typography from "@/components/ui/Typography";
  */
 export default function QuoteSection() {
   return (
-    <section className="relative z-20 w-full bg-[#FAF8F5]">
+    <section className="relative z-20 w-full bg-[#FAF8F5] max-md:-mt-px">
       <div className="relative w-full overflow-hidden rounded-bl-[56px] rounded-br-[56px] bg-black">
         <div className="relative mx-auto flex w-full max-w-7xl flex-col md:flex-row md:items-end">
           {/* Left — quote mark left; text indented under it */}

@@ -9,19 +9,16 @@ const timelineData = [
   {
     title: "Student Leader",
     content: (
-      <div className="flex flex-col gap-4">
-        <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-neutral-800 bg-[#171717]">
+      <div className="flex flex-col gap-3">
+        <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl border border-neutral-800 bg-[#171717]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/images/home/journey/a.png"
             alt="Student Leader"
             className="h-full w-full object-cover"
           />
         </div>
-        <Typography
-          as="p"
-          variant="bodyRelaxedSm"
-          className="text-neutral-400"
-        >
+        <Typography as="p" variant="cardDescription" className="text-[#a3a3a3]">
           Born in Chalakudy, Kerala, Swami Anandavanam Bharathi (formerly P.
           Salil) pursued Political Science and became an active student leader,
           developing strong leadership skills and a commitment to public
@@ -33,19 +30,16 @@ const timelineData = [
   {
     title: "A Spiritual Awakening",
     content: (
-      <div className="flex flex-col gap-4">
-        <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-neutral-800 bg-[#171717]">
+      <div className="flex flex-col gap-3">
+        <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl border border-neutral-800 bg-[#171717]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/images/home/journey/b.png"
             alt="A Spiritual Awakening"
             className="h-full w-full object-cover"
           />
         </div>
-        <Typography
-          as="p"
-          variant="bodyRelaxedSm"
-          className="text-neutral-400"
-        >
+        <Typography as="p" variant="cardDescription" className="text-[#a3a3a3]">
           In 2001, a life-changing visit to the Kumbh Mela sparked a profound
           transformation. Time spent on the banks of the Ganga inspired Sanatan
           Dharma and inner realization.
@@ -56,19 +50,16 @@ const timelineData = [
   {
     title: "Path of Devotion",
     content: (
-      <div className="flex flex-col gap-4">
-        <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-neutral-800 bg-[#171717]">
+      <div className="flex flex-col gap-3">
+        <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl border border-neutral-800 bg-[#171717]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/images/home/journey/c.png"
             alt="Path of Devotion"
             className="h-full w-full object-cover"
           />
         </div>
-        <Typography
-          as="p"
-          variant="bodyRelaxedSm"
-          className="text-neutral-400"
-        >
+        <Typography as="p" variant="cardDescription" className="text-[#a3a3a3]">
           Embracing a life of deep meditation and spiritual practice,
           dedicating every moment to the pursuit of higher consciousness and
           divine connection.
@@ -79,19 +70,16 @@ const timelineData = [
   {
     title: "Guiding the Light",
     content: (
-      <div className="flex flex-col gap-4">
-        <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-neutral-800 bg-[#171717]">
+      <div className="flex flex-col gap-3">
+        <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl border border-neutral-800 bg-[#171717]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/images/home/journey/d.png"
             alt="Guiding the Light"
             className="h-full w-full object-cover"
           />
         </div>
-        <Typography
-          as="p"
-          variant="bodyRelaxedSm"
-          className="text-neutral-400"
-        >
+        <Typography as="p" variant="cardDescription" className="text-[#a3a3a3]">
           Now traveling and sharing wisdom, helping seekers discover their
           inner potential and peace in the modern world.
         </Typography>
@@ -112,19 +100,20 @@ export default function JourneyTimeline({
 
   useEffect(() => {
     const checkSize = () => {
-      setIsDesktop(window.innerWidth >= 768);
+      // Match lg breakpoint used by EventCarousel drawer split
+      setIsDesktop(window.innerWidth >= 1024);
     };
 
     checkSize();
     window.addEventListener("resize", checkSize);
-
     return () => window.removeEventListener("resize", checkSize);
   }, []);
 
   if (isDesktop === null) {
-    return <div className="h-full min-h-screen w-full bg-black" />;
+    return <div className="min-h-[100svh] w-full bg-black" />;
   }
 
+  // Desktop: horizontal gallery. Mobile/tablet: vertical timeline.
   return isDesktop ? (
     <div className="h-full min-h-0 w-full">
       <HorizontalGallery progress={galleryProgress} />

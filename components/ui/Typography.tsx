@@ -25,7 +25,7 @@ export const typographyVariants = cva("", {
 
       // Semantic extensions (exact existing styles)
       heroTitle:
-        "text-5xl sm:text-6xl md:text-7xl lg:text-[80px] xl:text-[84px] font-normal tracking-tight leading-[1.05]",
+        "text-3xl sm:text-4xl md:text-5xl lg:text-[56px] xl:text-[60px] font-normal tracking-tight leading-[1.05]",
       sectionTitle:
         "text-3xl sm:text-4xl lg:text-5xl font-normal leading-[1.18] tracking-tight",
       sectionTitleTight: "text-3xl md:text-5xl font-normal leading-tight",
@@ -34,7 +34,7 @@ export const typographyVariants = cva("", {
       sectionEyebrow:
         "font-[var(--font-inter)] text-[23px] font-normal leading-none tracking-[-0.04em]",
       viewAllLink:
-        "font-[var(--font-inter)] text-[23px] font-normal leading-none tracking-[-0.04em]",
+        "font-[var(--font-inter)] text-[18px] font-normal leading-none tracking-[-0.04em]",
       galleryTitle:
         "text-2xl font-normal leading-[1.2] tracking-tight md:text-[1.85rem] lg:text-3xl",
       cardTitle:

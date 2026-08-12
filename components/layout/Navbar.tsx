@@ -1,11 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { FaHeart as HeartIcon } from "react-icons/fa";
-import { FiMenu } from "react-icons/fi";
+import { FiMenu, FiX } from "react-icons/fi";
 import MobileDrawer from "./MobileDrawer";
 import Typography from "@/components/ui/Typography";
 import { PAGE_CONTAINER } from "@/lib/layout";
@@ -20,6 +20,7 @@ const navLinks = [
   { name: "Events", href: "/events" },
   { name: "Media", href: "/media" },
   { name: "Volunteer", href: "/volunteer" },
+  { name: "Donation", href: "/donate" },
   { name: "Contact", href: "/contact" },
 ];
 
@@ -30,7 +31,7 @@ type NavbarProps = {
 
 export default function Navbar({ variant = "overlay" }: NavbarProps) {
   const pathname = usePathname();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const isSolid = variant === "solid";
 
@@ -39,20 +40,27 @@ export default function Navbar({ variant = "overlay" }: NavbarProps) {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
-    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isSolid]);
+
+  // Close mobile menu on route change
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [pathname]);
 
   return (
     <>
       <nav
-        className={`left-0 right-0 z-40 w-full py-3 transition-all duration-300 ${
+        className={cn(
+          "pointer-events-auto left-0 right-0 z-[400] w-full py-3 transition-all duration-300",
           isSolid
             ? "relative top-0 border-b border-stone-200/60 bg-white"
             : isScrolled
-              ? "fixed top-0 bg-white/80 backdrop-blur-md border-b border-stone-200/50 shadow-xs"
-              : "absolute top-12 sm:top-14 bg-transparent border-none"
-        }`}
+              ? "fixed top-0 border-b border-stone-200/50 bg-white/80 shadow-xs backdrop-blur-md"
+              : "absolute top-12 border-none bg-transparent sm:top-14"
+        )}
       >
         <div
           className={cn(
@@ -77,7 +85,7 @@ export default function Navbar({ variant = "overlay" }: NavbarProps) {
             </Link>
           </div>
 
-          <div className="hidden items-center justify-center gap-7 xl:gap-9 lg:flex">
+          <div className="hidden items-center justify-center gap-7 lg:flex xl:gap-9">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
               return (
@@ -101,28 +109,31 @@ export default function Navbar({ variant = "overlay" }: NavbarProps) {
           <div className="flex items-center justify-end gap-3">
             <Link
               href="/donate"
-              className="group flex items-center gap-2 rounded-full border-2 border-[#2A0707] bg-transparent px-5 py-1.5 text-[#2A0707] transition-all hover:bg-[#2A0707] hover:text-white shadow-xs"
+              className="group hidden items-center gap-2 rounded-full border-2 border-[#2A0707] bg-transparent px-5 py-1.5 text-[#2A0707] shadow-xs transition-all hover:bg-[#2A0707] hover:text-white lg:flex"
             >
               <Typography as="span" variant="buttonSmall">
                 Donate
               </Typography>
-              <HeartIcon className="w-3.5 h-3.5 text-[#2A0707] group-hover:text-white transition-colors" />
+              <HeartIcon className="h-3.5 w-3.5 text-[#2A0707] transition-colors group-hover:text-white" />
             </Link>
 
             <button
-              onClick={() => setMobileMenuOpen(true)}
-              className="lg:hidden p-2 text-gray-900 hover:text-black focus:outline-none cursor-pointer"
-              aria-label="Open menu"
+              type="button"
+              onClick={() => setIsMenuOpen((prev) => !prev)}
+              className="relative z-[410] flex h-11 w-11 cursor-pointer items-center justify-center rounded-md text-gray-900 hover:text-black focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2A0707] lg:hidden"
+              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isMenuOpen}
+              aria-controls="mobile-navigation"
             >
-              <FiMenu size={24} />
+              {isMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
             </button>
           </div>
         </div>
       </nav>
 
       <MobileDrawer
-        isOpen={mobileMenuOpen}
-        onClose={() => setMobileMenuOpen(false)}
+        isOpen={isMenuOpen}
+        onClose={() => setIsMenuOpen(false)}
         pathname={pathname}
       />
     </>

@@ -12,7 +12,7 @@ const DONATION_IMAGE = "/images/home/Donation/donation.jpg";
  */
 export default function DonationSection() {
   return (
-    <section className="relative z-20 flex aspect-[1402/747] w-full items-center justify-center overflow-hidden">
+    <section className="relative z-20 flex min-h-[560px] w-full items-center justify-center overflow-hidden sm:min-h-[520px] md:min-h-0 md:aspect-[1402/747]">
       <Image
         src={DONATION_IMAGE}
         alt=""
@@ -35,7 +35,7 @@ export default function DonationSection() {
       {/* Black layer above gradient */}
       <div className="absolute inset-0 bg-black/30" aria-hidden />
 
-      <div className="relative z-10 mx-auto flex w-full max-w-[933px] translate-y-6 flex-col items-center px-6 py-16 text-center sm:translate-y-8 sm:px-8 sm:py-20 md:translate-y-10 md:py-24 lg:translate-y-12">
+      <div className="relative z-10 mx-auto flex w-full max-w-[933px] flex-col items-center px-6 py-16 text-center sm:translate-y-4 sm:px-8 sm:py-20 md:translate-y-10 md:py-24 lg:translate-y-12">
         <Typography
           as="h2"
           variant="displayTitle"

@@ -39,7 +39,7 @@ export default function AboutSection() {
   return (
     <section
       ref={sectionRef}
-      className="about-section relative z-20 w-full bg-[#FAF8F5] rounded-t-[40px] sm:rounded-t-[60px] md:rounded-t-[70px] pt-14 pb-16 sm:pt-20 sm:pb-24 px-6 sm:px-12 md:px-16 lg:px-24 -mt-16 sm:-mt-24 shadow-2xl"
+      className="about-section relative z-10 w-full bg-[#FAF8F5] rounded-t-[40px] sm:rounded-t-[60px] md:rounded-t-[70px] pt-14 pb-16 sm:pt-20 sm:pb-24 px-6 sm:px-12 md:px-16 lg:px-24 -mt-[50vh] sm:-mt-24 md:-mt-28 shadow-2xl"
     >
       <div
         ref={contentRef}
@@ -88,13 +88,24 @@ export default function AboutSection() {
         {/* Right Column - Swami Image Card */}
         <div className="relative w-full rounded-3xl sm:rounded-[32px] overflow-hidden shadow-xl aspect-[4/3] lg:aspect-[16/11] group">
           <Image
-            src="/images/home/hero/about_swami.png"
+            src="/images/home/hero/tumbline.jpg"
             alt="Swami Anandavanam"
             fill
             className="object-cover transition-transform duration-700 group-hover:scale-105"
             sizes="(max-width: 1024px) 100vw, 50vw"
             priority
           />
+          <div
+            className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center"
+            aria-hidden
+          >
+            <div className="flex h-16 w-16 items-center justify-center rounded-full border-2 border-[#E8B84A] bg-white/95 shadow-lg sm:h-[72px] sm:w-[72px]">
+              <div
+                className="ml-1 h-0 w-0 border-y-[10px] border-l-[16px] border-y-transparent border-l-[#1a1a1a] sm:border-y-[11px] sm:border-l-[18px]"
+                role="presentation"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </section>
