@@ -6,8 +6,7 @@ import { ArrowRight } from "lucide-react";
 import Typography from "@/components/ui/Typography";
 import SectionHeading from "@/components/ui/SectionHeading";
 
-const LEGACY_IMAGE =
-  "/images/home/Juna%20Akhada/The%20Legacy%20of%20Juna%20Akhada.png";
+const LEGACY_IMAGE = "/images/home/Juna%20Akhada/juna_akhada.png";
 
 /**
  * About Juna Akhada — cream panel that scrolls over the sticky homepage background.

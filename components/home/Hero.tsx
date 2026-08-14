@@ -16,15 +16,13 @@ export default function Hero() {
         aria-hidden
       />
 
-      <div className="relative z-20 mx-auto flex max-w-5xl flex-col items-center px-4 pt-[72px] text-center sm:pt-[64px] md:pt-[68px] lg:pt-[78px]">
+      <div className="relative z-20 mx-auto flex max-w-5xl flex-col items-center px-4 pt-[72px] text-center sm:pt-[88px] md:pt-[92px] lg:pt-[102px]">
         <Typography
-          as="h1"
+          as="h4"
           variant="heroTitle"
           className="max-w-4xl text-gray-950"
         >
-          Guiding Souls
-          <br />
-          Inspiring Humanity.
+          "Reviving Dharma , Inspiring Society , Serving Humanity"
         </Typography>
       </div>
     </section>

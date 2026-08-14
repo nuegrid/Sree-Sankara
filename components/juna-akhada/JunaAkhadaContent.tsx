@@ -5,7 +5,7 @@ import InitiativesGrid from "@/components/juna-akhada/InitiativesGrid";
 import { PAGE_CONTAINER } from "@/lib/layout";
 import { cn } from "@/lib/utils";
 
-const HERO_IMAGE = "/images/Juna_Akhada/juna_akhanda.png";
+const HERO_IMAGE = "/images/Juna_Akhada/juna_akhanda.png.png";
 const VOLUNTEER_IMAGE = "/images/home/volunteer_card/volunteercard.png";
 
 /**

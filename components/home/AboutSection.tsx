@@ -68,28 +68,34 @@ export default function AboutSection() {
     isPlaying &&
     createPortal(
       <div
-        className="fixed inset-0 z-[500] flex items-center justify-center bg-black"
+        className="fixed inset-0 z-[500] flex items-center justify-center bg-black/55 p-5 sm:p-10"
         role="dialog"
         aria-modal="true"
         aria-label="Video player"
+        onClick={() => setIsPlaying(false)}
       >
-        <button
-          type="button"
-          onClick={() => setIsPlaying(false)}
-          className="absolute top-4 right-4 z-10 flex h-11 w-11 cursor-pointer items-center justify-center rounded-full bg-white/10 text-white backdrop-blur-sm transition-colors hover:bg-white/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:top-6 sm:right-6"
-          aria-label="Close video"
+        <div
+          className="relative aspect-[9/16] h-[min(78vh,calc((100vw-2.5rem)*16/9))] w-auto max-w-[calc(100vw-2.5rem)] overflow-hidden rounded-2xl bg-black shadow-2xl sm:aspect-video sm:h-auto sm:max-h-[72vh] sm:w-full sm:max-w-4xl"
+          onClick={(event) => event.stopPropagation()}
         >
-          <FiX size={24} />
-        </button>
+          <button
+            type="button"
+            onClick={() => setIsPlaying(false)}
+            className="absolute top-3 right-3 z-10 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-black/55 text-white backdrop-blur-sm transition-colors hover:bg-black/75 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            aria-label="Close video"
+          >
+            <FiX size={22} />
+          </button>
 
-        <iframe
-          title="Swami Anandavanam — Malliyoor Temple visit"
-          src={YOUTUBE_EMBED_SRC}
-          className="h-full w-full border-0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowFullScreen
-          referrerPolicy="strict-origin-when-cross-origin"
-        />
+          <iframe
+            title="Swami Anandavanam — Malliyoor Temple visit"
+            src={YOUTUBE_EMBED_SRC}
+            className="absolute inset-0 h-full w-full border-0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+            referrerPolicy="strict-origin-when-cross-origin"
+          />
+        </div>
       </div>,
       document.body
     );
@@ -111,7 +117,7 @@ export default function AboutSection() {
               variant="sectionLabel"
               className="text-orange-600"
             >
-              About Swami Anandavanam
+              About Swami Anandavanam Bharati
             </Typography>
 
             <Typography
@@ -119,32 +125,38 @@ export default function AboutSection() {
               variant="sectionTitle"
               className="text-gray-950"
             >
-              A Life Dedicated to
-              <br className="hidden sm:block" /> Dharma &amp; Humanity
+              A Journey of Spiritual Quest,
+              <br className="hidden sm:block" /> Dharma &amp; Service
             </Typography>
 
-            <Typography
-              as="p"
-              variant="bodyRelaxed"
-              className="max-w-xl text-gray-600"
-            >
-              Swamiji is a revered spiritual leader, philosopher and guide
-              dedicated to reviving the timeless wisdom of Sanatan Dharma and
-              serving humanity selflessly.
-            </Typography>
+            <div className="flex max-w-xl flex-col gap-3">
+              <Typography as="p" variant="bodyRelaxed" className="text-gray-600">
+                Mahamandaleshwar Swami Anandavanam Bharati Maharaj is a
+                spiritual leader associated with the Sri Panch Dasanam Juna
+                Akhada and a prominent figure in India&apos;s contemporary
+                spiritual and cultural landscape.
+              </Typography>
+              <Typography as="p" variant="bodyRelaxed" className="text-gray-600">
+                Born in Chalakkudy, Thrissur, Kerala, his journey has taken him
+                from education and public life through journalism and literature
+                to spiritual renunciation and leadership. His work today focuses
+                on Sanatana Dharma, spiritual awakening, cultural continuity,
+                social organisation and service.
+              </Typography>
+            </div>
 
             <Link
               href="/about"
               className="mt-2 inline-flex items-center gap-2.5 px-5 py-3 rounded-xl border border-orange-300 text-orange-600 hover:bg-orange-50 hover:border-orange-400 transition-all group"
             >
               <Typography as="span" variant="linkTextMedium">
-                Learn More About Swami Anandavanam
+                Discover His Journey
               </Typography>
               <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
 
-          {/* Right Column — video thumbnail opens fullscreen popup */}
+          {/* Right Column — video thumbnail opens popup */}
           <div className="relative w-full overflow-hidden rounded-3xl shadow-xl aspect-[4/3] sm:rounded-[32px] lg:aspect-[16/11]">
             <button
               type="button"

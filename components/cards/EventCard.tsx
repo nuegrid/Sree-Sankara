@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
-import { CalendarDays, MapPin, ArrowRight } from "lucide-react";
+import { CalendarDays, MapPin } from "lucide-react";
 import Typography from "@/components/ui/Typography";
 
 type Props = {
@@ -98,11 +98,11 @@ export default function EventCard({ event, active, onClick }: Props) {
 
       <div
         ref={contentRef}
-        className={`absolute bottom-3 left-3 right-3 rounded-[22px] bg-[#242424] px-5 py-5 text-white shadow-xl sm:bottom-4 sm:left-4 sm:right-4 sm:rounded-[24px] sm:px-6 sm:py-5 ${
+        className={`absolute bottom-3 left-3 right-3 rounded-[22px] bg-[#691E00] px-5 py-5 text-white shadow-xl sm:bottom-4 sm:left-4 sm:right-4 sm:rounded-[24px] sm:px-6 sm:py-5 ${
           active ? "visible" : "invisible pointer-events-none"
         }`}
       >
-        <div className="grid grid-cols-[1fr_auto] items-start gap-x-4 gap-y-3">
+        <div className="flex flex-col gap-3">
           <Typography
             as="h2"
             variant="cardTitle"
@@ -111,7 +111,7 @@ export default function EventCard({ event, active, onClick }: Props) {
             {event.title}
           </Typography>
 
-          <div className="col-start-1 flex min-w-0 flex-col gap-1.5 text-[#b0b0b0]">
+          <div className="flex min-w-0 flex-col gap-1.5 text-[#b0b0b0]">
             <div className="flex items-center gap-2">
               <CalendarDays className="h-[18px] w-[18px] shrink-0 text-[#b0b0b0] sm:h-5 sm:w-5" />
               <Typography as="span" variant="cardMeta" className="truncate">
@@ -126,16 +126,6 @@ export default function EventCard({ event, active, onClick }: Props) {
               </Typography>
             </div>
           </div>
-
-          <button
-            type="button"
-            className="col-start-2 row-start-2 flex h-[42px] w-[116px] shrink-0 items-center justify-center gap-1.5 self-center rounded-lg border border-[#f4510b] bg-transparent text-[#f4510b] transition-colors hover:bg-[#f4510b]/10"
-          >
-            <Typography as="span" variant="buttonSmall">
-              Learn More
-            </Typography>
-            <ArrowRight className="h-4 w-4" />
-          </button>
         </div>
       </div>
     </div>

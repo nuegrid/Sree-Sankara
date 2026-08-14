@@ -11,7 +11,7 @@ import Typography from "@/components/ui/Typography";
 import { PAGE_CONTAINER } from "@/lib/layout";
 import { cn } from "@/lib/utils";
 
-const LOGO_SRC = "/images/home/logo/logo-section.png";
+const LOGO_SRC = "/images/home/logo/Component%201.svg";
 
 const navLinks = [
   { name: "Home", href: "/" },

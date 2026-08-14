@@ -25,7 +25,7 @@ export const typographyVariants = cva("", {
 
       // Semantic extensions (exact existing styles)
       heroTitle:
-        "text-3xl sm:text-4xl md:text-5xl lg:text-[56px] xl:text-[60px] font-normal tracking-tight leading-[1.05]",
+        "text-lg sm:text-xl md:text-2xl lg:text-[30px] xl:text-[34px] font-medium tracking-tight leading-[1.05]",
       sectionTitle:
         "text-3xl sm:text-4xl lg:text-5xl font-normal leading-[1.18] tracking-tight",
       sectionTitleTight: "text-3xl md:text-5xl font-normal leading-tight",

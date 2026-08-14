@@ -6,13 +6,11 @@ export const featuredArticle = {
     "Swami Anandavanam Bharathi appointed Mahamandaleshwar of Juna Akhada",
   /** Exact Figma line breaks for the featured headline */
   titleLines: [
-    "Swami Anandavanam Bharathi",
-    "appointed Mahamandaleshwar of",
-    "Juna Akhada",
+    "Ascetics are expected to defend Dharma if required: Swami Anandavanam Bharathi Maharaj",
   ] as const,
   buttonText: "Read More",
   href: "/media",
-  image: `${FEATURED_NEWS_DIR}/Swami%20Anandavanam%20Bharathi%20appointed%20%20Mahamandaleshwar%20of%20Juna%20Akhada%20%20.png`,
+  image: "/images/News/News/indianexpress.png",
 };
 
 export const newsItems = [

@@ -2,147 +2,170 @@ import Image from "next/image";
 import Typography from "@/components/ui/Typography";
 import { PAGE_CONTAINER } from "@/lib/layout";
 import { cn } from "@/lib/utils";
+import { teachings } from "./data";
+import AboutJourney from "./AboutJourney";
+import AboutPrinciples from "./AboutPrinciples";
 
-const ABOUT_IMAGE = "/images/about/img.jpg";
-
-const missionPillars = [
-  {
-    title: "Spiritual Guidance",
-    description:
-      "Sharing the timeless wisdom of Sanatan Dharma through discourses, satsangs, and personal counsel.",
-  },
-  {
-    title: "Seva & Community Welfare",
-    description:
-      "Serving communities through selfless action, compassion, and practical support for those in need.",
-  },
-  {
-    title: "Youth Empowerment",
-    description:
-      "Inspiring the next generation with values, leadership, and a living connection to Dharma.",
-  },
-  {
-    title: "Cultural Preservation",
-    description:
-      "Protecting and celebrating sacred traditions, rituals, and the cultural heritage of Bharat.",
-  },
-  {
-    title: "Environmental Responsibility",
-    description:
-      "Honoring nature as sacred — encouraging care for the earth as an expression of Dharma.",
-  },
-];
+const ABOUT_IMAGE = "/images/about/img1.jpg";
 
 /**
- * About page body — all copy via Typography variants.
+ * About page — editorial layout with clear section rhythm.
  */
 export default function AboutContent() {
   return (
     <main className="w-full bg-[#FAF8F5]">
-      <div className={cn(PAGE_CONTAINER, "pb-14 pt-8 sm:pb-16 sm:pt-10 md:pb-20 md:pt-12")}>
-        <Typography
-          as="h1"
-          variant="aboutTitle"
-          className="max-w-[987px] text-black"
-        >
-          A Life Dedicated to Dharma, Wisdom &amp; Selfless Service
-        </Typography>
-
-        <div className="mt-6 max-w-[1369px] space-y-4 sm:mt-8">
-          <Typography as="p" variant="aboutBody" className="text-[#777777]">
-            Swami Anandavanam Bharathi is a revered spiritual leader and
-            Mahamandaleshwar of Juna Akhada, one of India&apos;s oldest and
-            largest monastic orders. His journey from student leadership to
-            spiritual enlightenment reflects a life dedicated to truth, service,
-            and the timeless wisdom of Sanatan Dharma.
+      <div
+        className={cn(
+          PAGE_CONTAINER,
+          "pb-16 pt-8 sm:pb-20 sm:pt-10 md:pb-24 md:pt-12"
+        )}
+      >
+        {/* Intro */}
+        <header>
+          <Typography
+            as="span"
+            variant="sectionLabel"
+            className="text-[#FE3E02]"
+          >
+            About Swami Anandavanam Bharati
           </Typography>
-          <Typography as="p" variant="aboutBody" className="text-[#777777]">
-            Rooted in sacred tradition yet alive to the needs of the present,
-            his teachings invite every seeker to walk the path of Dharma with
-            courage, humility, and compassion.
+          <Typography
+            as="h1"
+            variant="aboutTitle"
+            className="mt-3 text-black sm:mt-4"
+          >
+            A Journey from Public Life to Spiritual Leadership
           </Typography>
-        </div>
+          <div className="mt-6 space-y-4 sm:mt-8">
+            <Typography as="p" variant="aboutBody" className="text-[#777777]">
+              Mahamandaleshwar Swami Anandavanam Bharati Maharaj is a spiritual
+              leader associated with the Sri Panch Dasanam Juna Akhada and a
+              prominent figure in India&apos;s contemporary spiritual and
+              cultural landscape.
+            </Typography>
+            <Typography as="p" variant="aboutBody" className="text-[#777777]">
+              A native of Kerala, Swamiji&apos;s journey to spiritual
+              leadership reflects an unusual transition from education and
+              public life to the path of Sanatana Dharma and sannyasa.
+            </Typography>
+          </div>
+        </header>
 
-        <div className="relative mt-8 aspect-[2/1] w-full overflow-hidden rounded-2xl sm:mt-10 sm:rounded-3xl">
+        <div className="relative mt-10 aspect-[2/1] w-full overflow-hidden rounded-2xl sm:mt-12 sm:rounded-3xl">
           <Image
             src={ABOUT_IMAGE}
-            alt="Swami Anandavanam Bharathi with devotees"
+            alt="Swami Anandavanam Bharati with devotees"
             fill
             priority
-            className="object-cover"
+            className="object-cover object-[center_58%]"
             sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1152px"
           />
         </div>
 
-        <section className="mt-10 sm:mt-12 md:mt-14">
-          <Typography as="h2" variant="aboutTitle" className="text-black">
-            Our Mission
+        <div className="mt-10 space-y-4 sm:mt-12">
+          <Typography as="p" variant="aboutBody" className="text-[#777777]">
+            Born as Salil into the Menokki family of Chalakkudy in Thrissur
+            district, Kerala, he pursued graduate and postgraduate studies in
+            Political Science at Kerala Varma College, Thrissur. He was active
+            in student politics before entering the media profession, where he
+            worked with Mathrubhumi and was involved in media consultancy. His
+            engagement with Malayalam literature also included writing, with his
+            short story <em>Shikhamani</em> being adapted into a film.
           </Typography>
-          <div className="mt-5 max-w-[1373px] space-y-4 sm:mt-6">
-            <Typography as="p" variant="aboutBody" className="text-[#777777]">
-              To preserve and promote Sanatan Dharma through spiritual guidance,
-              selfless service, education, cultural preservation, and community
-              welfare. We aim to make spiritual wisdom accessible to people while
-              creating meaningful opportunities for seva, youth development,
-              environmental care, and cultural continuity.
-            </Typography>
-          </div>
+          <Typography as="p" variant="aboutBody" className="text-[#777777]">
+            His spiritual journey eventually led him to renounce worldly life
+            and enter the monastic tradition. He was initiated as Swami
+            Anandavanam Bharati and subsequently rose to the position of
+            Mahamandaleshwar in the Juna Akhada at Prayagraj Kumbhamela in
+            January 2025.
+          </Typography>
+          <Typography as="p" variant="aboutBody" className="text-[#777777]">
+            His public work has since focused on Sanatana Dharma, spiritual
+            awakening, cultural continuity, social organisation, temple
+            traditions and the role of spiritual institutions in contemporary
+            society.
+          </Typography>
+        </div>
 
+        {/* Transformation */}
+        <section className="mt-16 border-t border-stone-200/80 pt-12 sm:mt-20 sm:pt-16">
+          <Typography as="h2" variant="aboutTitle" className="text-black">
+            A Journey of Transformation
+          </Typography>
           <Typography
             as="p"
             variant="aboutPillarTitle"
-            className="mt-8 text-black sm:mt-10"
+            className="mt-4 text-black"
           >
-            Mission Pillars
+            From Public Life to Spiritual Leadership
           </Typography>
-
-          <ul className="mt-4 list-disc space-y-3 pl-6 marker:text-black sm:mt-5 sm:space-y-4 sm:pl-8">
-            {missionPillars.map((pillar) => (
-              <li key={pillar.title} className="pl-1">
-                <Typography as="p" variant="aboutBody" className="text-[#777777]">
-                  <Typography
-                    as="span"
-                    variant="aboutPillarTitle"
-                    className="text-black"
-                  >
-                    {pillar.title}
-                  </Typography>
-                  {" — "}
-                  {pillar.description}
-                </Typography>
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        <section className="mt-10 sm:mt-12 md:mt-14">
-          <Typography as="h2" variant="aboutTitle" className="text-black">
-            Our Vision
-          </Typography>
-          <div className="mt-5 max-w-[1373px] space-y-4 sm:mt-6">
+          <div className="mt-5 space-y-4">
             <Typography as="p" variant="aboutBody" className="text-[#777777]">
-              To build a spiritually awakened, compassionate, and empowered
-              society rooted in the timeless values of Sanatan Dharma. We envision
-              a future where spiritual wisdom, selfless service, education,
-              cultural heritage, and environmental responsibility come together to
-              uplift humanity.
+              Swami Anandavanam Bharati&apos;s life represents a distinctive
+              journey across different spheres of Indian public life—from
+              education and student activism to journalism, literature, media
+              and ultimately spiritual renunciation.
+            </Typography>
+            <Typography as="p" variant="aboutBody" className="text-[#777777]">
+              His journey reflects a continuing search for meaning, identity and
+              higher truth, culminating in his commitment to the Sanatana Dharma
+              tradition.
             </Typography>
           </div>
         </section>
 
-        <section className="mt-10 sm:mt-12 md:mt-14">
+        <AboutJourney />
+
+        <AboutPrinciples />
+
+        {/* Teachings */}
+        <section className="mt-16 border-t border-stone-200/80 pt-12 sm:mt-20 sm:pt-16">
           <Typography as="h2" variant="aboutTitle" className="text-black">
-            Spiritual Journey
+            Teachings &amp; Philosophy
           </Typography>
-          <Typography
-            as="p"
-            variant="aboutBody"
-            className="mt-5 max-w-[1373px] text-[#777777] sm:mt-6"
-          >
-            His journey from student leadership and journalism to spiritual life
-            reflects a profound transformation rooted in discipline,
-            self-realization, and service.
-          </Typography>
+          <div className="mt-8 grid grid-cols-1 gap-8 sm:mt-10 sm:grid-cols-2 lg:gap-x-14 lg:gap-y-12">
+            {teachings.map((item) => (
+              <article
+                key={item.title}
+                className="border-l-2 border-[#FE3E02]/40 pl-5"
+              >
+                <Typography
+                  as="h3"
+                  variant="aboutPillarTitle"
+                  className="text-black"
+                >
+                  {item.title}
+                </Typography>
+                <Typography
+                  as="p"
+                  variant="aboutBody"
+                  className="mt-2 text-[#777777]"
+                >
+                  {item.description}
+                </Typography>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        {/* Closing */}
+        <section className="mt-16 border-t border-stone-200/80 pt-12 sm:mt-20 sm:pt-16">
+          <div>
+            <Typography as="h2" variant="aboutTitle" className="text-black">
+              A Life of Dharma, Culture &amp; Service
+            </Typography>
+            <Typography
+              as="p"
+              variant="aboutBody"
+              className="mt-5 text-[#777777] sm:mt-6"
+            >
+              Swami Anandavanam Bharati&apos;s work brings together spiritual
+              awakening, cultural continuity, social organisation and service.
+              His journey from public life to spiritual leadership reflects a
+              continuing commitment to Sanatana Dharma and its relevance in
+              contemporary society.
+            </Typography>
+          </div>
         </section>
       </div>
     </main>

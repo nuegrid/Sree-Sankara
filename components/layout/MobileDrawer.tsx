@@ -81,7 +81,7 @@ export default function MobileDrawer({
             aria-label="Sree Sankara home"
           >
             <Image
-              src="/images/home/logo/logo-section.png"
+              src="/images/home/logo/Component%201.svg"
               alt="Sree Sankara"
               fill
               className="object-contain object-left"

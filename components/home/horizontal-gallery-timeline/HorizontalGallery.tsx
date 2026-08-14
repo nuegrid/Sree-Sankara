@@ -11,24 +11,24 @@ const cards = [
     title: "Student Leader",
     description:
       "Born in Chalakudy, Kerala, Swami Anandavanam Bharathi (formerly P. Salil) pursued Political Science and became an active student leader, developing strong leadership skills and a commitment to public service.",
-    image: "/images/home/journey/a.png",
+    image: "/images/home/journey/b.png",
   },
   {
     title: "A Spiritual Awakening",
     description:
-      "In 2001, a life-changing visit to the Kumbh Mela sparked a profound transformation. Time spent on the banks of the Ganga inspired Sanatan Dharma and inner realization.",
-    image: "/images/home/journey/b.png",
+      "In 2001, a life-changing visit to the Kumbh Mela sparked a profound spiritual transformation. Time spent on the banks of the Ganga inspired a lifelong pursuit of Sanatan Dharma and inner realization.",
+    image: "/images/home/journey/a.png",
   },
   {
-    title: "Path of Devotion",
+    title: "Years of Discipline",
     description:
-      "Embracing a life of deep meditation and spiritual practice, dedicating every moment to the pursuit of higher consciousness and divine connection.",
+      "Over the following years, he undertook pilgrimages across Haridwar, Rishikesh, Varanasi, and the Himalayas. Under the guidance of revered saints, he embraced rigorous spiritual practices and eventually entered Juna Akhara.",
     image: "/images/home/journey/c.png",
   },
   {
-    title: "Guiding the Light",
+    title: "Mahamandaleshwar",
     description:
-      "Now traveling and sharing wisdom, helping seekers discover their inner potential and peace in the modern world.",
+      "On 26 January 2024, he was anointed Mahamandaleshwar of Juna Akhara, becoming the first Keralite in the order to receive this distinguished spiritual title in modern times.",
     image: "/images/home/journey/d.png",
   },
 ];

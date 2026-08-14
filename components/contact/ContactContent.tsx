@@ -1,5 +1,4 @@
 import { Mail, MapPin, Phone } from "lucide-react";
-import { FaFacebookF } from "react-icons/fa";
 import Typography from "@/components/ui/Typography";
 import { PAGE_CONTAINER } from "@/lib/layout";
 import { cn } from "@/lib/utils";
@@ -7,9 +6,7 @@ import ContactInfoItem from "./ContactInfoItem";
 import ContactForm from "./ContactForm";
 
 const MAP_IFRAME_SRC =
-  "https://www.google.com/maps?q=Kaalika%20Peetham%2C%20Juna%20Akhada%2C%20Kerala&output=embed";
-
-const FACEBOOK_URL = "https://www.facebook.com/SadhuAnandavanam";
+  "https://www.google.com/maps?q=Mahamagha%20Mahotsava%20Samiti%2C%20Sri%20Panch%20Dasnam%20Juna%20Akhada%2C%20Thirunnavaya&output=embed";
 
 export default function ContactContent() {
   return (
@@ -31,34 +28,29 @@ export default function ContactContent() {
                 icon={<MapPin className="h-5 w-5 text-[#FF3D0B]" strokeWidth={1.75} />}
               >
                 <Typography as="p" variant="bodyText2" className="text-[#777777]">
-                  Kaalika Peetam, Juna Akhada
+                  Mahamagha Mahotsava Samiti
                   <br />
-                  Kerala, India
+                  Sri Panch Dasnam Juna Akhada
+                  <br />
+                  Thirunnavaya, Malappuram, Keralam – 676301
                 </Typography>
               </ContactInfoItem>
 
               <ContactInfoItem
+                href="tel:+918891458222"
                 icon={<Phone className="h-5 w-5 text-[#FF3D0B]" strokeWidth={1.75} />}
               >
                 <Typography as="p" variant="bodyText2" className="text-[#777777]">
-                  +91 12345 67890
+                  +91 88914 58222
                 </Typography>
               </ContactInfoItem>
 
               <ContactInfoItem
+                href="mailto:mail@mahamagham.com"
                 icon={<Mail className="h-5 w-5 text-[#FF3D0B]" strokeWidth={1.75} />}
               >
                 <Typography as="p" variant="bodyText2" className="text-[#777777]">
-                  info@swamianandavanam.org
-                </Typography>
-              </ContactInfoItem>
-
-              <ContactInfoItem
-                href={FACEBOOK_URL}
-                icon={<FaFacebookF className="h-4 w-4 text-[#FF3D0B]" />}
-              >
-                <Typography as="span" variant="bodyText2" className="text-[#777777]">
-                  facebook.com/SadhuAnandavanam
+                  mail@mahamagham.com
                 </Typography>
               </ContactInfoItem>
             </div>
@@ -73,7 +65,7 @@ export default function ContactContent() {
         <div className="mt-10 sm:mt-12">
           <div className="overflow-hidden rounded-3xl">
             <iframe
-              title="Kaalika Peetham map"
+              title="Mahamagha Mahotsava Samiti, Thirunnavaya map"
               src={MAP_IFRAME_SRC}
               className="h-[300px] w-full sm:h-[340px] md:h-[380px]"
               loading="lazy"

@@ -9,7 +9,7 @@ import ViewAllLink from "@/components/ui/ViewAllLink";
 import JunaAkhadaSection from "@/components/home/juna-akhada/JunaAkhadaSection";
 import { featuredArticle, newsItems } from "./data";
 
-const STICKY_BG = "/images/home/Home_Background/bg_stickey.jpg";
+const STICKY_BG = "/images/home/Home_Background/bg_stickey_new.jpg";
 
 /**
  * Featured News over a sticky cinematic background, then a reveal gap,

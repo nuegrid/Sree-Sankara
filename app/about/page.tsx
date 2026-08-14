@@ -7,7 +7,7 @@ import AboutContent from "@/components/about/AboutContent";
 export const metadata: Metadata = {
   title: "About | Sree Sankara",
   description:
-    "Learn about Swami Anandavanam Bharathi — a life dedicated to Dharma, wisdom, and selfless service.",
+    "Mahamandaleshwar Swami Anandavanam Bharati Maharaj — a journey from public life to spiritual leadership in the Juna Akhada.",
 };
 
 export default function AboutPage() {

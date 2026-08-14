@@ -13,7 +13,7 @@ const timelineData = [
         <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl border border-neutral-800 bg-[#171717]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/images/home/journey/a.png"
+            src="/images/home/journey/b.png"
             alt="Student Leader"
             className="h-full w-full object-cover"
           />
@@ -34,54 +34,56 @@ const timelineData = [
         <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl border border-neutral-800 bg-[#171717]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/images/home/journey/b.png"
+            src="/images/home/journey/a.png"
             alt="A Spiritual Awakening"
             className="h-full w-full object-cover"
           />
         </div>
         <Typography as="p" variant="cardDescription" className="text-[#a3a3a3]">
           In 2001, a life-changing visit to the Kumbh Mela sparked a profound
-          transformation. Time spent on the banks of the Ganga inspired Sanatan
-          Dharma and inner realization.
+          spiritual transformation. Time spent on the banks of the Ganga inspired
+          a lifelong pursuit of Sanatan Dharma and inner realization.
         </Typography>
       </div>
     ),
   },
   {
-    title: "Path of Devotion",
+    title: "Years of Discipline",
     content: (
       <div className="flex flex-col gap-3">
         <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl border border-neutral-800 bg-[#171717]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/images/home/journey/c.png"
-            alt="Path of Devotion"
+            alt="Years of Discipline"
             className="h-full w-full object-cover"
           />
         </div>
         <Typography as="p" variant="cardDescription" className="text-[#a3a3a3]">
-          Embracing a life of deep meditation and spiritual practice,
-          dedicating every moment to the pursuit of higher consciousness and
-          divine connection.
+          Over the following years, he undertook pilgrimages across Haridwar,
+          Rishikesh, Varanasi, and the Himalayas. Under the guidance of revered
+          saints, he embraced rigorous spiritual practices and eventually
+          entered Juna Akhara.
         </Typography>
       </div>
     ),
   },
   {
-    title: "Guiding the Light",
+    title: "Mahamandaleshwar",
     content: (
       <div className="flex flex-col gap-3">
         <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl border border-neutral-800 bg-[#171717]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/images/home/journey/d.png"
-            alt="Guiding the Light"
+            alt="Mahamandaleshwar"
             className="h-full w-full object-cover"
           />
         </div>
         <Typography as="p" variant="cardDescription" className="text-[#a3a3a3]">
-          Now traveling and sharing wisdom, helping seekers discover their
-          inner potential and peace in the modern world.
+          On 26 January 2024, he was anointed Mahamandaleshwar of Juna Akhara,
+          becoming the first Keralite in the order to receive this distinguished
+          spiritual title in modern times.
         </Typography>
       </div>
     ),

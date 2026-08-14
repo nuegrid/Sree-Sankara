@@ -123,12 +123,14 @@ export default function Footer({ overlap = true }: { overlap?: boolean }) {
             </Typography>
             <div className="mt-5 flex flex-col gap-2.5">
               <Typography as="p" variant="footerLink" className="text-[#BBBBBB]">
-                Kaalika Peetam, Juna Akhada
+                Mahamagha Mahotsava Samiti
                 <br />
-                Kerala, India
+                Sri Panch Dasnam Juna Akhada
+                <br />
+                Thirunnavaya, Malappuram, Keralam – 676301
               </Typography>
               <a
-                href="tel:+911234567890"
+                href="tel:+918891458222"
                 className="transition-colors hover:text-white"
               >
                 <Typography
@@ -136,11 +138,11 @@ export default function Footer({ overlap = true }: { overlap?: boolean }) {
                   variant="footerLink"
                   className="text-[#BBBBBB]"
                 >
-                  +91 12345 67890
+                  +91 88914 58222
                 </Typography>
               </a>
               <a
-                href="mailto:info@swamianandavanam.org"
+                href="mailto:mail@mahamagham.com"
                 className="transition-colors hover:text-white"
               >
                 <Typography
@@ -148,7 +150,7 @@ export default function Footer({ overlap = true }: { overlap?: boolean }) {
                   variant="footerLink"
                   className="text-[#BBBBBB]"
                 >
-                  info@swamianandavanam.org
+                  mail@mahamagham.com
                 </Typography>
               </a>
             </div>
