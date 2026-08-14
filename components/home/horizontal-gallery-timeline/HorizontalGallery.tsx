@@ -359,7 +359,7 @@ export default function HorizontalGallery({
             {cards.map((card, i) => (
               <div
                 key={i}
-                className="timeline-card relative flex w-[78vw] max-w-[280px] shrink-0 flex-col sm:max-w-[320px] md:w-[360px] md:max-w-none lg:w-[380px]"
+                className="timeline-card relative flex w-[88vw] max-w-[400px] shrink-0 flex-col sm:max-w-[440px] md:w-[500px] md:max-w-none lg:w-[540px]"
               >
                 {/* Timeline row — dots sit on the horizontal line */}
                 <div className="relative mb-4 h-4 shrink-0 md:mb-5">

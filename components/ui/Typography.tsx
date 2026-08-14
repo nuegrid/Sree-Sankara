@@ -40,7 +40,7 @@ export const typographyVariants = cva("", {
       cardTitle:
         "text-xl font-semibold leading-snug tracking-tight sm:text-[1.75rem] sm:leading-tight",
       cardMeta: "text-[15px] sm:text-lg",
-      cardDescription: "text-sm leading-relaxed tracking-wide",
+      cardDescription: "text-sm leading-snug tracking-wide",
       quote:
         "font-[var(--font-inter)] text-[1.5rem] font-medium leading-none tracking-[-0.04em] sm:text-[1.85rem] md:text-[2.15rem] lg:text-[2.5rem] xl:text-[57px]",
       buttonSmall: "text-sm font-medium",

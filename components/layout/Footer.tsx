@@ -20,11 +20,7 @@ const quickLinksRight = [
   { name: "Contact", href: "/contact" },
 ];
 
-const socialLinks = [
-  { href: "#", label: "Facebook", Icon: FaFacebookF },
-  { href: "#", label: "Instagram", Icon: FaInstagram },
-  { href: "#", label: "Twitter", Icon: FaTwitter },
-];
+const FACEBOOK_URL = "https://www.facebook.com/SadhuAnandavanam";
 
 /**
  * Site footer — black panel with large rounded top.
@@ -33,11 +29,10 @@ const socialLinks = [
 export default function Footer({ overlap = true }: { overlap?: boolean }) {
   return (
     <footer
-      className={`relative z-30 w-full overflow-hidden rounded-t-[40px] bg-black sm:rounded-t-[56px] md:rounded-t-[72px] lg:rounded-t-[90px] ${
-        overlap
-          ? "-mt-12 sm:-mt-16 md:-mt-20"
-          : "mt-0"
-      }`}
+      className={cn(
+        "pointer-events-auto relative z-[100] w-full overflow-hidden rounded-t-[40px] bg-black sm:rounded-t-[56px] md:rounded-t-[72px] lg:rounded-t-[90px]",
+        overlap ? "-mt-12 sm:-mt-16 md:-mt-20" : "mt-0"
+      )}
     >
       <div className={cn(PAGE_CONTAINER, "pb-6 pt-12 sm:pb-10 sm:pt-16 md:pt-20")}>
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-12 lg:grid-cols-3 lg:gap-16">
@@ -52,16 +47,27 @@ export default function Footer({ overlap = true }: { overlap?: boolean }) {
             </Typography>
 
             <div className="flex items-center gap-3">
-              {socialLinks.map(({ href, label, Icon }) => (
-                <Link
-                  key={label}
-                  href={href}
-                  aria-label={label}
-                  className="flex h-10 w-10 items-center justify-center rounded-full bg-[#FE3E02] text-white transition-colors hover:bg-[#e63702]"
-                >
-                  <Icon className="h-4 w-4" />
-                </Link>
-              ))}
+              <a
+                href={FACEBOOK_URL}
+                aria-label="Open Sadhu Anandavanam on Facebook"
+                className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#FE3E02] text-white transition-colors hover:bg-[#e63702]"
+              >
+                <FaFacebookF className="h-4 w-4" aria-hidden />
+              </a>
+              <a
+                href="#"
+                aria-label="Instagram"
+                className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#FE3E02] text-white transition-colors hover:bg-[#e63702]"
+              >
+                <FaInstagram className="h-4 w-4" aria-hidden />
+              </a>
+              <a
+                href="#"
+                aria-label="Twitter"
+                className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#FE3E02] text-white transition-colors hover:bg-[#e63702]"
+              >
+                <FaTwitter className="h-4 w-4" aria-hidden />
+              </a>
             </div>
           </div>
 

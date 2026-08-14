@@ -1,4 +1,5 @@
 import { Mail, MapPin, Phone } from "lucide-react";
+import { FaFacebookF } from "react-icons/fa";
 import Typography from "@/components/ui/Typography";
 import { PAGE_CONTAINER } from "@/lib/layout";
 import { cn } from "@/lib/utils";
@@ -7,6 +8,8 @@ import ContactForm from "./ContactForm";
 
 const MAP_IFRAME_SRC =
   "https://www.google.com/maps?q=Kaalika%20Peetham%2C%20Juna%20Akhada%2C%20Kerala&output=embed";
+
+const FACEBOOK_URL = "https://www.facebook.com/SadhuAnandavanam";
 
 export default function ContactContent() {
   return (
@@ -19,7 +22,7 @@ export default function ContactContent() {
             </Typography>
 
             <Typography as="p" variant="aboutBody" className="text-[#777777]">
-              Whether you're looking for spiritual guidance, information about upcoming programs,
+              Whether you&apos;re looking for spiritual guidance, information about upcoming programs,
               volunteering opportunities, or ways to support our initiatives, reach out to us.
             </Typography>
 
@@ -49,6 +52,15 @@ export default function ContactContent() {
                   info@swamianandavanam.org
                 </Typography>
               </ContactInfoItem>
+
+              <ContactInfoItem
+                href={FACEBOOK_URL}
+                icon={<FaFacebookF className="h-4 w-4 text-[#FF3D0B]" />}
+              >
+                <Typography as="span" variant="bodyText2" className="text-[#777777]">
+                  facebook.com/SadhuAnandavanam
+                </Typography>
+              </ContactInfoItem>
             </div>
           </div>
 
@@ -73,4 +85,3 @@ export default function ContactContent() {
     </main>
   );
 }
-

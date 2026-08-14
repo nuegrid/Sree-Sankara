@@ -12,7 +12,7 @@ const DONATION_IMAGE = "/images/home/Donation/donation.jpg";
  */
 export default function DonationSection() {
   return (
-    <section className="relative z-20 flex min-h-[560px] w-full items-center justify-center overflow-hidden sm:min-h-[520px] md:min-h-0 md:aspect-[1402/747]">
+    <section className="pointer-events-none relative z-20 flex min-h-[560px] w-full items-center justify-center overflow-hidden sm:min-h-[520px] md:min-h-0 md:aspect-[1402/747]">
       <Image
         src={DONATION_IMAGE}
         alt=""
@@ -56,7 +56,7 @@ export default function DonationSection() {
 
         <Link
           href="/donate"
-          className="mt-8 inline-flex h-[52px] w-fit items-center justify-center gap-[10px] rounded-[54px] bg-[#FE3E02] px-[30px] py-3 text-white transition-colors hover:bg-[#e63702] sm:mt-10"
+          className="pointer-events-auto mt-8 inline-flex h-[52px] w-fit items-center justify-center gap-[10px] rounded-[54px] bg-[#FE3E02] px-[30px] py-3 text-white transition-colors hover:bg-[#e63702] sm:mt-10"
         >
           <Typography as="span" variant="ctaButton" className="text-white">
             Make a Donation

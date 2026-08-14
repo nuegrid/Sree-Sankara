@@ -52,23 +52,18 @@ export default function MobileDrawer({
     };
   }, [isOpen, onClose]);
 
-  if (!mounted) return null;
+  if (!mounted || !isOpen) return null;
 
   return createPortal(
     <div
       id="mobile-navigation"
-      className={
-        isOpen
-          ? "fixed inset-0 z-[300] flex justify-end lg:hidden"
-          : "pointer-events-none fixed inset-0 z-[300] hidden justify-end lg:hidden"
-      }
-      aria-hidden={!isOpen}
+      className="fixed inset-0 z-[300] flex justify-end lg:hidden"
+      aria-hidden={false}
     >
       <button
         type="button"
         className="absolute inset-0 bg-stone-900/60 backdrop-blur-xs"
         aria-label="Close menu"
-        tabIndex={isOpen ? 0 : -1}
         onClick={onClose}
       />
 
