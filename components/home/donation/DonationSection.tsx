@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FaHeart } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 import Typography from "@/components/ui/Typography";
 
 const DONATION_IMAGE = "/images/home/Donation/donation_bg_1.png";
@@ -11,6 +12,7 @@ const DONATION_IMAGE = "/images/home/Donation/donation_bg_1.png";
  * Full-bleed donation CTA — cinematic background with centered copy + button.
  */
 export default function DonationSection() {
+  const { t } = useTranslation();
   return (
     <section className="pointer-events-none relative z-20 flex min-h-[560px] w-full items-center justify-center overflow-hidden sm:min-h-[520px] md:min-h-0 md:aspect-[1402/747]">
       <Image
@@ -41,7 +43,7 @@ export default function DonationSection() {
           variant="displayTitle"
           className="max-w-[711px] text-white"
         >
-          Join the Journey of Dharma
+          {t("home.donateTitle")}
         </Typography>
 
         <Typography
@@ -49,9 +51,7 @@ export default function DonationSection() {
           variant="ctaBody"
           className="mt-4 max-w-[933px] text-white sm:mt-5"
         >
-          Your support helps preserve Sanatan Dharma, empower communities, and
-          continue Swamiji&apos;s mission of spiritual guidance and selfless
-          service.
+          {t("home.donateBody")}
         </Typography>
 
         <Link
@@ -59,7 +59,7 @@ export default function DonationSection() {
           className="pointer-events-auto mt-8 inline-flex h-[52px] w-fit items-center justify-center gap-[10px] rounded-[54px] bg-[#FE3E02] px-[30px] py-3 text-white transition-colors hover:bg-[#e63702] sm:mt-10"
         >
           <Typography as="span" variant="ctaButton" className="text-white">
-            Make a Donation
+            {t("home.donateCta")}
           </Typography>
           <FaHeart className="h-4 w-4 shrink-0" aria-hidden />
         </Link>

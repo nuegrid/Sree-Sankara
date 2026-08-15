@@ -1,48 +1,50 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Compass, Eye, HeartHandshake, type LucideIcon } from "lucide-react";
 import Typography from "@/components/ui/Typography";
-import { missionItems } from "./data";
+import { PRINCIPLE_IDS } from "./data";
 import { cn } from "@/lib/utils";
 
 const icons: LucideIcon[] = [Compass, Eye, HeartHandshake];
-const DEFAULT_ACTIVE = "Vision";
+const DEFAULT_ACTIVE = "vision";
 
 /**
  * Highlighted Mission / Vision / Purpose band.
  * Orange highlight follows the hovered card; Vision is the default.
  */
 export default function AboutPrinciples() {
-  const [activeTitle, setActiveTitle] = useState(DEFAULT_ACTIVE);
+  const { t } = useTranslation();
+  const [activeKey, setActiveKey] = useState(DEFAULT_ACTIVE);
 
   return (
     <section className="mt-16 overflow-hidden rounded-[28px] bg-[#2A0707] px-6 py-12 sm:mt-20 sm:rounded-[36px] sm:px-10 sm:py-16 md:px-12">
       <div className="mx-auto max-w-xl text-center">
         <Typography as="span" variant="sectionLabel" className="text-[#FE3E02]">
-          Guiding Light
+          {t("about.guidingLight")}
         </Typography>
         <Typography
           as="h2"
           variant="aboutTitle"
           className="mt-3 text-white"
         >
-          Mission, Vision &amp; Purpose
+          {t("about.principlesTitle")}
         </Typography>
       </div>
 
       <div
         className="mt-10 grid grid-cols-1 gap-5 md:mt-12 md:grid-cols-3 md:items-stretch md:gap-6"
-        onMouseLeave={() => setActiveTitle(DEFAULT_ACTIVE)}
+        onMouseLeave={() => setActiveKey(DEFAULT_ACTIVE)}
       >
-        {missionItems.map((item, index) => {
+        {PRINCIPLE_IDS.map((id, index) => {
           const Icon = icons[index];
-          const isFeatured = activeTitle === item.title;
+          const isFeatured = activeKey === id;
 
           return (
             <article
-              key={item.title}
-              onMouseEnter={() => setActiveTitle(item.title)}
+              key={id}
+              onMouseEnter={() => setActiveKey(id)}
               className={cn(
                 "flex cursor-default flex-col rounded-2xl border px-6 py-8 transition-colors duration-300",
                 isFeatured
@@ -65,7 +67,7 @@ export default function AboutPrinciples() {
                 variant="initiativeTitle"
                 className="mt-5 text-white"
               >
-                {item.title}
+                {t(`about.principles.${id}.title`)}
               </Typography>
               <Typography
                 as="p"
@@ -75,7 +77,7 @@ export default function AboutPrinciples() {
                   isFeatured ? "text-white/90" : "text-white/70"
                 )}
               >
-                {item.body}
+                {t(`about.principles.${id}.body`)}
               </Typography>
             </article>
           );

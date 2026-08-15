@@ -1,11 +1,15 @@
+"use client";
+
 import Image from "next/image";
+import { useTranslation } from "react-i18next";
 import Typography from "@/components/ui/Typography";
 
 const HERO_IMAGE = "/images/home/hero/BG 1.jpeg";
 
 export default function Hero() {
+  const { t } = useTranslation();
   return (
-    <section className="pointer-events-none sticky top-0 z-0 flex h-screen w-full flex-col items-center overflow-hidden">
+    <section className="pointer-events-none sticky top-0 z-0 -mt-[3.75rem] flex h-screen w-full flex-col items-center overflow-hidden sm:-mt-16">
       <Image
         src={HERO_IMAGE}
         alt=""
@@ -16,14 +20,14 @@ export default function Hero() {
         aria-hidden
       />
 
-      <div className="relative z-20 mx-auto flex max-w-5xl flex-col items-center px-4 pt-[72px] text-center sm:pt-[88px] md:pt-[92px] lg:pt-[102px]">
+      <div className="relative z-20 mx-auto flex max-w-5xl flex-col items-center px-4 pt-24 text-center sm:pt-28 md:pt-32">
         <Typography
           as="h4"
           variant="heroTitle"
-          className="max-w-5xl text-gray-950"
+          className="max-w-5xl text-gray-950 [.lang-ml_&]:text-base sm:[.lang-ml_&]:text-lg md:[.lang-ml_&]:text-xl lg:[.lang-ml_&]:text-[26px] xl:[.lang-ml_&]:text-[30px]"
         >
-          <span className="block">Reviving Dharma , Inspiring Society ,</span>
-          <span className="block">Serving Humanity</span>
+          <span className="block whitespace-nowrap">{t("home.heroLine1")}</span>
+          <span className="block whitespace-nowrap">{t("home.heroLine2")}</span>
         </Typography>
       </div>
     </section>

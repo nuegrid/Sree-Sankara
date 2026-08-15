@@ -1,9 +1,10 @@
-﻿"use client";
+"use client";
 
 import { useState, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { useTranslation } from "react-i18next";
 import EventCard from "@/components/cards/EventCard";
 import JourneyDrawer from "../horizontal-gallery-timeline/JourneyDrawer";
 import { events } from "./data";
@@ -18,6 +19,7 @@ const HOLD_DUR = 0.25;
 const GALLERY_DUR = 2;
 
 export default function EventCarousel() {
+  const { t } = useTranslation();
   const [activeId, setActiveId] = useState(events[0].id);
   const [galleryProgress, setGalleryProgress] = useState(0);
   const rootRef = useRef<HTMLDivElement>(null);
@@ -189,17 +191,23 @@ export default function EventCarousel() {
     }, 150);
   };
 
-  const handleCardClick = (id: number) => {
-    const index = events.findIndex((e) => e.id === id);
-    if (index === -1) return;
+  const setActiveCard = (id: number) => {
+    if (id === activeIdRef.current) return;
     activeIdRef.current = id;
     setActiveId(id);
+  };
 
-    const card = trackRef.current?.children[index] as HTMLElement | undefined;
-    card?.scrollIntoView({
+  const handleCardClick = (id: number) => {
+    setActiveCard(id);
+    if (window.innerWidth >= 1024) return;
+
+    const index = events.findIndex((e) => e.id === id);
+    if (index === -1 || !containerRef.current || !trackRef.current) return;
+    const card = trackRef.current.children[index] as HTMLElement | undefined;
+    if (!card) return;
+    containerRef.current.scrollTo({
+      left: card.offsetLeft,
       behavior: "smooth",
-      inline: "nearest",
-      block: "nearest",
     });
   };
 
@@ -217,31 +225,35 @@ export default function EventCarousel() {
                 variant="sectionLabel"
                 className="text-orange-600"
               >
-                Upcoming Programs
+                {t("home.upcomingPrograms")}
               </Typography>
               <Typography
                 as="h2"
                 variant="sectionTitle"
                 className="text-gray-950"
               >
-                Join Swamiji for discourses, satsangs, and
-                <br className="hidden sm:block" /> sacred events across the
-                country.
+                {t("home.upcomingTitle")}
               </Typography>
             </div>
             <div className="shrink-0 md:pb-2">
-              <ViewAllLink href="/events">View All Programs</ViewAllLink>
+              <ViewAllLink href="/events">{t("home.viewAllPrograms")}</ViewAllLink>
             </div>
           </div>
 
           <div
             ref={containerRef}
             onScroll={handleScroll}
+            onWheel={(event) => {
+              if (window.innerWidth < 1024) return;
+              if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
+              event.currentTarget.scrollLeft = 0;
+            }}
             data-lenis-prevent
-            className="no-scrollbar relative flex w-full flex-row flex-nowrap overflow-x-auto px-6 py-4 md:px-[calc((100vw-1280px)/2+24px)]"
+            className="no-scrollbar relative flex w-full flex-row flex-nowrap overflow-x-auto overflow-y-hidden overscroll-x-contain px-6 py-4 lg:overflow-x-hidden md:px-[calc((100vw-1280px)/2+24px)]"
           >
             <div
               ref={trackRef}
+              onMouseLeave={() => setActiveCard(events[0].id)}
               className="flex w-max flex-shrink-0 flex-row flex-nowrap gap-[20px] md:gap-[28px]"
             >
               {events.map((event) => (
@@ -249,7 +261,7 @@ export default function EventCarousel() {
                   key={event.id}
                   event={event}
                   active={activeId === event.id}
-                  onClick={() => handleCardClick(event.id)}
+                  onActivate={() => handleCardClick(event.id)}
                 />
               ))}
               <div className="w-[10px] flex-shrink-0 md:w-[calc((100vw-1280px)/2+24px)]" />
@@ -259,7 +271,7 @@ export default function EventCarousel() {
 
         <div
           ref={drawerRef}
-          className="absolute right-0 bottom-0 left-0 z-30 hidden h-full w-full bg-transparent will-change-transform lg:block"
+          className="absolute right-0 -bottom-px left-0 z-30 hidden h-[calc(100%+1px)] w-full bg-transparent will-change-transform lg:block"
         >
           <JourneyDrawer galleryProgress={galleryProgress} />
         </div>

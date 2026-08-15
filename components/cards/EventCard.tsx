@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { CalendarDays, MapPin } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import Typography from "@/components/ui/Typography";
 
 type Props = {
@@ -14,10 +15,14 @@ type Props = {
     date: string;
   };
   active: boolean;
-  onClick: () => void;
+  onActivate: () => void;
 };
 
-export default function EventCard({ event, active, onClick }: Props) {
+export default function EventCard({ event, active, onActivate }: Props) {
+  const { t } = useTranslation();
+  const title = t(`events.items.${event.id}.title`);
+  const date = t(`events.items.${event.id}.date`);
+  const location = t(`events.items.${event.id}.location`);
   const cardRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -78,7 +83,8 @@ export default function EventCard({ event, active, onClick }: Props) {
   return (
     <div
       ref={cardRef}
-      onClick={onClick}
+      onClick={onActivate}
+      onMouseEnter={onActivate}
       className={`relative flex-shrink-0 snap-start cursor-pointer overflow-hidden rounded-[28px] bg-neutral-200 ${
         active
           ? "h-[380px] w-[calc(100vw-80px)] md:h-[420px] md:w-[65%] lg:w-[640px]"
@@ -90,7 +96,7 @@ export default function EventCard({ event, active, onClick }: Props) {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={event.image}
-          alt={event.title}
+          alt={title}
           className="h-full w-full object-cover"
           draggable={false}
         />
@@ -108,21 +114,21 @@ export default function EventCard({ event, active, onClick }: Props) {
             variant="cardTitle"
             className="min-w-0 truncate text-white"
           >
-            {event.title}
+            {title}
           </Typography>
 
           <div className="flex min-w-0 flex-col gap-1.5 text-[#b0b0b0]">
             <div className="flex items-center gap-2">
               <CalendarDays className="h-[18px] w-[18px] shrink-0 text-[#b0b0b0] sm:h-5 sm:w-5" />
               <Typography as="span" variant="cardMeta" className="truncate">
-                {event.date}
+                {date}
               </Typography>
             </div>
 
             <div className="flex items-center gap-2">
               <MapPin className="h-[18px] w-[18px] shrink-0 text-[#b0b0b0] sm:h-5 sm:w-5" />
               <Typography as="span" variant="cardMeta" className="truncate">
-                {event.location}
+                {location}
               </Typography>
             </div>
           </div>

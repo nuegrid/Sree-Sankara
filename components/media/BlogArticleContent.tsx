@@ -1,18 +1,26 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import Typography from "@/components/ui/Typography";
 import { PAGE_CONTAINER } from "@/lib/layout";
 import { cn } from "@/lib/utils";
-import type { BlogArticle } from "./data";
+import { getBlogBody, type BlogArticle } from "./data";
 
 export default function BlogArticleContent({
+  id,
   image,
-  category,
-  date,
-  title,
+  slug,
   body,
 }: BlogArticle) {
+  const { t, i18n } = useTranslation();
+  const title = t(`media.posts.${id}.title`);
+  const category = t(`media.posts.${id}.category`);
+  const date = t(`media.posts.${id}.date`);
+  const localizedBody = (slug ? getBlogBody(slug, i18n.language) : undefined) ?? body;
+
   return (
     <main className="w-full bg-[#FAF8F5]">
       <article
@@ -27,7 +35,7 @@ export default function BlogArticleContent({
         >
           <ArrowLeft className="h-4 w-4" />
           <Typography as="span" variant="buttonSmall" className="text-inherit">
-            Back to Media
+            {t("media.backToMedia")}
           </Typography>
         </Link>
 
@@ -65,7 +73,7 @@ export default function BlogArticleContent({
         </div>
 
         <div className="mt-10 space-y-10 sm:mt-12">
-          {body?.map((section) => (
+          {localizedBody?.map((section) => (
             <section key={section.heading ?? section.paragraphs[0]} className="space-y-4">
               {section.heading ? (
                 <Typography

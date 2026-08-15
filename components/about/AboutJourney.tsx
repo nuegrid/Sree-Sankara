@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Award,
   Flower2,
@@ -9,9 +11,10 @@ import {
   Users,
   type LucideIcon,
 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import Typography from "@/components/ui/Typography";
 import { cn } from "@/lib/utils";
-import { journeySteps } from "./data";
+import { JOURNEY_STEP_IDS } from "./data";
 
 const journeyIcons: LucideIcon[] = [
   Home,
@@ -28,10 +31,12 @@ const journeyIcons: LucideIcon[] = [
  * Alternating vertical timeline for Swamiji's life stages.
  */
 export default function AboutJourney() {
+  const { t, i18n } = useTranslation();
+
   return (
     <section className="mt-16 border-t border-stone-200/80 pt-12 sm:mt-20 sm:pt-16">
       <Typography as="h2" variant="aboutTitle" className="text-black">
-        His Journey
+        {t("about.journeyTitle")}
       </Typography>
 
       <ol className="relative mt-10 sm:mt-12">
@@ -40,13 +45,14 @@ export default function AboutJourney() {
           aria-hidden
         />
 
-        {journeySteps.map((step, index) => {
+        {JOURNEY_STEP_IDS.map((id, index) => {
           const Icon = journeyIcons[index];
           const isLeft = index % 2 === 0;
+          const placeKey = `about.journey.${id}.place`;
 
           return (
             <li
-              key={step.title}
+              key={id}
               className="relative pb-8 pl-14 last:pb-0 md:grid md:grid-cols-2 md:gap-x-16 md:pb-12 md:pl-0"
             >
               <span className="absolute top-0 left-0 z-10 flex h-10 w-10 items-center justify-center rounded-full border-2 border-[#FE3E02] bg-white text-[#FE3E02] md:left-1/2 md:-translate-x-1/2">
@@ -72,16 +78,16 @@ export default function AboutJourney() {
                     variant="initiativeTitle"
                     className="text-black"
                   >
-                    {step.title}
+                    {t(`about.journey.${id}.title`)}
                   </Typography>
                 </div>
-                {step.place ? (
+                {i18n.exists(placeKey) ? (
                   <Typography
                     as="p"
                     variant="sectionLabelSm"
                     className="mt-2 text-[#FE3E02]"
                   >
-                    {step.place}
+                    {t(placeKey)}
                   </Typography>
                 ) : null}
                 <Typography
@@ -89,7 +95,7 @@ export default function AboutJourney() {
                   variant="initiativeBody"
                   className="mt-2 text-[#777777]"
                 >
-                  {step.description}
+                  {t(`about.journey.${id}.description`)}
                 </Typography>
               </article>
             </li>

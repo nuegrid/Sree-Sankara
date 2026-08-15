@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { FiChevronDown } from "react-icons/fi";
 import { cn } from "@/lib/utils";
 import Typography from "@/components/ui/Typography";
@@ -15,13 +16,13 @@ type FormState = {
 type TouchedState = Partial<Record<keyof FormState, boolean>>;
 
 const CITY_OPTIONS = [
-  "Kerala",
-  "Karnataka",
-  "Tamil Nadu",
-  "Maharashtra",
-  "Delhi NCR",
-  "Other",
-];
+  "kerala",
+  "karnataka",
+  "tamilNadu",
+  "maharashtra",
+  "delhiNcr",
+  "other",
+] as const;
 
 function isValidEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
@@ -33,6 +34,7 @@ function isValidPhone(phone: string) {
 }
 
 export default function VolunteerForm() {
+  const { t } = useTranslation();
   const [values, setValues] = useState<FormState>({
     fullName: "",
     phone: "",
@@ -45,14 +47,14 @@ export default function VolunteerForm() {
 
   const errors = useMemo(() => {
     const e: Partial<Record<keyof FormState, string>> = {};
-    if (!values.fullName.trim()) e.fullName = "Full Name is required.";
-    if (!values.phone.trim()) e.phone = "Phone Number is required.";
-    else if (!isValidPhone(values.phone)) e.phone = "Enter a valid phone number.";
-    if (!values.email.trim()) e.email = "Email Id is required.";
-    else if (!isValidEmail(values.email)) e.email = "Enter a valid email address.";
-    if (!values.city) e.city = "City / Location is required.";
+    if (!values.fullName.trim()) e.fullName = t("volunteer.form.fullNameRequired");
+    if (!values.phone.trim()) e.phone = t("volunteer.form.phoneRequired");
+    else if (!isValidPhone(values.phone)) e.phone = t("volunteer.form.phoneInvalid");
+    if (!values.email.trim()) e.email = t("volunteer.form.emailRequired");
+    else if (!isValidEmail(values.email)) e.email = t("volunteer.form.emailInvalid");
+    if (!values.city) e.city = t("volunteer.form.cityRequired");
     return e;
-  }, [values]);
+  }, [values, t]);
 
   const showError = (key: keyof FormState) => {
     if (success) return false;
@@ -81,10 +83,10 @@ export default function VolunteerForm() {
     return (
       <div className="rounded-3xl border border-stone-200 bg-white px-6 py-10">
         <Typography as="h2" variant="headline3" className="text-gray-950">
-          Thank you for applying to volunteer.
+          {t("volunteer.form.successTitle")}
         </Typography>
         <Typography as="p" variant="bodyText2" className="mt-3 text-neutral-600">
-          We have received your application and will be in touch soon.
+          {t("volunteer.form.successBody")}
         </Typography>
       </div>
     );
@@ -95,7 +97,7 @@ export default function VolunteerForm() {
       <div className="grid grid-cols-1 gap-4 sm:gap-5">
         <div className="flex flex-col gap-1.5">
           <label htmlFor="volunteer-fullname" className="sr-only">
-            Full Name
+            {t("volunteer.form.fullName")}
           </label>
           <input
             id="volunteer-fullname"
@@ -103,7 +105,7 @@ export default function VolunteerForm() {
             value={values.fullName}
             onChange={(e) => setField("fullName", e.target.value)}
             onBlur={() => setTouched((p) => ({ ...p, fullName: true }))}
-            placeholder="Full Name"
+            placeholder={t("volunteer.form.fullName")}
             className={inputClass("fullName")}
             autoComplete="name"
           />
@@ -116,7 +118,7 @@ export default function VolunteerForm() {
 
         <div className="flex flex-col gap-1.5">
           <label htmlFor="volunteer-phone" className="sr-only">
-            Phone Number
+            {t("volunteer.form.phone")}
           </label>
           <input
             id="volunteer-phone"
@@ -125,7 +127,7 @@ export default function VolunteerForm() {
             value={values.phone}
             onChange={(e) => setField("phone", e.target.value)}
             onBlur={() => setTouched((p) => ({ ...p, phone: true }))}
-            placeholder="Phone Number"
+            placeholder={t("volunteer.form.phone")}
             className={inputClass("phone")}
             autoComplete="tel"
           />
@@ -138,7 +140,7 @@ export default function VolunteerForm() {
 
         <div className="flex flex-col gap-1.5">
           <label htmlFor="volunteer-email" className="sr-only">
-            Email Id
+            {t("volunteer.form.email")}
           </label>
           <input
             id="volunteer-email"
@@ -147,7 +149,7 @@ export default function VolunteerForm() {
             value={values.email}
             onChange={(e) => setField("email", e.target.value)}
             onBlur={() => setTouched((p) => ({ ...p, email: true }))}
-            placeholder="Email Id"
+            placeholder={t("volunteer.form.email")}
             className={inputClass("email")}
             autoComplete="email"
           />
@@ -160,7 +162,7 @@ export default function VolunteerForm() {
 
         <div className="flex flex-col gap-1.5">
           <label htmlFor="volunteer-city" className="sr-only">
-            City / Location
+            {t("volunteer.form.city")}
           </label>
           <div className="relative">
             <select
@@ -176,11 +178,11 @@ export default function VolunteerForm() {
               )}
             >
               <option value="" disabled>
-                City/ Location
+                {t("volunteer.form.city")}
               </option>
               {CITY_OPTIONS.map((city) => (
                 <option key={city} value={city} className="text-gray-950">
-                  {city}
+                  {t(`volunteer.form.cities.${city}`)}
                 </option>
               ))}
             </select>
@@ -201,7 +203,7 @@ export default function VolunteerForm() {
           className="mt-1 h-12 w-full rounded-2xl bg-[#FE3E02] text-white transition-colors hover:bg-[#e63702]"
         >
           <Typography as="span" variant="buttonSmall" className="text-white">
-            Submit Application
+            {t("volunteer.form.submit")}
           </Typography>
         </button>
       </div>

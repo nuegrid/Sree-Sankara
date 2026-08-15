@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useTranslation } from "react-i18next";
 import Typography from "@/components/ui/Typography";
 import { PAGE_CONTAINER } from "@/lib/layout";
 import { cn } from "@/lib/utils";
@@ -10,6 +13,7 @@ const DONATION_ILLUSTRATION = "/images/Donation/Donation%201.png";
  * Donate coming-soon page — centered message with contact CTA.
  */
 export default function DonateContent() {
+  const { t } = useTranslation();
   return (
     <main className="flex w-full flex-1 flex-col bg-[#FAF8F5]">
       <div
@@ -21,7 +25,7 @@ export default function DonateContent() {
         <div className="relative mb-8 h-[180px] w-[280px] sm:mb-10 sm:h-[220px] sm:w-[340px] md:h-[260px] md:w-[400px]">
           <Image
             src={DONATION_ILLUSTRATION}
-            alt=""
+            alt={t("donate.imageAlt")}
             fill
             priority
             className="object-contain"
@@ -34,7 +38,7 @@ export default function DonateContent() {
           variant="aboutTitle"
           className="max-w-[900px] text-black"
         >
-          Your Support Can Make a Difference
+          {t("donate.title")}
         </Typography>
 
         <Typography
@@ -42,8 +46,7 @@ export default function DonateContent() {
           variant="aboutBody"
           className="mt-5 max-w-[720px] text-center text-[#777777] sm:mt-6"
         >
-          We are currently preparing our donation facilities to make your
-          contribution simple, secure, and transparent.
+          {t("donate.body")}
         </Typography>
 
         <Typography
@@ -51,7 +54,7 @@ export default function DonateContent() {
           variant="bodyRelaxed"
           className="mt-8 text-[#777777] sm:mt-10"
         >
-          Online Donations Coming Soon
+          {t("donate.comingSoon")}
         </Typography>
 
         <Link
@@ -59,7 +62,7 @@ export default function DonateContent() {
           className="mt-4 inline-block text-[#FE3E02] underline decoration-2 underline-offset-[6px] transition-colors hover:text-[#e03802] sm:mt-5"
         >
           <Typography as="span" variant="viewAllLink" className="text-[#FE3E02]">
-            Contact Us
+            {t("common.contactUs")}
           </Typography>
         </Link>
       </div>

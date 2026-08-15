@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { cn } from "@/lib/utils";
 import Typography from "@/components/ui/Typography";
 
@@ -18,6 +19,7 @@ function isValidEmail(email: string) {
 }
 
 export default function ContactForm() {
+  const { t } = useTranslation();
   const [values, setValues] = useState<FormState>({
     fullName: "",
     email: "",
@@ -29,12 +31,12 @@ export default function ContactForm() {
 
   const errors = useMemo(() => {
     const e: Partial<Record<keyof FormState, string>> = {};
-    if (!values.fullName.trim()) e.fullName = "Full Name is required.";
-    if (!values.email.trim()) e.email = "Email Id is required.";
-    else if (!isValidEmail(values.email)) e.email = "Enter a valid email address.";
-    if (!values.message.trim()) e.message = "Message is required.";
+    if (!values.fullName.trim()) e.fullName = t("contact.form.fullNameRequired");
+    if (!values.email.trim()) e.email = t("contact.form.emailRequired");
+    else if (!isValidEmail(values.email)) e.email = t("contact.form.emailInvalid");
+    if (!values.message.trim()) e.message = t("contact.form.messageRequired");
     return e;
-  }, [values]);
+  }, [values, t]);
 
   const showError = (key: keyof FormState) => {
     if (success) return false;
@@ -62,10 +64,10 @@ export default function ContactForm() {
       {success ? (
         <div className="rounded-3xl border border-stone-200 bg-white px-6 py-10">
           <Typography as="h2" variant="headline3" className="text-gray-950">
-            Thank you! We have received your message.
+            {t("contact.form.successTitle")}
           </Typography>
           <Typography as="p" variant="bodyText2" className="mt-3 text-neutral-600">
-            We will get back to you shortly.
+            {t("contact.form.successBody")}
           </Typography>
         </div>
       ) : (
@@ -73,7 +75,7 @@ export default function ContactForm() {
           <div className="grid grid-cols-1 gap-4 sm:gap-5">
             <div className="flex flex-col gap-1.5">
               <label htmlFor="contact-fullname" className="sr-only">
-                Full Name
+                {t("contact.form.fullName")}
               </label>
               <input
                 id="contact-fullname"
@@ -81,7 +83,7 @@ export default function ContactForm() {
                 value={values.fullName}
                 onChange={(e) => setField("fullName", e.target.value)}
                 onBlur={() => setTouched((p) => ({ ...p, fullName: true }))}
-                placeholder="Full Name"
+                placeholder={t("contact.form.fullName")}
                 className={cn(
                   "h-12 w-full rounded-2xl border border-stone-200 bg-white px-5 text-sm text-gray-950 placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-[#FF3D0B]/20 focus:border-[#FF3D0B]/40",
                   showError("fullName") && "border-[#FF3D0B]"
@@ -97,7 +99,7 @@ export default function ContactForm() {
 
             <div className="flex flex-col gap-1.5">
               <label htmlFor="contact-email" className="sr-only">
-                Email Id
+                {t("contact.form.email")}
               </label>
               <input
                 id="contact-email"
@@ -105,7 +107,7 @@ export default function ContactForm() {
                 value={values.email}
                 onChange={(e) => setField("email", e.target.value)}
                 onBlur={() => setTouched((p) => ({ ...p, email: true }))}
-                placeholder="Email Id"
+                placeholder={t("contact.form.email")}
                 className={cn(
                   "h-12 w-full rounded-2xl border border-stone-200 bg-white px-5 text-sm text-gray-950 placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-[#FF3D0B]/20 focus:border-[#FF3D0B]/40",
                   showError("email") && "border-[#FF3D0B]"
@@ -121,7 +123,7 @@ export default function ContactForm() {
 
             <div className="flex flex-col gap-1.5">
               <label htmlFor="contact-message" className="sr-only">
-                Message
+                {t("contact.form.message")}
               </label>
               <textarea
                 id="contact-message"
@@ -129,7 +131,7 @@ export default function ContactForm() {
                 value={values.message}
                 onChange={(e) => setField("message", e.target.value)}
                 onBlur={() => setTouched((p) => ({ ...p, message: true }))}
-                placeholder="Message"
+                placeholder={t("contact.form.message")}
                 rows={5}
                 className={cn(
                   "w-full resize-none rounded-2xl border border-stone-200 bg-white px-5 py-4 text-sm text-gray-950 placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-[#FF3D0B]/20 focus:border-[#FF3D0B]/40",
@@ -149,7 +151,7 @@ export default function ContactForm() {
               className="h-12 w-full rounded-full bg-[#FF3D0B] text-white transition-colors hover:bg-[#e8370a]"
             >
               <Typography as="span" variant="buttonSmall" className="text-white">
-                Submit
+                {t("contact.form.submit")}
               </Typography>
             </button>
           </div>
@@ -158,4 +160,3 @@ export default function ContactForm() {
     </section>
   );
 }
-

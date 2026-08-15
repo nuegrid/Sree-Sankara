@@ -7,6 +7,7 @@ import {
   motion,
 } from "motion/react";
 import React, { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import Typography from "@/components/ui/Typography";
 
 interface TimelineEntry {
@@ -16,8 +17,6 @@ interface TimelineEntry {
 
 interface TimelineProps {
   data: TimelineEntry[];
-  title?: string;
-  subtitle?: string;
   description?: string;
 }
 
@@ -28,10 +27,9 @@ interface TimelineProps {
  */
 export const Timeline = ({
   data,
-  title = "A Life Dedicated to Dharma",
-  subtitle = "Swamiji's Spiritual Journey",
   description,
 }: TimelineProps) => {
+  const { t } = useTranslation();
   const ref = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -95,33 +93,25 @@ export const Timeline = ({
 
   return (
     <div
-      className="w-full bg-black px-5 py-14 font-sans sm:px-8"
+      className="w-full bg-black px-5 py-14 pt-24 font-sans sm:px-8 sm:pt-28"
       ref={containerRef}
     >
       <div className="mx-auto max-w-7xl pb-8">
-        {subtitle && (
-          <Typography
-            as="span"
-            variant="sectionEyebrow"
-            className="mb-2 block text-[#FE3E02]"
-          >
-            {subtitle}
-          </Typography>
-        )}
+        <Typography
+          as="span"
+          variant="sectionEyebrow"
+          className="mb-2 block text-[#FE3E02]"
+        >
+          {t("home.journeyLabel")}
+        </Typography>
         <Typography
           as="h2"
           variant="galleryTitle"
           className="max-w-sm text-white"
         >
-          {title.includes("Dharma") ? (
-            <>
-              A Life Dedicated to
-              <br />
-              Dharma
-            </>
-          ) : (
-            title
-          )}
+          {t("home.journeyTitleLine1")}
+          <br />
+          {t("home.journeyTitleLine2")}
         </Typography>
         {description && (
           <Typography

@@ -4,11 +4,21 @@ import {
   type BlogSection,
 } from "./blog-articles";
 import {
+  inspiringJourneySectionsMl,
+  junaAkhadaLegacySectionsMl,
+} from "./blog-articles.ml";
+import {
   keralaVisionSections,
   teachingsSections,
   kumbhMelaSections,
   sanatanaDharmaSections,
 } from "./blog-articles-more";
+import {
+  keralaVisionSectionsMl,
+  teachingsSectionsMl,
+  kumbhMelaSectionsMl,
+  sanatanaDharmaSectionsMl,
+} from "./blog-articles-more.ml";
 
 export type { BlogSection };
 
@@ -149,4 +159,28 @@ export const blogs: BlogArticle[] = [
 
 export function getBlogBySlug(slug: string) {
   return blogs.find((blog) => blog.slug === slug && blog.body);
+}
+
+const blogBodiesByLang: Record<"en" | "ml", Record<string, BlogSection[]>> = {
+  en: {
+    "inspiring-journey-of-swami-anandavanam-bharathi": inspiringJourneySections,
+    "juna-akhada-preserving-an-ancient-spiritual-legacy": junaAkhadaLegacySections,
+    "juna-akhada-vision-for-kerala": keralaVisionSections,
+    "teachings-of-swami-anandavanam-bharathi": teachingsSections,
+    "kumbh-mela-faith-transformation-and-tradition": kumbhMelaSections,
+    "sanatana-dharma-in-the-modern-world": sanatanaDharmaSections,
+  },
+  ml: {
+    "inspiring-journey-of-swami-anandavanam-bharathi": inspiringJourneySectionsMl,
+    "juna-akhada-preserving-an-ancient-spiritual-legacy": junaAkhadaLegacySectionsMl,
+    "juna-akhada-vision-for-kerala": keralaVisionSectionsMl,
+    "teachings-of-swami-anandavanam-bharathi": teachingsSectionsMl,
+    "kumbh-mela-faith-transformation-and-tradition": kumbhMelaSectionsMl,
+    "sanatana-dharma-in-the-modern-world": sanatanaDharmaSectionsMl,
+  },
+};
+
+export function getBlogBody(slug: string, lang: string): BlogSection[] | undefined {
+  const key = lang.startsWith("ml") ? "ml" : "en";
+  return blogBodiesByLang[key][slug] ?? blogBodiesByLang.en[slug];
 }

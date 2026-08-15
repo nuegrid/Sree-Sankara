@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useTranslation } from "react-i18next";
 import Typography from "@/components/ui/Typography";
 
 /**
@@ -11,8 +12,18 @@ import Typography from "@/components/ui/Typography";
  *   3. [humanity.]
  */
 export default function QuoteSection() {
+  const { t } = useTranslation();
+  const line2Prefix = t("home.quoteLine2Prefix");
   return (
-    <section className="relative z-20 w-full bg-[#FAF8F5] max-md:-mt-px">
+    <section className="relative z-20 -mt-px w-full bg-black">
+      <div
+        className="pointer-events-none absolute inset-x-0 -top-px z-10 h-[3px] bg-black"
+        aria-hidden
+      />
+      <div
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-[56px] bg-[#FAF8F5]"
+        aria-hidden
+      />
       <div className="relative w-full overflow-hidden rounded-bl-[56px] rounded-br-[56px] bg-black">
         <div className="relative mx-auto flex w-full max-w-7xl flex-col md:flex-row md:items-end">
           {/* Left — quote mark left; text indented under it */}
@@ -36,16 +47,16 @@ export default function QuoteSection() {
                 className="flex flex-col gap-1 text-white sm:gap-1.5"
               >
                 <span className="block md:whitespace-nowrap">
-                  The highest form of worship
+                  {t("home.quoteLine1")}
                 </span>
                 <span className="block md:whitespace-nowrap">
-                  is{" "}
+                  {line2Prefix}
                   <span className="relative inline-block leading-none text-white">
                     <span
                       aria-hidden
                       className="pointer-events-none absolute inset-x-0 top-[0.06em] bottom-[-0.14em] bg-[#FE3E02]"
                     />
-                    <span className="relative z-[1]">selfless service to</span>
+                    <span className="relative z-[1]">{t("home.quoteHighlight1")}</span>
                   </span>
                 </span>
                 <span className="mt-1.5 block sm:mt-2">
@@ -54,7 +65,7 @@ export default function QuoteSection() {
                       aria-hidden
                       className="pointer-events-none absolute inset-x-0 top-[0.06em] bottom-[-0.14em] bg-[#FE3E02]"
                     />
-                    <span className="relative z-[1]">humanity.</span>
+                    <span className="relative z-[1]">{t("home.quoteHighlight2")}</span>
                   </span>
                 </span>
               </Typography>
@@ -64,7 +75,7 @@ export default function QuoteSection() {
                 variant="bodyText2"
                 className="mt-5 text-white sm:mt-6"
               >
-                Swami Anandavanam
+                {t("home.quoteAuthor")}
               </Typography>
             </div>
           </div>
@@ -73,7 +84,7 @@ export default function QuoteSection() {
           <div className="relative z-0 mx-auto flex w-full shrink-0 items-end justify-center md:w-[42%] md:justify-end lg:w-[40%]">
             <Image
               src="/images/home/journey/sw1.png"
-              alt="Swami Anandavanam"
+              alt={t("home.quoteAuthor")}
               width={720}
               height={960}
               sizes="(max-width: 768px) 72vw, 40vw"

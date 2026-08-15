@@ -8,6 +8,7 @@ import SectionHeading from "@/components/ui/SectionHeading";
 import ViewAllLink from "@/components/ui/ViewAllLink";
 import JunaAkhadaSection from "@/components/home/juna-akhada/JunaAkhadaSection";
 import { featuredArticle, newsItems } from "./data";
+import { useTranslation } from "react-i18next";
 
 const STICKY_BG = "/images/home/Home_Background/bg_stickey_new.jpg";
 
@@ -21,6 +22,7 @@ const STICKY_BG = "/images/home/Home_Background/bg_stickey_new.jpg";
  * 3. Foreground panels scroll; gaps / rounded corners reveal the image.
  */
 export default function FeaturedNewsSection() {
+  const { t } = useTranslation();
   return (
     <section className="relative z-20 w-full">
       {/* Sticky background — locked to viewport while this section scrolls */}
@@ -43,14 +45,14 @@ export default function FeaturedNewsSection() {
         <div className="rounded-bl-[48px] rounded-br-[48px] bg-[#FAF8F5] px-6 py-16 sm:rounded-bl-[64px] sm:rounded-br-[64px] sm:px-8 sm:py-20 md:rounded-bl-[80px] md:rounded-br-[80px] md:px-[calc((100vw-1280px)/2+24px)] md:py-24 lg:rounded-bl-[100px] lg:rounded-br-[100px]">
           <div className="mx-auto w-full max-w-7xl">
             <SectionHeading className="mb-8 md:mb-10">
-              Featured News
+              {t("home.featuredNews")}
             </SectionHeading>
 
             <article className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-12 xl:gap-16">
               <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl bg-neutral-200 sm:rounded-[28px] lg:aspect-[5/4]">
                 <Image
                   src={featuredArticle.image}
-                  alt={featuredArticle.title}
+                  alt={t("home.featuredArticle.title")}
                   fill
                   className="object-cover"
                   sizes="(max-width: 1024px) 100vw, 50vw"
@@ -69,7 +71,7 @@ export default function FeaturedNewsSection() {
                     variant="bodyText2"
                     className="text-neutral-500"
                   >
-                    {featuredArticle.date}
+                    {t("home.featuredArticle.date")}
                   </Typography>
                 </div>
 
@@ -78,11 +80,7 @@ export default function FeaturedNewsSection() {
                   variant="newsHeadline"
                   className="text-gray-950"
                 >
-                  {featuredArticle.titleLines.map((line) => (
-                    <span key={line} className="block">
-                      {line}
-                    </span>
-                  ))}
+                  {t("home.featuredArticle.title")}
                 </Typography>
 
                 <Link
@@ -94,7 +92,7 @@ export default function FeaturedNewsSection() {
                     variant="buttonSmall"
                     className="text-orange-600"
                   >
-                    {featuredArticle.buttonText}
+                    {t("common.readMore")}
                   </Typography>
                   <ArrowRight className="h-4 w-4" />
                 </Link>
@@ -113,7 +111,7 @@ export default function FeaturedNewsSection() {
                   <div className="relative aspect-[16/11] w-full overflow-hidden rounded-2xl bg-neutral-200 sm:rounded-3xl">
                     <Image
                       src={item.image}
-                      alt={item.title}
+                      alt={t(`home.news.${item.id}.title`)}
                       fill
                       className="object-cover transition-transform duration-500 group-hover:scale-105"
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
@@ -131,7 +129,7 @@ export default function FeaturedNewsSection() {
                         variant="bodyText2"
                         className="text-neutral-500"
                       >
-                        {item.date}
+                        {t(`home.news.${item.id}.date`)}
                       </Typography>
                     </div>
 
@@ -140,7 +138,7 @@ export default function FeaturedNewsSection() {
                       variant="headline3"
                       className="leading-snug text-gray-950 transition-colors group-hover:text-orange-700"
                     >
-                      {item.title}
+                      {t(`home.news.${item.id}.title`)}
                     </Typography>
                   </div>
                 </Link>
@@ -148,7 +146,7 @@ export default function FeaturedNewsSection() {
             </div>
 
             <div className="mt-10 flex justify-end sm:mt-12">
-              <ViewAllLink href="/media">View All News</ViewAllLink>
+              <ViewAllLink href="/media">{t("home.viewAllNews")}</ViewAllLink>
             </div>
           </div>
         </div>

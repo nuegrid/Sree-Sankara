@@ -1,5 +1,3 @@
-import TopBar from "@/components/layout/TopBar";
-import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Hero from "@/components/home/Hero";
 import AboutSection from "@/components/home/AboutSection";
@@ -12,8 +10,6 @@ import DonationSection from "@/components/home/donation/DonationSection";
 export default function Home() {
   return (
     <div className="relative min-h-screen w-full bg-white flex flex-col">
-      <TopBar />
-      <Navbar />
       <Hero />
       <AboutSection />
       <EventCarousel />

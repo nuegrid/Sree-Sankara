@@ -7,12 +7,14 @@ import Link from "next/link";
 import { FiArrowRight, FiX } from "react-icons/fi";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useTranslation } from "react-i18next";
 import Typography from "@/components/ui/Typography";
 
 const YOUTUBE_VIDEO_ID = "st-aq-ds8NM";
 const YOUTUBE_EMBED_SRC = `https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}?autoplay=1&rel=0&modestbranding=1&playsinline=1`;
 
 export default function AboutSection() {
+  const { t } = useTranslation();
   const sectionRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -82,7 +84,7 @@ export default function AboutSection() {
             type="button"
             onClick={() => setIsPlaying(false)}
             className="absolute top-3 right-3 z-10 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-black/55 text-white backdrop-blur-sm transition-colors hover:bg-black/75 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-            aria-label="Close video"
+            aria-label={t("home.closeVideo")}
           >
             <FiX size={22} />
           </button>
@@ -117,7 +119,7 @@ export default function AboutSection() {
               variant="sectionLabel"
               className="text-orange-600"
             >
-              About Swami Anandavanam Bharati
+              {t("home.aboutLabel")}
             </Typography>
 
             <Typography
@@ -125,23 +127,15 @@ export default function AboutSection() {
               variant="sectionTitle"
               className="text-gray-950"
             >
-              A Journey of Spiritual Quest,
-              <br className="hidden sm:block" /> Dharma &amp; Service
+              {t("home.aboutTitle")}
             </Typography>
 
             <div className="flex max-w-xl flex-col gap-3">
               <Typography as="p" variant="bodyRelaxed" className="text-gray-600">
-                Mahamandaleshwar Swami Anandavanam Bharati Maharaj is a
-                spiritual leader associated with the Sri Panch Dasanam Juna
-                Akhada and a prominent figure in India&apos;s contemporary
-                spiritual and cultural landscape.
+                {t("home.aboutP1")}
               </Typography>
               <Typography as="p" variant="bodyRelaxed" className="text-gray-600">
-                Born in Chalakkudy, Thrissur, Kerala, his journey has taken him
-                from education and public life through journalism and literature
-                to spiritual renunciation and leadership. His work today focuses
-                on Sanatana Dharma, spiritual awakening, cultural continuity,
-                social organisation and service.
+                {t("home.aboutP2")}
               </Typography>
             </div>
 
@@ -150,7 +144,7 @@ export default function AboutSection() {
               className="mt-2 inline-flex items-center gap-2.5 px-5 py-3 rounded-xl border border-orange-300 text-orange-600 hover:bg-orange-50 hover:border-orange-400 transition-all group"
             >
               <Typography as="span" variant="linkTextMedium">
-                Discover His Journey
+                {t("home.discoverJourney")}
               </Typography>
               <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
@@ -162,7 +156,7 @@ export default function AboutSection() {
               type="button"
               onClick={() => setIsPlaying(true)}
               className="group absolute inset-0 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FE3E02]"
-              aria-label="Play video about Swami Anandavanam"
+              aria-label={t("home.playVideo")}
             >
               <Image
                 src="/images/home/hero/tumbline.jpg"

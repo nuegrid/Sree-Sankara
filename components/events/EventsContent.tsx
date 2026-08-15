@@ -1,3 +1,6 @@
+"use client";
+
+import { useTranslation } from "react-i18next";
 import Typography from "@/components/ui/Typography";
 import ViewAllLink from "@/components/ui/ViewAllLink";
 import { PAGE_CONTAINER } from "@/lib/layout";
@@ -7,6 +10,8 @@ import EventsPageCard from "./EventsPageCard";
 import MomentsMasonry from "./MomentsMasonry";
 
 export default function EventsContent() {
+  const { t } = useTranslation();
+
   return (
     <main className="w-full bg-[#FAF8F5]">
       <div
@@ -20,8 +25,7 @@ export default function EventsContent() {
           variant="aboutTitle"
           className="max-w-[987px] text-black"
         >
-          Join Swamiji for discourses, satsangs, and sacred events across the
-          country.
+          {t("events.pageTitle")}
         </Typography>
 
         <div className="mt-8 grid grid-cols-1 gap-6 sm:mt-10 md:grid-cols-2 md:gap-8 lg:gap-10">
@@ -33,10 +37,10 @@ export default function EventsContent() {
         <section className="mt-14 sm:mt-16 md:mt-20 lg:mt-24">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <Typography as="h2" variant="aboutTitle" className="text-black">
-              Moments From Our Journey
+              {t("events.momentsTitle")}
             </Typography>
             <div className="shrink-0 sm:pb-1">
-              <ViewAllLink href="/media">View All</ViewAllLink>
+              <ViewAllLink href="/media">{t("common.viewAll")}</ViewAllLink>
             </div>
           </div>
 

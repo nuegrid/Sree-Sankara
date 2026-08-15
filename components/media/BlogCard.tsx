@@ -1,17 +1,23 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import Typography from "@/components/ui/Typography";
 import type { BlogArticle } from "./data";
 
 export default function BlogCard({
+  id,
   image,
-  category,
-  date,
-  title,
-  excerpt,
   href,
 }: BlogArticle) {
+  const { t } = useTranslation();
+  const title = t(`media.posts.${id}.title`);
+  const category = t(`media.posts.${id}.category`);
+  const date = t(`media.posts.${id}.date`);
+  const excerpt = t(`media.posts.${id}.excerpt`);
+
   return (
     <article className="h-full">
       <Link href={href} className="group flex h-full flex-col">
@@ -57,7 +63,7 @@ export default function BlogCard({
 
           <span className="mt-4 inline-flex w-fit items-center gap-1.5 text-[#FE3E02] transition-colors group-hover:text-[#e03802]">
             <Typography as="span" variant="buttonSmall" className="text-inherit">
-              Read Article
+              {t("common.readArticle")}
             </Typography>
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
           </span>

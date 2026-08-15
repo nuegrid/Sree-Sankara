@@ -2,22 +2,23 @@
 
 import Link from "next/link";
 import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 import Typography from "@/components/ui/Typography";
 import { PAGE_CONTAINER } from "@/lib/layout";
 import { cn } from "@/lib/utils";
 
 const quickLinksLeft = [
-  { name: "Home", href: "/" },
-  { name: "About", href: "/about" },
-  { name: "Juna Akhada", href: "/juna-akhada" },
-  { name: "Events", href: "/events" },
+  { key: "home", href: "/" },
+  { key: "about", href: "/about" },
+  { key: "junaAkhada", href: "/juna-akhada" },
+  { key: "events", href: "/events" },
 ];
 
 const quickLinksRight = [
-  { name: "Media", href: "/media" },
-  { name: "Volunteer", href: "/volunteer" },
-  { name: "Donate", href: "/donate" },
-  { name: "Contact", href: "/contact" },
+  { key: "media", href: "/media" },
+  { key: "volunteer", href: "/volunteer" },
+  { key: "donate", href: "/donate" },
+  { key: "contact", href: "/contact" },
 ];
 
 const FACEBOOK_URL = "https://www.facebook.com/SadhuAnandavanam";
@@ -27,6 +28,7 @@ const FACEBOOK_URL = "https://www.facebook.com/SadhuAnandavanam";
  * `overlap` pulls it up over the previous section (homepage donation).
  */
 export default function Footer({ overlap = true }: { overlap?: boolean }) {
+  const { t } = useTranslation();
   return (
     <footer
       className={cn(
@@ -42,8 +44,7 @@ export default function Footer({ overlap = true }: { overlap?: boolean }) {
               variant="footerTagline"
               className="max-w-[464px] text-white"
             >
-              Guiding humanity through the timeless wisdom Of Sanatan Dharma
-              compassion, and selfless service.
+              {t("footer.tagline")}
             </Typography>
 
             <div className="flex items-center gap-3">
@@ -77,7 +78,7 @@ export default function Footer({ overlap = true }: { overlap?: boolean }) {
               variant="footerHeading"
               className="text-white"
             >
-              Quick Link
+              {t("footer.quickLink")}
             </Typography>
             <div className="mt-5 grid grid-cols-2 gap-x-8 gap-y-2.5 sm:gap-x-12">
               <ul className="flex flex-col gap-2.5">
@@ -89,7 +90,7 @@ export default function Footer({ overlap = true }: { overlap?: boolean }) {
                         variant="footerLink"
                         className="text-[#BBBBBB]"
                       >
-                        {link.name}
+                        {t(`nav.${link.key}`)}
                       </Typography>
                     </Link>
                   </li>
@@ -97,14 +98,14 @@ export default function Footer({ overlap = true }: { overlap?: boolean }) {
               </ul>
               <ul className="flex flex-col gap-2.5">
                 {quickLinksRight.map((link) => (
-                  <li key={link.name}>
+                  <li key={link.href}>
                     <Link href={link.href} className="transition-colors hover:text-white">
                       <Typography
                         as="span"
                         variant="footerLink"
                         className="text-[#BBBBBB]"
                       >
-                        {link.name}
+                        {t(`nav.${link.key}`)}
                       </Typography>
                     </Link>
                   </li>
@@ -119,7 +120,7 @@ export default function Footer({ overlap = true }: { overlap?: boolean }) {
               variant="footerHeading"
               className="text-white"
             >
-              Contact
+              {t("footer.contact")}
             </Typography>
             <div className="mt-5 flex flex-col gap-2.5">
               <Typography as="p" variant="footerLink" className="text-[#BBBBBB]">
@@ -168,12 +169,12 @@ export default function Footer({ overlap = true }: { overlap?: boolean }) {
           <div className="flex flex-wrap items-center gap-6 sm:gap-8">
             <Link href="/privacy" className="transition-colors hover:text-white">
               <Typography as="span" variant="footerMeta" className="text-[#BBBBBB]">
-                Privacy Policy
+                {t("footer.privacy")}
               </Typography>
             </Link>
             <Link href="/terms" className="transition-colors hover:text-white">
               <Typography as="span" variant="footerMeta" className="text-[#BBBBBB]">
-                Terms &amp; Conditions
+                {t("footer.terms")}
               </Typography>
             </Link>
           </div>

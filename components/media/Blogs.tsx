@@ -1,8 +1,13 @@
+"use client";
+
+import { useTranslation } from "react-i18next";
 import Typography from "@/components/ui/Typography";
 import BlogCard from "./BlogCard";
 import { blogs } from "./data";
 
 export default function Blogs() {
+  const { t } = useTranslation();
+
   return (
     <section aria-labelledby="blogs-heading">
       <Typography
@@ -11,15 +16,14 @@ export default function Blogs() {
         variant="aboutTitle"
         className="text-black"
       >
-        Blogs
+        {t("media.blogsTitle")}
       </Typography>
       <Typography
         as="p"
         variant="aboutBody"
         className="mt-3 max-w-2xl text-[#777777] sm:mt-4"
       >
-        Explore thoughts, teachings, reflections, and insights from Swamiji and
-        the spiritual journey.
+        {t("media.blogsSubtitle")}
       </Typography>
 
       <div className="mt-8 grid grid-cols-1 gap-x-8 gap-y-10 sm:mt-10 sm:grid-cols-2 lg:grid-cols-3 lg:gap-y-12">

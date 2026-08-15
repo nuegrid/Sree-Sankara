@@ -1,17 +1,22 @@
+"use client";
+
 import { CalendarDays, MapPin } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import Typography from "@/components/ui/Typography";
 import type { EventsPageItem } from "./data";
 
 type Props = EventsPageItem;
 
 export default function EventsPageCard({
+  id,
   image,
   status,
-  title,
-  date,
-  location,
 }: Props) {
+  const { t } = useTranslation();
   const isLive = status === "Live Now";
+  const displayTitle = t(`events.items.${id}.title`);
+  const displayDate = t(`events.items.${id}.date`);
+  const displayLocation = t(`events.items.${id}.location`);
 
   return (
     <article className="relative overflow-hidden rounded-[34px] shadow-sm">
@@ -19,7 +24,7 @@ export default function EventsPageCard({
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={image}
-        alt={title}
+        alt={displayTitle}
         className="absolute inset-0 h-full w-full object-cover"
         draggable={false}
       />
@@ -40,7 +45,7 @@ export default function EventsPageCard({
               variant="buttonSmall"
               className="text-white"
             >
-              {status}
+              {t(isLive ? "events.liveNow" : "events.upcoming")}
             </Typography>
           </span>
         </div>
@@ -53,21 +58,21 @@ export default function EventsPageCard({
               variant="cardTitle"
               className="min-w-0 text-white"
             >
-              {title}
+              {displayTitle}
             </Typography>
 
             <div className="flex min-w-0 flex-col gap-1.5 text-[#d4a88a]">
               <div className="flex items-center gap-2">
                 <CalendarDays className="h-[18px] w-[18px] shrink-0 text-[#d4a88a] sm:h-5 sm:w-5" />
                 <Typography as="span" variant="cardMeta" className="truncate text-[#d4a88a]">
-                  {date}
+                  {displayDate}
                 </Typography>
               </div>
 
               <div className="flex items-center gap-2">
                 <MapPin className="h-[18px] w-[18px] shrink-0 text-[#d4a88a] sm:h-5 sm:w-5" />
                 <Typography as="span" variant="cardMeta" className="truncate text-[#d4a88a]">
-                  {location}
+                  {displayLocation}
                 </Typography>
               </div>
             </div>

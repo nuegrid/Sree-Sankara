@@ -11,59 +11,26 @@ import {
   Sprout,
   HeartPulse,
   BookOpen,
-  type LucideIcon,
 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import Typography from "@/components/ui/Typography";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const initiatives: {
-  title: string;
-  description: string;
-  Icon: LucideIcon;
-}[] = [
-  {
-    title: "Spiritual Activities",
-    description:
-      "Facilitating pilgrimages, Kumbh Mela journeys, sacred yatras, spiritual gatherings, and knowledge forums such as Sharada Sabha.",
-    Icon: Sparkles,
-  },
-  {
-    title: "Social Service & Empowerment",
-    description:
-      "Supporting communities through education guidance, healthcare assistance, legal support, government service assistance, and humanitarian initiatives.",
-    Icon: HeartHandshake,
-  },
-  {
-    title: "Youth Empowerment",
-    description:
-      "Creating opportunities through higher education guidance, sports, arts, Kalarippayattu, yoga, meditation, leadership development, and spiritual training.",
-    Icon: GraduationCap,
-  },
-  {
-    title: "Environmental Seva",
-    description:
-      "Working towards tree plantation, conservation of sacred water bodies, waste management, afforestation, and greater environmental awareness.",
-    Icon: Sprout,
-  },
-  {
-    title: "Ayurveda & Healthcare",
-    description:
-      "Supporting initiatives focused on healthcare for sadhus and sanyasis and developing research-oriented approaches that bring traditional Ayurvedic knowledge together with modern practices.",
-    Icon: HeartPulse,
-  },
-  {
-    title: "Preserving Ancient Knowledge",
-    description:
-      "Working toward the preservation and digitisation of ancient Indian manuscripts and supporting the revival of Gurukula-based education.",
-    Icon: BookOpen,
-  },
-];
+const INITIATIVE_IDS = [
+  { id: "spiritual", Icon: Sparkles },
+  { id: "social", Icon: HeartHandshake },
+  { id: "youth", Icon: GraduationCap },
+  { id: "environment", Icon: Sprout },
+  { id: "ayurveda", Icon: HeartPulse },
+  { id: "knowledge", Icon: BookOpen },
+] as const;
 
 /**
  * Editorial 3×2 initiatives grid — left rail borders, no cards.
  */
 export default function InitiativesGrid() {
+  const { t } = useTranslation();
   const gridRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
@@ -96,9 +63,9 @@ export default function InitiativesGrid() {
       ref={gridRef}
       className="mt-10 grid grid-cols-1 gap-x-10 gap-y-14 sm:mt-12 sm:grid-cols-2 sm:gap-x-12 sm:gap-y-16 lg:mt-14 lg:grid-cols-3 lg:gap-x-14 lg:gap-y-[72px]"
     >
-      {initiatives.map(({ title, description, Icon }) => (
+      {INITIATIVE_IDS.map(({ id, Icon }) => (
         <article
-          key={title}
+          key={id}
           data-initiative-item
           className="relative min-h-0 border-l-2 border-black/15 py-4 pl-5 sm:py-5 sm:pl-6 lg:min-h-[220px] lg:py-6 lg:pl-7"
         >
@@ -112,14 +79,14 @@ export default function InitiativesGrid() {
             variant="initiativeTitle"
             className="mt-6 max-w-[320px] text-black sm:mt-7"
           >
-            {title}
+            {t(`junaAkhada.initiatives.${id}.title`)}
           </Typography>
           <Typography
             as="p"
             variant="initiativeBody"
             className="mt-2.5 max-w-[400px] text-[#A4A4A4] sm:mt-3"
           >
-            {description}
+            {t(`junaAkhada.initiatives.${id}.description`)}
           </Typography>
         </article>
       ))}

@@ -5,7 +5,9 @@ import { createPortal } from "react-dom";
 import Link from "next/link";
 import Image from "next/image";
 import { FiChevronRight } from "react-icons/fi";
+import { useTranslation } from "react-i18next";
 import Typography from "@/components/ui/Typography";
+import { navLinks } from "@/lib/nav";
 
 interface MobileDrawerProps {
   isOpen: boolean;
@@ -13,22 +15,12 @@ interface MobileDrawerProps {
   pathname: string;
 }
 
-const navLinks = [
-  { name: "Home", href: "/" },
-  { name: "About", href: "/about" },
-  { name: "Juna Akhada", href: "/juna-akhada" },
-  { name: "Events", href: "/events" },
-  { name: "Media", href: "/media" },
-  { name: "Volunteer", href: "/volunteer" },
-  { name: "Donation", href: "/donate" },
-  { name: "Contact", href: "/contact" },
-];
-
 export default function MobileDrawer({
   isOpen,
   onClose,
   pathname,
 }: MobileDrawerProps) {
+  const { t } = useTranslation();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -63,7 +55,7 @@ export default function MobileDrawer({
       <button
         type="button"
         className="absolute inset-0 bg-stone-900/60 backdrop-blur-xs"
-        aria-label="Close menu"
+        aria-label={t("nav.closeMenu")}
         onClick={onClose}
       />
 
@@ -95,7 +87,7 @@ export default function MobileDrawer({
             const isActive = pathname === link.href;
             return (
               <Link
-                key={link.name}
+                key={link.href}
                 href={link.href}
                 onClick={onClose}
                 className={`flex items-center justify-between rounded-xl px-4 py-3.5 transition-all ${
@@ -109,7 +101,7 @@ export default function MobileDrawer({
                   variant="bodyBase"
                   className={isActive ? "font-semibold" : "font-medium"}
                 >
-                  {link.name}
+                  {t(`nav.${link.key}`)}
                 </Typography>
                 <FiChevronRight
                   className={`h-4 w-4 opacity-70 ${

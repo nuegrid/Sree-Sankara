@@ -1,23 +1,28 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { CalendarDays, ArrowRight } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import Typography from "@/components/ui/Typography";
 import type { NewsArticle } from "./data";
 
 export default function NewsCard({
+  id,
   image,
-  date,
-  title,
-  excerpt,
   href,
 }: NewsArticle) {
+  const { t } = useTranslation();
+  const title = t(`media.news.${id}.title`);
+  const date = t(`media.news.${id}.date`);
+  const excerpt = t(`media.news.${id}.excerpt`);
   const isExternal = href.startsWith("http");
   const ctaClassName =
     "mt-5 inline-flex h-10 w-fit items-center justify-center gap-2 rounded-xl border border-[#FE3E02] bg-white px-4 text-[#FE3E02] transition-colors hover:bg-[#FE3E02]/5";
   const ctaLabel = (
     <>
       <Typography as="span" variant="buttonSmall" className="text-[#FE3E02]">
-        Read More
+        {t("common.readMore")}
       </Typography>
       <ArrowRight className="h-4 w-4" aria-hidden />
     </>

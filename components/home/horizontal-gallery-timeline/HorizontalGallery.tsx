@@ -4,34 +4,15 @@ import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { useTranslation } from "react-i18next";
 import Typography from "@/components/ui/Typography";
 
-const cards = [
-  {
-    title: "Student Leader",
-    description:
-      "Born in Chalakudy, Kerala, Swami Anandavanam Bharathi (formerly P. Salil) pursued Political Science and became an active student leader, developing strong leadership skills and a commitment to public service.",
-    image: "/images/home/journey/b.png",
-  },
-  {
-    title: "A Spiritual Awakening",
-    description:
-      "In 2001, a life-changing visit to the Kumbh Mela sparked a profound spiritual transformation. Time spent on the banks of the Ganga inspired a lifelong pursuit of Sanatan Dharma and inner realization.",
-    image: "/images/home/journey/a.png",
-  },
-  {
-    title: "Years of Discipline",
-    description:
-      "Over the following years, he undertook pilgrimages across Haridwar, Rishikesh, Varanasi, and the Himalayas. Under the guidance of revered saints, he embraced rigorous spiritual practices and eventually entered Juna Akhara.",
-    image: "/images/home/journey/c.png",
-  },
-  {
-    title: "Mahamandaleshwar",
-    description:
-      "On 26 January 2024, he was anointed Mahamandaleshwar of Juna Akhara, becoming the first Keralite in the order to receive this distinguished spiritual title in modern times.",
-    image: "/images/home/journey/d.png",
-  },
-];
+const JOURNEY_CARDS = [
+  { id: "studentLeader", image: "/images/home/journey/b.png" },
+  { id: "awakening", image: "/images/home/journey/a.png" },
+  { id: "discipline", image: "/images/home/journey/c.png" },
+  { id: "mahamandaleshwar", image: "/images/home/journey/d.png" },
+] as const;
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -48,6 +29,7 @@ type HorizontalGalleryProps = {
 export default function HorizontalGallery({
   progress,
 }: HorizontalGalleryProps) {
+  const { t } = useTranslation();
   const container = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -313,25 +295,25 @@ export default function HorizontalGallery({
   return (
     <section
       ref={container}
-      className="relative flex min-h-[100svh] w-full flex-col justify-center overflow-hidden bg-black lg:h-full lg:min-h-screen"
+      className="relative flex min-h-[100svh] w-full flex-col justify-start overflow-hidden bg-black lg:h-full lg:min-h-screen"
     >
-      <div className="w-full py-10 pt-14 md:translate-y-8 md:py-10 md:pt-16 lg:translate-y-6 lg:py-8 lg:pt-12">
+      <div className="w-full px-0 pb-10 pt-28 md:pt-32 lg:pt-36">
         <header className="relative z-20 mx-auto mb-6 w-full max-w-7xl shrink-0 px-6 md:mb-6">
           <Typography
             as="span"
             variant="sectionEyebrow"
             className="text-[#FE3E02]"
           >
-            Swamiji&apos;s Spiritual Journey
+            {t("home.journeyLabel")}
           </Typography>
           <Typography
             as="h2"
             variant="galleryTitle"
             className="mt-1 max-w-sm text-white md:max-w-md"
           >
-            A Life Dedicated to
+            {t("home.journeyTitleLine1")}
             <br />
-            Dharma
+            {t("home.journeyTitleLine2")}
           </Typography>
         </header>
 
@@ -356,9 +338,13 @@ export default function HorizontalGallery({
               className="absolute top-2 h-[2px] origin-left rounded-full bg-gradient-to-r from-[#FE3E02] to-[#ea580c] shadow-[0_0_8px_rgba(254,62,2,0.55)]"
             />
 
-            {cards.map((card, i) => (
+            {JOURNEY_CARDS.map((card) => {
+              const title = t(`home.journey.${card.id}.title`);
+              const description = t(`home.journey.${card.id}.description`);
+
+              return (
               <div
-                key={i}
+                key={card.id}
                 className="timeline-card relative flex w-[88vw] max-w-[400px] shrink-0 flex-col sm:max-w-[440px] md:w-[500px] md:max-w-none lg:w-[540px]"
               >
                 {/* Timeline row — dots sit on the horizontal line */}
@@ -371,7 +357,7 @@ export default function HorizontalGallery({
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
                       src={card.image}
-                      alt={card.title}
+                      alt={title}
                       className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                     />
                   )}
@@ -382,17 +368,18 @@ export default function HorizontalGallery({
                   variant="headline4"
                   className="mb-1 text-white md:mb-1.5"
                 >
-                  {card.title}
+                  {title}
                 </Typography>
                 <Typography
                   as="p"
                   variant="cardDescription"
                   className="text-[#a3a3a3]"
                 >
-                  {card.description}
+                  {description}
                 </Typography>
               </div>
-            ))}
+              );
+            })}
 
             <div
               className="w-[10px] shrink-0 md:w-[calc((100vw-1280px)/2+24px)]"
