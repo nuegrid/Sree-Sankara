@@ -1,7 +1,10 @@
+import Image from "next/image";
 import Link from "next/link";
 import Typography from "@/components/ui/Typography";
 import { PAGE_CONTAINER } from "@/lib/layout";
 import { cn } from "@/lib/utils";
+
+const DONATION_ILLUSTRATION = "/images/Donation/Donation%201.png";
 
 /**
  * Donate coming-soon page — centered message with contact CTA.
@@ -12,9 +15,20 @@ export default function DonateContent() {
       <div
         className={cn(
           PAGE_CONTAINER,
-          "flex flex-1 flex-col items-center justify-center py-20 text-center sm:py-28 md:py-32 lg:py-40"
+          "flex flex-1 flex-col items-center justify-center py-16 text-center sm:py-24 md:py-28 lg:py-32"
         )}
       >
+        <div className="relative mb-8 h-[180px] w-[280px] sm:mb-10 sm:h-[220px] sm:w-[340px] md:h-[260px] md:w-[400px]">
+          <Image
+            src={DONATION_ILLUSTRATION}
+            alt=""
+            fill
+            priority
+            className="object-contain"
+            sizes="(max-width: 640px) 280px, (max-width: 768px) 340px, 400px"
+          />
+        </div>
+
         <Typography
           as="h1"
           variant="aboutTitle"

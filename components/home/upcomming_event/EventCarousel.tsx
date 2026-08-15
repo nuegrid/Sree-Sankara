@@ -12,15 +12,10 @@ import ViewAllLink from "@/components/ui/ViewAllLink";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const LAST_INDEX = events.length - 1;
-const LAST_ID = events[LAST_INDEX]?.id;
-
-/** Master timeline phase weights ΓÇö no overlap between phases */
-const CARD_DUR = 1;
+/** Master timeline phase weights — no overlap between phases */
 const DRAWER_DUR = 1;
-const HOLD_DUR = 0.25; // first card fully visible & frozen
+const HOLD_DUR = 0.25;
 const GALLERY_DUR = 2;
-const TOTAL_DUR = CARD_DUR + DRAWER_DUR + HOLD_DUR + GALLERY_DUR;
 
 export default function EventCarousel() {
   const [activeId, setActiveId] = useState(events[0].id);
@@ -30,7 +25,6 @@ export default function EventCarousel() {
   const containerRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const drawerRef = useRef<HTMLDivElement>(null);
-  const scrollTriggerRef = useRef<ScrollTrigger | null>(null);
   const scrollTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const activeIdRef = useRef(events[0].id);
   const galleryProgressRef = useRef(0);
@@ -45,15 +39,6 @@ export default function EventCarousel() {
         const container = containerRef.current;
         const drawer = drawerRef.current;
         if (!pin || !track || !container || !drawer) return;
-
-        const getScrollDistance = () => {
-          const paddingLeft =
-            parseFloat(window.getComputedStyle(container).paddingLeft) || 0;
-          return Math.max(
-            0,
-            track.scrollWidth - container.clientWidth + paddingLeft
-          );
-        };
 
         gsap.set(track, { x: 0 });
         gsap.set(drawer, {
@@ -72,12 +57,6 @@ export default function EventCarousel() {
 
         galleryProgressRef.current = 0;
         setGalleryProgress(0);
-
-        const setActive = (id: number) => {
-          if (id === activeIdRef.current) return;
-          activeIdRef.current = id;
-          setActiveId(id);
-        };
 
         const setGallery = (p: number) => {
           const clamped = Math.min(1, Math.max(0, p));
@@ -98,57 +77,25 @@ export default function EventCarousel() {
             scrub: 1,
             start: "top top",
             end: () => {
-              const cards = Math.max(getScrollDistance() * 1.5, 600);
               const drawerScroll = Math.max(window.innerHeight * 1.2, 700);
               const holdScroll = window.innerHeight * 0.2;
               const galleryScroll = Math.max(window.innerWidth * 2.5, 1200);
-              return `+=${cards + drawerScroll + holdScroll + galleryScroll}`;
+              return `+=${drawerScroll + holdScroll + galleryScroll}`;
             },
             invalidateOnRefresh: true,
             anticipatePin: 1,
             onUpdate: () => {
               const kids = tl.getChildren(false, true, false);
-              const cardTween = kids[0];
-              const drawerTween = kids[1];
-              const cardProg = cardTween
-                ? Math.min(1, Math.max(0, cardTween.progress()))
-                : 0;
+              const drawerTween = kids[0];
               const drawerProg = drawerTween
                 ? Math.min(1, Math.max(0, drawerTween.progress()))
                 : 0;
-
-              // Event cards active state (stage 0 only)
-              if (cardProg < 1) {
-                const activeIndex = Math.min(
-                  LAST_INDEX,
-                  Math.floor(cardProg * events.length)
-                );
-                if (events[activeIndex]) setActive(events[activeIndex].id);
-              } else if (LAST_ID != null) {
-                setActive(LAST_ID);
-              }
-
-              // Drawer interaction only while open / opening
               drawer.style.pointerEvents =
                 drawerProg > 0.02 ? "auto" : "none";
             },
           },
         });
 
-        // ΓÇöΓÇöΓÇö STAGE 0: event cards horizontal ΓÇöΓÇöΓÇö
-        tl.fromTo(
-          track,
-          { x: 0 },
-          {
-            x: () => -getScrollDistance(),
-            duration: CARD_DUR,
-            force3D: true,
-            immediateRender: false,
-          },
-          0
-        );
-
-        // ΓÇöΓÇöΓÇö STAGE 1: drawer rises ONLY (gallery frozen at progress 0) ΓÇöΓÇöΓÇö
         tl.fromTo(
           drawer,
           { yPercent: 100 },
@@ -161,20 +108,18 @@ export default function EventCarousel() {
               setGallery(0);
             },
           },
-          CARD_DUR
+          0
         );
 
-        // ΓÇöΓÇöΓÇö HOLD: first card fully visible & stationary ΓÇöΓÇöΓÇö
         tl.to(
           {},
           {
             duration: HOLD_DUR,
             onUpdate: () => setGallery(0),
           },
-          CARD_DUR + DRAWER_DUR
+          DRAWER_DUR
         );
 
-        // ΓÇöΓÇöΓÇö STAGE 2: HorizontalGallery / Timeline scroll ΓÇöΓÇöΓÇö
         tl.fromTo(
           galleryProxy,
           { p: 0 },
@@ -183,10 +128,8 @@ export default function EventCarousel() {
             duration: GALLERY_DUR,
             onUpdate: () => setGallery(galleryProxy.p),
           },
-          CARD_DUR + DRAWER_DUR + HOLD_DUR
+          DRAWER_DUR + HOLD_DUR
         );
-
-        scrollTriggerRef.current = tl.scrollTrigger ?? null;
 
         const refresh = () => ScrollTrigger.refresh();
         requestAnimationFrame(refresh);
@@ -198,7 +141,6 @@ export default function EventCarousel() {
           clearTimeout(t2);
           tl.scrollTrigger?.kill(true);
           tl.kill();
-          scrollTriggerRef.current = null;
           gsap.set(track, { clearProps: "transform" });
           gsap.set(drawer, { clearProps: "transform,pointerEvents" });
           if (drawerContent) {
@@ -221,6 +163,7 @@ export default function EventCarousel() {
   );
 
   const handleScroll = () => {
+    if (window.innerWidth >= 1024) return;
     if (!containerRef.current) return;
     if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
 
@@ -252,28 +195,12 @@ export default function EventCarousel() {
     activeIdRef.current = id;
     setActiveId(id);
 
-    if (window.innerWidth >= 1024 && scrollTriggerRef.current) {
-      const st = scrollTriggerRef.current;
-      const cardPortion = CARD_DUR / TOTAL_DUR;
-      const targetScroll =
-        st.start +
-        (index / Math.max(LAST_INDEX, 1)) * (st.end - st.start) * cardPortion;
-      window.scrollTo({ top: targetScroll, behavior: "smooth" });
-      return;
-    }
-
-    if (containerRef.current) {
-      let inactiveWidth = 200;
-      let gap = 28;
-      if (window.innerWidth < 768) {
-        inactiveWidth = 100;
-        gap = 20;
-      }
-      containerRef.current.scrollTo({
-        left: index * (inactiveWidth + gap),
-        behavior: "smooth",
-      });
-    }
+    const card = trackRef.current?.children[index] as HTMLElement | undefined;
+    card?.scrollIntoView({
+      behavior: "smooth",
+      inline: "nearest",
+      block: "nearest",
+    });
   };
 
   return (
@@ -311,11 +238,11 @@ export default function EventCarousel() {
             ref={containerRef}
             onScroll={handleScroll}
             data-lenis-prevent
-            className="no-scrollbar relative flex w-full flex-row flex-nowrap overflow-x-auto px-6 py-4 md:px-[calc((100vw-1280px)/2+24px)] lg:overflow-x-hidden"
+            className="no-scrollbar relative flex w-full flex-row flex-nowrap overflow-x-auto px-6 py-4 md:px-[calc((100vw-1280px)/2+24px)]"
           >
             <div
               ref={trackRef}
-              className="flex w-max flex-shrink-0 flex-row flex-nowrap gap-[20px] md:gap-[28px] will-change-transform"
+              className="flex w-max flex-shrink-0 flex-row flex-nowrap gap-[20px] md:gap-[28px]"
             >
               {events.map((event) => (
                 <EventCard

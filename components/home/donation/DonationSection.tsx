@@ -5,7 +5,7 @@ import Link from "next/link";
 import { FaHeart } from "react-icons/fa";
 import Typography from "@/components/ui/Typography";
 
-const DONATION_IMAGE = "/images/home/Donation/donation_bg.png";
+const DONATION_IMAGE = "/images/home/Donation/donation_bg_1.png";
 
 /**
  * Full-bleed donation CTA — cinematic background with centered copy + button.

@@ -5,7 +5,7 @@ import { PAGE_CONTAINER } from "@/lib/layout";
 import { cn } from "@/lib/utils";
 import VolunteerForm from "./VolunteerForm";
 
-const VOLUNTEER_IMAGE = "/images/Volunteer/volunteer.jpg";
+const VOLUNTEER_IMAGE = "/images/Volunteer/img.png";
 
 const sevaAreas: {
   title: string;
@@ -40,14 +40,14 @@ export default function VolunteerContent() {
     <main className="w-full bg-[#FAF8F5]">
       <div className={cn(PAGE_CONTAINER, "pb-16 pt-10 sm:pb-20 sm:pt-12 md:pb-24")}>
         {/* Hero */}
-        <section className="mx-auto flex max-w-4xl flex-col items-center text-center">
+        <section className="flex w-full flex-col items-start text-left">
           <Typography as="h1" variant="aboutTitle" className="text-black">
             Serve With Purpose.
           </Typography>
           <Typography
             as="p"
             variant="aboutBody"
-            className="mt-5 max-w-[820px] text-center text-[#777777] sm:mt-6"
+            className="mt-5 w-full text-left text-[#777777] sm:mt-6"
           >
             Offer your time, skills, and dedication to support spiritual
             programs, community welfare, environmental initiatives, and

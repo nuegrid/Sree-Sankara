@@ -95,7 +95,7 @@ export const blogs: BlogArticle[] = [
   },
   {
     id: 3,
-    image: "/images/Volunteer/volunteer.jpg",
+    image: "/images/home/featured%20news/img.png",
     category: "Seva",
     date: "09 May 2026",
     slug: "juna-akhada-vision-for-kerala",

@@ -2,9 +2,9 @@ import Typography from "@/components/ui/Typography";
 import ViewAllLink from "@/components/ui/ViewAllLink";
 import { PAGE_CONTAINER } from "@/lib/layout";
 import { cn } from "@/lib/utils";
-import { events, moments } from "./data";
+import { events } from "./data";
 import EventsPageCard from "./EventsPageCard";
-import MomentCard from "./MomentCard";
+import MomentsMasonry from "./MomentsMasonry";
 
 export default function EventsContent() {
   return (
@@ -40,14 +40,8 @@ export default function EventsContent() {
             </div>
           </div>
 
-          <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8 lg:grid-cols-3">
-            {moments.map((moment) => (
-              <MomentCard
-                key={moment.id}
-                image={moment.image}
-                alt={moment.alt}
-              />
-            ))}
+          <div className="mt-8 sm:mt-10">
+            <MomentsMasonry />
           </div>
         </section>
       </div>

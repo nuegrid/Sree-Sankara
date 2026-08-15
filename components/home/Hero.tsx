@@ -20,9 +20,10 @@ export default function Hero() {
         <Typography
           as="h4"
           variant="heroTitle"
-          className="max-w-4xl text-gray-950"
+          className="max-w-5xl text-gray-950"
         >
-          "Reviving Dharma , Inspiring Society , Serving Humanity"
+          <span className="block">Reviving Dharma , Inspiring Society ,</span>
+          <span className="block">Serving Humanity</span>
         </Typography>
       </div>
     </section>
