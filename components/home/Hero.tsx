@@ -20,7 +20,7 @@ export default function Hero() {
         aria-hidden
       />
 
-      <div className="relative z-20 mx-auto flex max-w-5xl flex-col items-center px-4 pt-24 text-center sm:pt-28 md:pt-32">
+      <div className="relative z-20 mx-auto flex max-w-5xl flex-col items-center px-4 pt-16 text-center sm:pt-20 md:pt-24">
         <Typography
           as="h4"
           variant="heroTitle"
