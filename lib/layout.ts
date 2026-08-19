@@ -1,42 +1,6 @@
-import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-  metadataBase: new URL("https://www.anandavan.org"),
-
-  title: "Swami Anandhavanam | Official Website",
-
-  description:
-    "Official website of Swami Anandhavanam. Explore his journey, spiritual mission, teachings, initiatives, and charitable activities.",
-
-  openGraph: {
-    title: "Swami Anandhavanam | Official Website",
-
-    description:
-      "Discover the spiritual journey, mission, teachings, and charitable initiatives of Swami Anandhavanam.",
-
-    url: "https://www.anandavan.org",
-
-    siteName: "Swami Anandhavanam",
-
-    images: [
-      {
-        url: "/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Swami Ananhdavanam Official Website",
-      },
-    ],
-
-    type: "website",
-  },
-
-  twitter: {
-    card: "summary_large_image",
-    title: "Swami Anandhavanam | Official Website",
-
-    description:
-      "Discover the spiritual journey, mission, teachings, and charitable initiatives of Swami Anandhavanam.",
-
-    images: ["/og-image.jpg"],
-  },
-};
+/**
+ * Shared page shell — centered max-width with equal left/right padding.
+ * Used by Navbar, About, Juna Akhada, and Footer so edges stay aligned.
+ */
+export const PAGE_CONTAINER =
+  "mx-auto w-full max-w-[1400px] px-6 sm:px-8 md:px-10 lg:px-12";
