@@ -3,9 +3,12 @@
 import {
   useScroll,
   useTransform,
+  useMotionValueEvent,
   motion,
 } from "motion/react";
 import React, { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+import Typography from "@/components/ui/Typography";
 
 interface TimelineEntry {
   title: string;
@@ -14,118 +17,170 @@ interface TimelineEntry {
 
 interface TimelineProps {
   data: TimelineEntry[];
-  title?: string;
-  subtitle?: string;
   description?: string;
 }
 
+/**
+ * Vertical timeline for mobile/tablet — same visual language as the
+ * horizontal journey gallery (grey track, orange progress, glowing dots).
+ * Each point fills orange when the progress line reaches it.
+ */
 export const Timeline = ({
   data,
-  title = "A Life Dedicated to Dharma",
-  subtitle = "Swami's Spiritual Journey",
   description,
 }: TimelineProps) => {
+  const { t } = useTranslation();
   const ref = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [height, setHeight] = useState(0);
+  const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [lineHeight, setLineHeight] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
     if (!ref.current) return;
-    
-    // Dynamically track height changes (e.g. as images load or window resizes)
-    const handleResize = () => {
-      if (ref.current) {
-        setHeight(ref.current.getBoundingClientRect().height);
-      }
+
+    const measureLine = () => {
+      const items = itemRefs.current.filter(Boolean) as HTMLDivElement[];
+      if (items.length === 0) return;
+
+      const last = items[items.length - 1];
+      // Stop the track at the center of the final dot (do not extend under last card)
+      const lastDotCenter = last.offsetTop + 14;
+      setLineHeight(lastDotCenter);
     };
 
-    handleResize();
-
-    const resizeObserver = new ResizeObserver(() => {
-      handleResize();
-    });
-    
+    measureLine();
+    const resizeObserver = new ResizeObserver(measureLine);
     resizeObserver.observe(ref.current);
-
-    // Initial delay refresh to make sure layout settles
-    const timer = setTimeout(handleResize, 500);
+    const timer = setTimeout(measureLine, 400);
 
     return () => {
       resizeObserver.disconnect();
       clearTimeout(timer);
     };
-  }, []);
+  }, [data]);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start 20%", "end 80%"],
+    offset: ["start 30%", "end 70%"],
   });
 
-  const heightTransform = useTransform(scrollYProgress, [0, 1], [0, height]);
-  const opacityTransform = useTransform(scrollYProgress, [0, 0.1], [0, 1]);
+  const heightTransform = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [0, lineHeight]
+  );
+  const opacityTransform = useTransform(scrollYProgress, [0, 0.05], [0, 1]);
+
+  useMotionValueEvent(scrollYProgress, "change", (progress) => {
+    if (!ref.current || lineHeight <= 0) return;
+
+    const progressPx = progress * lineHeight;
+    let nextActive = -1;
+
+    itemRefs.current.forEach((item, index) => {
+      if (!item) return;
+      const dotCenter = item.offsetTop + 14;
+      if (progressPx >= dotCenter) {
+        nextActive = index;
+      }
+    });
+
+    if (progress > 0.02 && nextActive < 0) nextActive = 0;
+
+    setActiveIndex(nextActive);
+  });
 
   return (
     <div
-      className="w-full bg-black font-sans px-4 sm:px-6 md:px-10 py-16"
+      className="w-full bg-black px-5 py-14 pt-24 font-sans sm:px-8 sm:pt-28"
       ref={containerRef}
     >
-      <div className="max-w-7xl mx-auto py-10 px-4 md:px-8 lg:px-10">
-        {subtitle && (
-          <span className="text-sm font-semibold tracking-wide text-orange-600 block mb-2">
-            {subtitle}
-          </span>
-        )}
-        <h2 className="text-3xl md:text-5xl font-normal text-white max-w-4xl leading-tight">
-          {title}
-        </h2>
+      <div className="mx-auto max-w-7xl pb-8">
+        <Typography
+          as="span"
+          variant="sectionEyebrow"
+          className="mb-2 block text-[#FE3E02]"
+        >
+          {t("home.journeyLabel")}
+        </Typography>
+        <Typography
+          as="h2"
+          variant="galleryTitle"
+          className="max-w-sm text-white"
+        >
+          {t("home.journeyTitleLine1")}
+          <br />
+          {t("home.journeyTitleLine2")}
+        </Typography>
         {description && (
-          <p className="text-neutral-400 text-sm md:text-base max-w-md mt-4 leading-relaxed">
+          <Typography
+            as="p"
+            variant="bodyText3"
+            className="mt-4 max-w-md leading-relaxed text-neutral-400"
+          >
             {description}
-          </p>
+          </Typography>
         )}
       </div>
 
-      <div ref={ref} className="relative max-w-7xl mx-auto pb-10">
-        {data.map((item, index) => (
-          <div
-            key={index}
-            className="flex justify-start pt-10 md:pt-28 md:gap-10"
-          >
-            <div className="sticky flex flex-col md:flex-row z-40 items-center top-40 self-start max-w-xs lg:max-w-sm md:w-full">
-              <div className="h-10 absolute left-3 md:left-3 w-10 rounded-full bg-black flex items-center justify-center border border-neutral-800">
-                <div className="h-4 w-4 rounded-full bg-neutral-900 border border-neutral-700 p-2" />
-              </div>
-              <h3 className="hidden md:block text-xl md:pl-20 md:text-4xl font-semibold text-neutral-500">
-                {item.title}
-              </h3>
-            </div>
-
-            <div className="relative pl-20 pr-4 md:pl-4 w-full">
-              <h3 className="md:hidden block text-xl mb-4 text-left font-semibold text-neutral-400">
-                {item.title}
-              </h3>
-              <div className="text-neutral-300">
-                {item.content}
-              </div>
-            </div>
-          </div>
-        ))}
-        
-        {/* Track Line */}
+      <div ref={ref} className="relative mx-auto max-w-7xl pb-2">
+        {/* Grey base track — ends at last point */}
         <div
-          style={{
-            height: height + "px",
-          }}
-          className="absolute md:left-8 left-8 top-0 overflow-hidden w-[2px] bg-[linear-gradient(to_bottom,var(--tw-gradient-stops))] from-transparent from-[0%] via-neutral-800 to-transparent to-[99%] [mask-image:linear-gradient(to_bottom,transparent_0%,black_10%,black_90%,transparent_100%)]"
+          style={{ height: lineHeight ? `${lineHeight}px` : 0 }}
+          className="absolute top-0 left-[15px] w-[2px] bg-neutral-800"
+        />
+        {/* Orange progress fill — ends at last point */}
+        <div
+          style={{ height: lineHeight ? `${lineHeight}px` : 0 }}
+          className="absolute top-0 left-[15px] w-[2px] overflow-hidden"
         >
           <motion.div
             style={{
               height: heightTransform,
               opacity: opacityTransform,
             }}
-            className="absolute inset-x-0 top-0 w-[2px] bg-gradient-to-b from-orange-600 via-red-600 to-transparent from-[0%] via-[10%] rounded-full shadow-[0_0_8px_rgba(234,88,12,0.5)]"
+            className="absolute inset-x-0 top-0 w-[2px] rounded-full bg-gradient-to-b from-[#FE3E02] to-[#ea580c] shadow-[0_0_10px_rgba(254,62,2,0.65)]"
           />
         </div>
+
+        {data.map((item, index) => {
+          const isComplete = index <= activeIndex;
+          const isLast = index === data.length - 1;
+
+          return (
+            <div
+              key={index}
+              ref={(el) => {
+                itemRefs.current[index] = el;
+              }}
+              className={`relative flex gap-5 ${isLast ? "pb-0" : "pb-12"}`}
+            >
+              {/* Dot on the vertical line */}
+              <div className="relative z-10 flex w-8 shrink-0 justify-center pt-1">
+                <div
+                  className={`h-3.5 w-3.5 rounded-full border-2 transition-all duration-300 ${
+                    isComplete
+                      ? "scale-110 border-[#FE3E02] bg-[#FE3E02] shadow-[0_0_12px_rgba(254,62,2,0.85)]"
+                      : "border-neutral-600 bg-black"
+                  }`}
+                />
+              </div>
+
+              {/* Card content */}
+              <div className="min-w-0 flex-1">
+                <Typography
+                  as="h3"
+                  variant="headline4"
+                  className="mb-3 text-white"
+                >
+                  {item.title}
+                </Typography>
+                <div>{item.content}</div>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

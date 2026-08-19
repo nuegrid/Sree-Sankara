@@ -1,0 +1,398 @@
+{
+  "lang": {
+    "en": "English",
+    "ml": "മലയാളം"
+  },
+  "topBar": {
+    "events": "Upcoming events details here..."
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "junaAkhada": "Juna Akhada",
+    "events": "Events",
+    "media": "Media",
+    "volunteer": "Volunteer",
+    "donation": "Donation",
+    "contact": "Contact",
+    "donate": "Donate",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "footer": {
+    "tagline": "Guiding humanity through the timeless wisdom of Sanatan Dharma, compassion, and selfless service.",
+    "quickLink": "Quick Link",
+    "contact": "Contact",
+    "privacy": "Privacy Policy",
+    "terms": "Terms & Conditions"
+  },
+  "common": {
+    "viewAll": "View All",
+    "readMore": "Read More",
+    "readArticle": "Read Article",
+    "contactUs": "Contact Us"
+  },
+  "home": {
+    "heroLine1": "Reviving Dharma , Inspiring Society ,",
+    "heroLine2": "Serving Humanity",
+    "featuredNews": "Featured News",
+    "viewAllNews": "View All News",
+    "featuredArticle": {
+      "date": "15 Feb 2026",
+      "title": "Ascetics are expected to defend Dharma if required: Swami Anandavanam Bharathi Maharaj"
+    },
+    "news": {
+      "1": {
+        "date": "12 Jun 2026",
+        "title": "The Inspiring Journey of Swami Anandavanam Bharathi: From Student Leader to Mahamandaleshwar"
+      },
+      "2": {
+        "date": "28 May 2026",
+        "title": "Juna Akhada: Preserving an Ancient Spiritual Legacy for the Modern World"
+      },
+      "3": {
+        "date": "09 May 2026",
+        "title": "Juna Akhada's Vision for Kerala: Building a Spiritual and Social Movement"
+      }
+    },
+    "upcomingPrograms": "Upcoming Programs",
+    "upcomingTitle": "Join Swamiji for discourses, satsangs, and sacred events across the country.",
+    "viewAllPrograms": "View All Programs",
+    "junaAkhadaLabel": "About Juna Akhada",
+    "junaAkhadaTitle": "The Legacy of Juna Akhada",
+    "junaAkhadaBody": "One of India's oldest and largest monastic orders, preserving the wisdom of Sanatan Dharma through spiritual discipline, selfless service, and cultural heritage.",
+    "junaAkhadaExplore": "Explore Juna Akhada",
+    "volunteerEyebrow": "Be a Dharma Sevak",
+    "volunteerTitle": "Join Our Volunteer Community",
+    "volunteerBody": "Your time, skills, and dedication can help us spread spiritual wisdom, support sacred traditions, uplift communities, and protect our environment. Together, let's build a better and more compassionate world rooted in Dharma.",
+    "volunteerCta": "Become a Volunteer",
+    "volunteerImageAlt": "Hands joined in community service",
+    "donateTitle": "Join the Journey of Dharma",
+    "donateBody": "Your support helps preserve Sanatan Dharma, empower communities, and continue Swamiji's mission of spiritual guidance and selfless service.",
+    "donateCta": "Make a Donation",
+    "aboutLabel": "About Mahamandaleshwar Swami Anandavanam Bharati Maharaj",
+    "aboutTitle": "A Journey of Spiritual Quest, Dharma & Service",
+    "aboutP1": "Mahamandaleshwar Swami Anandavanam Bharati Maharaj is a spiritual leader associated with the Sri Panch Dasanam Juna Akhada and a prominent figure in India's contemporary spiritual and cultural landscape.",
+    "aboutP2": "Born in Chalakkudy, Thrissur, Kerala, his journey has taken him from education and public life through journalism and literature to spiritual renunciation and leadership. His work today focuses on Sanatana Dharma, spiritual awakening, cultural continuity, social organisation and service.",
+    "discoverJourney": "Discover His Journey",
+    "playVideo": "Play video about Swami Anandavanam",
+    "closeVideo": "Close video",
+    "quoteLine1": "The highest form of worship",
+    "quoteLine2Prefix": "is ",
+    "quoteHighlight1": "selfless service to",
+    "quoteHighlight2": "humanity.",
+    "quoteAuthor": "Swami Anandavanam",
+    "journeyLabel": "Swamiji's Spiritual Journey",
+    "journeyTitleLine1": "A Life Dedicated to",
+    "journeyTitleLine2": "Dharma",
+    "journey": {
+      "studentLeader": {
+        "title": "Student Leader",
+        "description": "Born in Chalakudy, Kerala, Swami Anandavanam Bharathi (formerly P. Salil) pursued Political Science and became an active student leader, developing strong leadership skills and a commitment to public service."
+      },
+      "awakening": {
+        "title": "A Spiritual Awakening",
+        "description": "In 2001, a life-changing visit to the Kumbh Mela sparked a profound spiritual transformation. Time spent on the banks of the Ganga inspired a lifelong pursuit of Sanatan Dharma and inner realization."
+      },
+      "discipline": {
+        "title": "Years of Discipline",
+        "description": "Over the following years, he undertook pilgrimages across Haridwar, Rishikesh, Varanasi, and the Himalayas. Under the guidance of revered saints, he embraced rigorous spiritual practices and eventually entered Juna Akhara."
+      },
+      "mahamandaleshwar": {
+        "title": "Mahamandaleshwar",
+        "description": "On 26 January 2024, he was anointed Mahamandaleshwar of Juna Akhara, becoming the first Keralite in the order to receive this distinguished spiritual title in modern times."
+      }
+    }
+  },
+  "events": {
+    "pageTitle": "Join Swamiji for discourses, satsangs, and sacred events across the country.",
+    "momentsTitle": "Moments From Our Journey",
+    "liveNow": "Live Now",
+    "upcoming": "Upcoming",
+    "items": {
+      "1": {
+        "title": "Shri Ganga Mahotsav 1",
+        "date": "15 May 2026 to 25 May 2026",
+        "location": "Haridwar, Uttarakhand"
+      },
+      "2": {
+        "title": "Shri Ganga Mahotsav 2",
+        "date": "15 May 2026 to 25 May 2026",
+        "location": "Haridwar, Uttarakhand"
+      },
+      "3": {
+        "title": "Shri Ganga Mahotsav 3",
+        "date": "15 May 2026 to 25 May 2026",
+        "location": "Haridwar, Uttarakhand"
+      },
+      "4": {
+        "title": "Shri Ganga Mahotsav 4",
+        "date": "15 May 2026 to 25 May 2026",
+        "location": "Haridwar, Uttarakhand"
+      }
+    }
+  },
+  "junaAkhada": {
+    "pageTitle": "The Legacy of Juna Akhada",
+    "intro": "Juna Akhada is one of the largest and most influential akharas within the Dashanami Sampradaya associated with Adi Shankaracharya. For centuries, it has played an important role in preserving spiritual traditions, monastic discipline, and the cultural heritage of Sanatan Dharma. Through its saints and sadhus, the akhada continues to guide seekers on the path of renunciation, wisdom, and selfless service.",
+    "imageAlt": "Sadhus of Juna Akhada at a sacred temple complex",
+    "legacyTitle": "A Legacy Through the Ages",
+    "legacyBody": "From the banks of sacred rivers to the gathering grounds of the Kumbh, Juna Akhada has preserved the discipline of the akhada tradition — meditation, scripture, seva, and the fierce protection of Dharma. Its history is written not only in chronicles, but in the unbroken chain of Guru and disciple.",
+    "kumbhTitle": "Kumbh Mela",
+    "kumbhBody": "At the Kumbh Mela — the world's largest spiritual gathering — Juna Akhada holds a place of honor. Processions of sadhus, sacred baths, discourses, and collective worship renew the bond between humanity and the divine, affirming the akhada's role as a guardian of Sanatan Dharma.",
+    "swamijiTitle": "Swamiji & Juna Akhada",
+    "swamijiP1": "As Mahamandaleshwar of Juna Akhada, Swami Anandavanam Bharathi carries forward this sacred lineage with wisdom, compassion, and tireless seva — guiding communities toward a life rooted in Dharma.",
+    "swamijiP2": "Through spiritual leadership and community service, he bridges ancient monastic tradition with the needs of the modern world, inviting every seeker to walk the path of truth and selfless service.",
+    "initiativesTitle": "Our Initiatives",
+    "initiatives": {
+      "spiritual": {
+        "title": "Spiritual Activities",
+        "description": "Facilitating pilgrimages, Kumbh Mela journeys, sacred yatras, spiritual gatherings, and knowledge forums such as Sharada Sabha."
+      },
+      "social": {
+        "title": "Social Service & Empowerment",
+        "description": "Supporting communities through education guidance, healthcare assistance, legal support, government service assistance, and humanitarian initiatives."
+      },
+      "youth": {
+        "title": "Youth Empowerment",
+        "description": "Creating opportunities through higher education guidance, sports, arts, Kalarippayattu, yoga, meditation, leadership development, and spiritual training."
+      },
+      "environment": {
+        "title": "Environmental Seva",
+        "description": "Working towards tree plantation, conservation of sacred water bodies, waste management, afforestation, and greater environmental awareness."
+      },
+      "ayurveda": {
+        "title": "Ayurveda & Healthcare",
+        "description": "Supporting initiatives focused on healthcare for sadhus and sanyasis and developing research-oriented approaches that bring traditional Ayurvedic knowledge together with modern practices."
+      },
+      "knowledge": {
+        "title": "Preserving Ancient Knowledge",
+        "description": "Working toward the preservation and digitisation of ancient Indian manuscripts and supporting the revival of Gurukula-based education."
+      }
+    }
+  },
+  "about": {
+    "label": "About Mahamandaleshwar Swami Anandavanam Bharati Maharaj",
+    "pageTitle": "A Journey from Public Life to Spiritual Leadership",
+    "intro1": "Mahamandaleshwar Swami Anandavanam Bharati Maharaj is a spiritual leader associated with the Sri Panch Dasanam Juna Akhada and a prominent figure in India's contemporary spiritual and cultural landscape.",
+    "intro2": "A native of Kerala, Swamiji's journey to spiritual leadership reflects an unusual transition from education and public life to the path of Sanatana Dharma and sannyasa.",
+    "imageAlt": "Swami Anandavanam Bharati with devotees",
+    "bio1": "Born as Salil into the Menokki family of Chalakkudy in Thrissur district, Kerala, he pursued graduate and postgraduate studies in Political Science at Kerala Varma College, Thrissur. He was active in student politics before entering the media profession, where he worked with Mathrubhumi and was involved in media consultancy. His engagement with Malayalam literature also included writing, with his short story Shikhamani being adapted into a film.",
+    "bio2": "His spiritual journey eventually led him to renounce worldly life and enter the monastic tradition. He was initiated as Swami Anandavanam Bharati and subsequently rose to the position of Mahamandaleshwar in the Juna Akhada at Prayagraj Kumbhamela in January 2025.",
+    "bio3": "His public work has since focused on Sanatana Dharma, spiritual awakening, cultural continuity, social organisation, temple traditions and the role of spiritual institutions in contemporary society.",
+    "transformationTitle": "A Journey of Transformation",
+    "transformationSubtitle": "From Public Life to Spiritual Leadership",
+    "transformationP1": "Swami Anandavanam Bharati's life represents a distinctive journey across different spheres of Indian public life—from education and student activism to journalism, literature, media and ultimately spiritual renunciation.",
+    "transformationP2": "His journey reflects a continuing search for meaning, identity and higher truth, culminating in his commitment to the Sanatana Dharma tradition.",
+    "journeyTitle": "His Journey",
+    "journey": {
+      "earlyLife": {
+        "title": "Early Life",
+        "place": "Chalakkudy, Thrissur, Kerala",
+        "description": "Born as Salil into the Menokki family of Chalakkudy in Thrissur district, Kerala."
+      },
+      "education": {
+        "title": "Education",
+        "place": "Kerala Varma College, Thrissur",
+        "description": "Pursued graduate and postgraduate studies in Political Science."
+      },
+      "publicLife": {
+        "title": "Public & Student Life",
+        "description": "Actively engaged in student activism and public life before entering the media profession."
+      },
+      "media": {
+        "title": "Media & Literature",
+        "description": "Worked with Mathrubhumi and was involved in media consultancy. He also pursued his interest in Malayalam literature, including writing."
+      },
+      "quest": {
+        "title": "Spiritual Quest",
+        "description": "His search for deeper meaning and truth gradually led him towards spiritual life and renunciation."
+      },
+      "sannyasa": {
+        "title": "Sannyasa",
+        "description": "Entered the monastic tradition and was initiated as Swami Anandavanam Bharati."
+      },
+      "mahamandaleshwar": {
+        "title": "Mahamandaleshwar",
+        "description": "Elevated to the position of Mahamandaleshwar in the Juna Akhada at Prayagraj Kumbhamela in January 2025."
+      },
+      "southIndia": {
+        "title": "South India",
+        "description": "Continues spiritual and cultural activities with a particular focus on Kerala and South India."
+      }
+    },
+    "guidingLight": "Guiding Light",
+    "principlesTitle": "Mission, Vision & Purpose",
+    "principles": {
+      "mission": {
+        "title": "Mission",
+        "body": "To nurture spiritual awareness, uphold the values of Sanatana Dharma, strengthen families and communities, and inspire individuals towards a life rooted in dharma, compassion, discipline and service."
+      },
+      "vision": {
+        "title": "Vision",
+        "body": "To contribute to the spiritual and cultural renewal of society by reconnecting individuals and communities with India's civilisational wisdom while carrying its values meaningfully into the contemporary world."
+      },
+      "purpose": {
+        "title": "Purpose",
+        "body": "To serve as a bridge between India's ancient spiritual traditions and present-day society through spiritual education, dharmic discourse, cultural preservation, community engagement and service."
+      }
+    },
+    "teachingsTitle": "Teachings & Philosophy",
+    "teachings": {
+      "dharma": {
+        "title": "Dharma as a Way of Life",
+        "description": "Dharma is not limited to ritual or religious observance. It encompasses ethical conduct, responsibility, social duty and a commitment to what is right."
+      },
+      "strength": {
+        "title": "Spiritual Strength",
+        "description": "Spirituality should not remain confined to personal practice. It should contribute to stronger individuals, families and communities."
+      },
+      "family": {
+        "title": "Family & Society",
+        "description": "Swamiji's teachings emphasise the importance of families being spiritually and financially strong, while grounding social life in the fourfold objectives of Dharma, Artha, Kama and Moksha."
+      },
+      "culture": {
+        "title": "Cultural Continuity",
+        "description": "His public work places considerable emphasis on preserving India's spiritual traditions, pilgrimage centres, temple traditions and cultural memory."
+      },
+      "service": {
+        "title": "Service",
+        "description": "Spirituality is linked with responsibility towards society and the preservation of the natural and cultural environment."
+      }
+    },
+    "closingTitle": "A Life of Dharma, Culture & Service",
+    "closingBody": "Swami Anandavanam Bharati's work brings together spiritual awakening, cultural continuity, social organisation and service. His journey from public life to spiritual leadership reflects a continuing commitment to Sanatana Dharma and its relevance in contemporary society."
+  },
+  "volunteer": {
+    "pageTitle": "Serve With Purpose.",
+    "intro": "Offer your time, skills, and dedication to support spiritual programs, community welfare, environmental initiatives, and educational activities. Join a community committed to serving humanity with compassion, discipline, and purpose.",
+    "imageAlt": "Volunteers serving at a community welfare drive",
+    "joinTitle": "Join the Seva",
+    "joinBody": "Join us in creating meaningful change through service, compassion, and Dharma.",
+    "areas": {
+      "spiritual": {
+        "title": "Spiritual Programs",
+        "description": "Support satsangs, Dharma gatherings, spiritual events, and pilgrimage initiatives."
+      },
+      "community": {
+        "title": "Community Welfare",
+        "description": "Help provide food, healthcare, humanitarian assistance, and support to communities in need."
+      },
+      "environment": {
+        "title": "Environmental Seva",
+        "description": "Contribute to tree planting, conservation, and initiatives that protect our natural environment."
+      }
+    },
+    "form": {
+      "fullName": "Full Name",
+      "phone": "Phone Number",
+      "email": "Email Id",
+      "city": "City/ Location",
+      "submit": "Submit Application",
+      "fullNameRequired": "Full Name is required.",
+      "phoneRequired": "Phone Number is required.",
+      "phoneInvalid": "Enter a valid phone number.",
+      "emailRequired": "Email Id is required.",
+      "emailInvalid": "Enter a valid email address.",
+      "cityRequired": "City / Location is required.",
+      "successTitle": "Thank you for applying to volunteer.",
+      "successBody": "We have received your application and will be in touch soon.",
+      "cities": {
+        "kerala": "Kerala",
+        "karnataka": "Karnataka",
+        "tamilNadu": "Tamil Nadu",
+        "maharashtra": "Maharashtra",
+        "delhiNcr": "Delhi NCR",
+        "other": "Other"
+      }
+    }
+  },
+  "donate": {
+    "title": "Your Support Can Make a Difference",
+    "body": "We are currently preparing our donation facilities to make your contribution simple, secure, and transparent.",
+    "comingSoon": "Online Donations Coming Soon",
+    "imageAlt": "Illustration of a donation jar with coins"
+  },
+  "contact": {
+    "title": "Get in Touch",
+    "body": "Whether you're looking for spiritual guidance, information about upcoming programs, volunteering opportunities, or ways to support our initiatives, reach out to us.",
+    "address": "Mahamagha Mahotsava Samiti\nSri Panch Dasnam Juna Akhada\nThirunnavaya, Malappuram, Keralam – 676301",
+    "phone": "+91 88914 58222",
+    "email": "mail@mahamagham.com",
+    "mapTitle": "Mahamagha Mahotsava Samiti, Thirunnavaya map",
+    "form": {
+      "fullName": "Full Name",
+      "email": "Email Id",
+      "message": "Message",
+      "submit": "Submit",
+      "fullNameRequired": "Full Name is required.",
+      "emailRequired": "Email Id is required.",
+      "emailInvalid": "Enter a valid email address.",
+      "messageRequired": "Message is required.",
+      "successTitle": "Thank you! We have received your message.",
+      "successBody": "We will get back to you shortly."
+    }
+  },
+  "media": {
+    "featuredTitle": "Featured News",
+    "featuredSubtitle": "Stay updated with the latest news, events, and moments from Swamiji's journey.",
+    "blogsTitle": "Blogs",
+    "blogsSubtitle": "Explore thoughts, teachings, reflections, and insights from Swamiji and the spiritual journey.",
+    "backToMedia": "Back to Media",
+    "news": {
+      "4": {
+        "date": "15 Feb 2026",
+        "title": "Ascetics are expected to defend Dharma if required: Swami Anandavanam Bharathi Maharaj",
+        "excerpt": "Swami Anandavanam Bharathi Maharaj, as he is known now, recently led the grand Mahamagham Maholsavam at Thirunavaya. His transition from Marxism to spirituality was quite a tumultuous one. Once a firebrand student leader, P Salil grew disillusioned with communism and became a monk. Today, he is the Mahamandaleshwar of Juna Akhada, the ancient order of warrior monks. He tells TNIE about ‘Hindu awakening’, Kerala politics, his personal journey, and more."
+      },
+      "2": {
+        "date": "17 Jan 2026",
+        "title": "\"Spiritual congregation comparable to Kumbh Mela\": Swami Anandavanam Bharathi Maharaj on Mahamagha Mahotsavam",
+        "excerpt": "By: FirstIndia. Malappuram: Swami Anandavanam Bharathi on Saturday spoke about the Mahamagha Mahotsavam, which is like the Kumbh Mela of South India, and said it was being re-established in its glory days."
+      },
+      "3": {
+        "date": "29 Sep 2025",
+        "title": "From Red to Rudraksha: Swami Anandavanam Bharati’s Journey from Communism to Sanatana Dharma",
+        "excerpt": "As soon as the news of Swami Anandavanam Bharati, a Keralite saint, being appointed as Mahamandaleshwar of the Juna Akhada was flashed across digital and print media, I was intrigued. Learning about his unusual background—particularly his deep involvement with the Communist movement—I felt an urge to meet him and understand what had led a staunch Communist to renounce political life and embrace the path of Hindu monkhood."
+      }
+    },
+    "posts": {
+      "1": {
+        "category": "Journey",
+        "date": "12 Jun 2026",
+        "title": "The Inspiring Journey of Swami Anandavanam Bharathi: From Student Leader to Mahamandaleshwar",
+        "excerpt": "From student leadership and journalism to years of discipline in the Himalayas, his elevation as Mahamandaleshwar of Juna Akhada is a story of experience, reflection, and sincere self-discovery."
+      },
+      "2": {
+        "category": "Tradition",
+        "date": "28 May 2026",
+        "title": "Juna Akhada: Preserving an Ancient Spiritual Legacy for the Modern World",
+        "excerpt": "Juna Akhada is one of India’s oldest monastic orders — a living centre of discipline, learning, and service that continues to carry Sanatana Dharma into the present."
+      },
+      "3": {
+        "category": "Seva",
+        "date": "09 May 2026",
+        "title": "Juna Akhada's Vision for Kerala: Building a Spiritual and Social Movement",
+        "excerpt": "With Kerala at the heart of a new chapter, Juna Akhada seeks to reconnect people with Sanatana Dharma while serving society through education, healthcare, environment, and youth."
+      },
+      "4": {
+        "category": "Teachings",
+        "date": "21 Apr 2026",
+        "title": "The Teachings of Swami Anandavanam Bharathi: Finding Inner Peace Through Self-Transformation",
+        "excerpt": "Spiritual growth begins in everyday life. Swamiji’s teachings offer a practical path to inner peace through self-awareness, dharma, and sincere transformation."
+      },
+      "5": {
+        "category": "Pilgrimage",
+        "date": "04 Apr 2026",
+        "title": "Kumbh Mela: A Journey of Faith, Transformation, and Timeless Tradition",
+        "excerpt": "More than the world’s largest gathering, the Kumbh Mela is a pilgrimage of inner renewal — and Juna Akhada continues to keep this living tradition accessible to devotees from Kerala."
+      },
+      "6": {
+        "category": "Wisdom",
+        "date": "16 Mar 2026",
+        "title": "Sanatana Dharma in the Modern World: Why Ancient Wisdom Still Matters Today",
+        "excerpt": "In a world of speed and noise, Sanatana Dharma still offers a way to live with clarity, compassion, and purpose — not as a retreat from modern life, but as a guide through it."
+      }
+    }
+  }
+}

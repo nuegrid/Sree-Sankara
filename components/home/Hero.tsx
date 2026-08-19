@@ -1,44 +1,34 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import Image from "next/image";
+import { useTranslation } from "react-i18next";
+import Typography from "@/components/ui/Typography";
+
+const HERO_IMAGE = "/images/home/hero/BG 1.jpeg";
 
 export default function Hero() {
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.play().catch((err) => {
-        console.log("Autoplay issue handled:", err);
-      });
-    }
-  }, []);
-
+  const { t } = useTranslation();
   return (
-    <section className="sticky top-0 w-full h-screen z-0 overflow-hidden flex flex-col items-center">
-      {/* Background Video */}
-      <video
-        ref={videoRef}
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="auto"
-        className="absolute inset-0 w-full h-full object-cover z-0"
-      >
-        <source src="/videos/hero_video.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
+    <section className="pointer-events-none sticky top-0 z-0 -mt-[3.75rem] flex h-screen w-full flex-col items-center overflow-hidden sm:-mt-16">
+      <Image
+        src={HERO_IMAGE}
+        alt=""
+        fill
+        priority
+        className="pointer-events-none absolute inset-0 z-0 object-cover object-center max-md:-translate-y-[18%] md:translate-y-0"
+        sizes="100vw"
+        aria-hidden
+      />
 
-      {/* Subtle warm gradient overlay to enhance text readability without darkening the video */}
-      <div className="absolute inset-0 bg-gradient-to-b from-amber-50/75 via-amber-50/25 to-transparent z-10 pointer-events-none" />
-
-      {/* Main Content */}
-      <div className="relative z-20 mx-auto max-w-5xl px-4 pt-[175px] sm:pt-[195px] md:pt-[215px] lg:pt-[225px] text-center flex flex-col items-center">
-        <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[80px] xl:text-[84px] font-normal text-gray-950 tracking-tight leading-[1.05] max-w-4xl">
-          Guiding Souls
-          <br />
-          Inspiring Humanity.
-        </h1>
+      <div className="relative z-20 mx-auto flex max-w-5xl flex-col items-center px-4 pt-16 text-center sm:pt-20 md:pt-24">
+        <Typography
+          as="h4"
+          variant="heroTitle"
+          className="max-w-5xl text-gray-950 [.lang-ml_&]:text-base sm:[.lang-ml_&]:text-lg md:[.lang-ml_&]:text-xl lg:[.lang-ml_&]:text-[26px] xl:[.lang-ml_&]:text-[30px]"
+        >
+          <span className="block whitespace-nowrap">{t("home.heroLine1")}</span>
+          <span className="block whitespace-nowrap">{t("home.heroLine2")}</span>
+        </Typography>
       </div>
     </section>
   );

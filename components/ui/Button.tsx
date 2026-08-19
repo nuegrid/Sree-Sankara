@@ -1,7 +1,9 @@
 import React from "react";
 import { cn } from "@/lib/utils";
+import Typography from "@/components/ui/Typography";
 
-export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary" | "outline" | "ghost";
   size?: "sm" | "md" | "lg";
 }
@@ -14,7 +16,7 @@ export default function Button({
   ...props
 }: ButtonProps) {
   const baseStyles =
-    "inline-flex items-center justify-center rounded-full font-medium transition-all focus:outline-none focus:ring-2 focus:ring-amber-500/50 disabled:pointer-events-none disabled:opacity-50 hover-lift";
+    "inline-flex items-center justify-center rounded-full transition-all focus:outline-none focus:ring-2 focus:ring-amber-500/50 disabled:pointer-events-none disabled:opacity-50 hover-lift";
 
   const variants = {
     primary:
@@ -28,17 +30,26 @@ export default function Button({
   };
 
   const sizes = {
-    sm: "px-4 py-1.5 text-xs",
-    md: "px-6 py-2.5 text-sm",
-    lg: "px-8 py-3.5 text-base",
+    sm: "px-4 py-1.5",
+    md: "px-6 py-2.5",
+    lg: "px-8 py-3.5",
   };
+
+  const textVariant =
+    size === "sm" ? "buttonXs" : size === "lg" ? "bodyText" : "buttonSmall";
 
   return (
     <button
       className={cn(baseStyles, variants[variant], sizes[size], className)}
       {...props}
     >
-      {children}
+      {typeof children === "string" || typeof children === "number" ? (
+        <Typography as="span" variant={textVariant}>
+          {children}
+        </Typography>
+      ) : (
+        children
+      )}
     </button>
   );
 }
