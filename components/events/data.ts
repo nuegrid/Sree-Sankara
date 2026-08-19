@@ -1,4 +1,4 @@
-export type EventStatus = "Live Now" | "Upcoming";
+export type EventStatus = "Live Now" | "Upcoming" | "Past Events";
 
 export type EventsPageItem = {
   id: number;
@@ -21,16 +21,16 @@ export const events: EventsPageItem[] = [
   {
     id: 1,
     image: "/images/events/Event-cards/card1.png",
-    status: "Live Now",
-    title: "Shri Ganga Mahotsav 1",
-    date: "15 May 2026 to 25 May 2026",
-    location: "Haridwar, Uttarakhand",
+    status: "Upcoming",
+    title: "Mahamagha Mahotsavam",
+    date: "January to February 2027",
+    location: "Malappuram, Kerala",
   },
   {
     id: 2,
     image: "/images/events/Event-cards/card2.png",
-    status: "Upcoming",
-    title: "Shri Ganga Mahotsav 2",
+    status: "Past Events",
+    title: "Shri Ganga Mahotsav",
     date: "15 May 2026 to 25 May 2026",
     location: "Haridwar, Uttarakhand",
   },
@@ -38,17 +38,17 @@ export const events: EventsPageItem[] = [
     id: 3,
     image: "/images/events/Event-cards/card3.png",
     status: "Upcoming",
-    title: "Shri Ganga Mahotsav 3",
-    date: "15 May 2026 to 25 May 2026",
-    location: "Haridwar, Uttarakhand",
+    title: "Event coming soon",
+    date: "date",
+    location: "location",
   },
   {
     id: 4,
     image: "/images/events/Event-cards/card4.png",
     status: "Upcoming",
-    title: "Shri Ganga Mahotsav 4",
-    date: "15 May 2026 to 25 May 2026",
-    location: "Haridwar, Uttarakhand",
+    title: "Event coming soon",
+    date: "date",
+    location: "location",
   },
 ];
 

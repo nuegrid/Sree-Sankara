@@ -4,7 +4,7 @@
     "ml": "മലയാളം"
   },
   "topBar": {
-    "events": "Upcoming events details here..."
+    "events": "Mahamagha Mahotsavam - January to February 2027"
   },
   "nav": {
     "home": "Home",
@@ -109,26 +109,27 @@
     "momentsTitle": "Moments From Our Journey",
     "liveNow": "Live Now",
     "upcoming": "Upcoming",
+    "pastEvents": "Past Events",
     "items": {
       "1": {
-        "title": "Shri Ganga Mahotsav 1",
-        "date": "15 May 2026 to 25 May 2026",
-        "location": "Haridwar, Uttarakhand"
+        "title": "Mahamagha Mahotsavam",
+        "date": "January to February 2027",
+        "location": "Malappuram, Kerala"
       },
       "2": {
-        "title": "Shri Ganga Mahotsav 2",
+        "title": "Shri Ganga Mahotsav",
         "date": "15 May 2026 to 25 May 2026",
         "location": "Haridwar, Uttarakhand"
       },
       "3": {
-        "title": "Shri Ganga Mahotsav 3",
-        "date": "15 May 2026 to 25 May 2026",
-        "location": "Haridwar, Uttarakhand"
+        "title": "Event coming soon",
+        "date": "Date",
+        "location": "Location"
       },
       "4": {
-        "title": "Shri Ganga Mahotsav 4",
-        "date": "15 May 2026 to 25 May 2026",
-        "location": "Haridwar, Uttarakhand"
+        "title": "Event coming soon",
+        "date": "Date",
+        "location": "Location"
       }
     }
   },

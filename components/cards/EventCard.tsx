@@ -117,21 +117,27 @@ export default function EventCard({ event, active, onActivate }: Props) {
             {title}
           </Typography>
 
-          <div className="flex min-w-0 flex-col gap-1.5 text-[#b0b0b0]">
-            <div className="flex items-center gap-2">
-              <CalendarDays className="h-[18px] w-[18px] shrink-0 text-[#b0b0b0] sm:h-5 sm:w-5" />
-              <Typography as="span" variant="cardMeta" className="truncate">
-                {date}
-              </Typography>
-            </div>
+          {(date || location) && (
+            <div className="flex min-w-0 flex-col gap-1.5 text-[#b0b0b0]">
+              {date ? (
+                <div className="flex items-center gap-2">
+                  <CalendarDays className="h-[18px] w-[18px] shrink-0 text-[#b0b0b0] sm:h-5 sm:w-5" />
+                  <Typography as="span" variant="cardMeta" className="truncate">
+                    {date}
+                  </Typography>
+                </div>
+              ) : null}
 
-            <div className="flex items-center gap-2">
-              <MapPin className="h-[18px] w-[18px] shrink-0 text-[#b0b0b0] sm:h-5 sm:w-5" />
-              <Typography as="span" variant="cardMeta" className="truncate">
-                {location}
-              </Typography>
+              {location ? (
+                <div className="flex items-center gap-2">
+                  <MapPin className="h-[18px] w-[18px] shrink-0 text-[#b0b0b0] sm:h-5 sm:w-5" />
+                  <Typography as="span" variant="cardMeta" className="truncate">
+                    {location}
+                  </Typography>
+                </div>
+              ) : null}
             </div>
-          </div>
+          )}
         </div>
       </div>
     </div>
