@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { useTranslation } from "react-i18next";
 import { FiGlobe, FiChevronDown } from "react-icons/fi";
 import Typography from "@/components/ui/Typography";
@@ -36,13 +37,18 @@ export default function TopBar() {
           "flex h-full items-center justify-between"
         )}
       >
-        <Typography
-          as="p"
-          variant="topBarText"
-          className="min-w-0 flex-1 truncate pr-6 text-left text-[#FFCB94] [.lang-ml_&]:translate-y-[3px]"
+        <Link
+          href="/events"
+          className="min-w-0 flex-1 truncate pr-6 text-left text-[#FFCB94] transition-colors hover:text-white"
         >
-          {t("topBar.events")}
-        </Typography>
+          <Typography
+            as="span"
+            variant="topBarText"
+            className="[.lang-ml_&]:translate-y-[3px]"
+          >
+            {t("topBar.events")}
+          </Typography>
+        </Link>
 
         <div ref={rootRef} className="relative shrink-0">
           <button
